@@ -1,0 +1,49 @@
+diff -c -r madwifi/wlan/if_ieee80211wireless.c patch/madwifi/wlan/if_ieee80211wireless.c
+*** madwifi/wlan/if_ieee80211wireless.c	Fri Mar  5 18:20:09 2004
+--- patch/madwifi/wlan/if_ieee80211wireless.c	Fri Apr  2 16:23:50 2004
+***************
+*** 222,231 ****
+  			/* verify the key to be installed is non-zero length */
+  			if (ic->ic_nw_keys[kid].wk_len == 0)
+  				return -EINVAL;
+  		}
+- 		ic->ic_wep_txkey = kid;
+- 		wepchange = (ic->ic_flags & IEEE80211_F_WEPON) == 0;
+- 		ic->ic_flags |= IEEE80211_F_WEPON;
+  	} else {
+  		if ((ic->ic_flags & IEEE80211_F_WEPON) == 0)
+  			return 0;
+--- 222,232 ----
+  			/* verify the key to be installed is non-zero length */
+  			if (ic->ic_nw_keys[kid].wk_len == 0)
+  				return -EINVAL;
++ 
++ 			ic->ic_wep_txkey = kid;
++ 			wepchange = (ic->ic_flags & IEEE80211_F_WEPON) == 0;
++ 			ic->ic_flags |= IEEE80211_F_WEPON;
+  		}
+  	} else {
+  		if ((ic->ic_flags & IEEE80211_F_WEPON) == 0)
+  			return 0;
+***************
+*** 245,253 ****
+  		 * be done w/o changing the 802.11 state machine
+  		 * which is important for applications like 802.1x.
+  		 */
+! 		if (wepchange)
+! 			error = (*ic->ic_init)(dev);
+! 		else
+  			error = (*ic->ic_reset)(dev);
+  	}
+  	return -error;
+--- 246,254 ----
+  		 * be done w/o changing the 802.11 state machine
+  		 * which is important for applications like 802.1x.
+  		 */
+! 		//if (wepchange)
+! 		//	error = (*ic->ic_init)(dev);
+! 		//else
+  			error = (*ic->ic_reset)(dev);
+  	}
+  	return -error;
+Only in patch/madwifi/wlan: if_ieee80211wireless.c.~1.44.~

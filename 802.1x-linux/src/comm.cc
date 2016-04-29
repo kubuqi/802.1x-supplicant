@@ -1,0 +1,194 @@
+// user communication
+//
+char const _8021x_comm_rcsid[] = "$Id: comm.cc,v 1.9 2002/08/29 08:17:02 rw Exp $";
+
+//*  includes
+//
+#include "buffer.hh"
+#include "comm.hh"
+
+namespace eap 
+{
+    extern "C" {
+#include <errno.h>	
+#include <stdarg.h>	
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>	
+#include <unistd.h>
+#include <syslog.h>	
+    }
+
+    //*  functions
+    //
+    static char *find_m(char *s)
+    {
+	while (1) {
+	    switch (*s) {
+	    case 0:
+		goto none;
+
+	    case '%':
+		switch (s[1]) {
+		case 0:
+		    return 0;
+
+		case 'm':
+		    return s;
+		}
+	    }
+
+	    ++s;
+	}
+
+    none:
+	return 0;
+    }
+
+    static char *find_marker(char *s)
+    {
+	while (1) {
+	    switch (*s) {
+	    case 0:
+		goto none;
+
+	    case '\001':
+		switch(s[1]) {
+		case 0:
+		    return 0;
+
+		case '\002':
+		    return s;
+		}
+	    }
+
+	    ++s;
+	}
+
+    none:
+	return 0;
+    }
+
+    //*  variables
+    //
+    int out::debug_level = out::d_notice;
+    out *out::sink;
+
+    //*  methods
+    //**  out
+    //
+    void out::notice(char const *fmt, ...)
+    {
+	va_list va;
+
+	if (debug_level >= d_notice) {
+	    va_start(va, fmt);
+	    sink->do_print(fmt, va);
+	    va_end(va);
+	}
+    }
+	
+    void out::warn(char const *fmt, ...)
+    {
+	if (debug_level >= d_warn) { 
+	    va_list va; 
+	    va_start(va, fmt); 
+	    sink->do_print(fmt, va); 
+	    va_end(va); 
+	} 
+    }
+    
+    void out::info(char const *fmt, ...)
+    {
+	if (debug_level >= d_info) { 
+	    va_list va; 
+	    va_start(va, fmt); 
+	    sink->do_print(fmt, va); 
+	    va_end(va); 
+	} 
+    }
+	
+    void out::debug(char const *fmt, ...)
+    {
+	if (debug_level >= d_debug) { 
+	    va_list va; 
+	    va_start(va, fmt); 
+	    sink->do_print(fmt, va); 
+	    va_end(va); 
+	} 
+    }
+    
+    void out::do_print(char const *fmt, va_list va)
+    {
+	char *pm;
+	int rc;
+	size_t need, elen;
+	buffer f(need = strlen(fmt) + 1);
+	
+	memcpy(f, fmt, need);
+
+	pm = find_m(f);
+	if (pm) {
+	    *pm = '\001';
+	    pm[1] = '\002';
+	}
+
+	while (1) {
+	    rc = vsnprintf((char *)fmt_buf, fmt_buf.max(), (char *)f, va);
+	    if ((unsigned)rc < fmt_buf.max()) break;
+	    
+	    fmt_buf.expand();
+	}
+	
+	if (pm) {
+	    pm = find_marker(fmt_buf);
+	    
+	    need = elen = strlen(strerror(errno));
+	    need += rc;
+	    need -= 2;
+	    while (fmt_buf.max() < need) fmt_buf.expand();
+	    memmove(pm + elen, pm + 2, rc - 2 - (pm - fmt_buf));
+	    memcpy(pm, strerror(errno), elen);
+
+	    len = need;
+	} else len = rc;
+	
+	flush();
+    }
+
+    //**  printer
+    //
+    void printer::make()
+    {
+	if (sink) delete sink;
+	sink = new printer;
+    }
+
+    void printer::flush()
+    {
+	if (!remain()) fmt_buf.expand();
+	fmt_buf[len] = '\n';
+	write(STDERR_FILENO, fmt_buf, len + 1);
+
+	len = 0;
+    }
+
+    //**  logger
+    //
+    void logger::make(char const *name, int fac)
+    {
+	if (sink) delete sink;
+	sink = new logger;
+
+	closelog();
+	openlog(name, LOG_PID | LOG_NDELAY, fac);
+    }
+
+    void logger::flush()
+    {
+	if (!remain()) fmt_buf.expand();
+	fmt_buf[len] = 0;
+	syslog(LOG_INFO, "%s", (char *)fmt_buf);
+	len = 0;
+    }
+}

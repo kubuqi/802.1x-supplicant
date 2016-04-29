@@ -1,0 +1,29 @@
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.2//EN"
+    "http://www.oasis-open.org/docbook/xml/4.2/docbookx.dtd"
+    [
+      <!ENTITY chapter1 SYSTEM "chapter1.xml">
+      <!ENTITY chapter2 SYSTEM "chapter2.xml">
+      <!ENTITY chapter3 SYSTEM "chapter3.xml">
+      <!ENTITY chapter4 SYSTEM "chapter4.xml">
+      <!ENTITY chapter5 SYSTEM "chapter5.xml">
+      <!ENTITY chapter6 SYSTEM "chapter6.xml">
+      <!ENTITY chapter7 SYSTEM "chapter7.xml">
+      <!ENTITY appendix1 SYSTEM "appendix1.xml">
+      <!ENTITY appendix2 SYSTEM "appendix2.xml">
+    ]
+>
+
+<book>
+<title>Open1x User's Guide</title>
+&chapter1
+&chapter2
+&chapter3
+&chapter4
+&chapter5
+&chapter6
+&chapter7
+&appendix1
+&appendix2
+</book>
+

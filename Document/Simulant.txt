@@ -1,0 +1,8 @@
+1, USERNAME改变
+主要是客户端需要改一下，另外，我觉得应该选另外一个TOKENCHAR，不可打印的，呵呵
+
+2，SIMULTANEOUS-USE，还要拜托你试一下
+
+3，能不能不用RADUTMP文件，而是用SQL
+
+4，LOG文件应该进SQL，而不是LOG文件

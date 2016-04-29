@@ -1,0 +1,163 @@
+Only in orinoco-0.13e-fastkey/: hermes.d
+Only in orinoco-0.13e-fastkey/: hermes.o
+diff -r -c orinoco-0.13e/orinoco.c orinoco-0.13e-fastkey/orinoco.c
+*** orinoco-0.13e/orinoco.c	Mon May 12 00:22:27 2003
+--- orinoco-0.13e-fastkey/orinoco.c	Tue May 13 22:02:04 2003
+***************
+*** 571,577 ****
+  static int __orinoco_program_rids(struct net_device *dev);
+  
+  static int __orinoco_hw_set_bitrate(struct orinoco_private *priv);
+! static int __orinoco_hw_setup_wep(struct orinoco_private *priv);
+  static int orinoco_hw_get_bssid(struct orinoco_private *priv, char buf[ETH_ALEN]);
+  static int orinoco_hw_get_essid(struct orinoco_private *priv, int *active,
+  				char buf[IW_ESSID_MAX_SIZE+1]);
+--- 571,577 ----
+  static int __orinoco_program_rids(struct net_device *dev);
+  
+  static int __orinoco_hw_set_bitrate(struct orinoco_private *priv);
+! static int __orinoco_hw_setup_wep(struct orinoco_private *priv, int fastkey);
+  static int orinoco_hw_get_bssid(struct orinoco_private *priv, char buf[ETH_ALEN]);
+  static int orinoco_hw_get_essid(struct orinoco_private *priv, int *active,
+  				char buf[IW_ESSID_MAX_SIZE+1]);
+***************
+*** 893,899 ****
+  
+  	/* Set up encryption */
+  	if (priv->has_wep) {
+! 		err = __orinoco_hw_setup_wep(priv);
+  		if (err) {
+  			printk(KERN_ERR "%s: Error %d activating WEP\n",
+  			       dev->name, err);
+--- 893,899 ----
+  
+  	/* Set up encryption */
+  	if (priv->has_wep) {
+! 		err = __orinoco_hw_setup_wep(priv,0);
+  		if (err) {
+  			printk(KERN_ERR "%s: Error %d activating WEP\n",
+  			       dev->name, err);
+***************
+*** 1119,1133 ****
+  }
+  
+  
+! static int __orinoco_hw_setup_wep(struct orinoco_private *priv)
+  {
+  	hermes_t *hw = &priv->hw;
+  	int err = 0;
+  	int	master_wep_flag;
+  	int	auth_flag;
+  
+  	switch (priv->firmware_type) {
+  	case FIRMWARE_TYPE_AGERE: /* Agere style WEP */
+  		if (priv->wep_on) {
+  			err = hermes_write_wordrec(hw, USER_BAP,
+  						   HERMES_RID_CNFTXKEY_AGERE,
+--- 1119,1145 ----
+  }
+  
+  
+! static int __orinoco_hw_setup_wep(struct orinoco_private *priv, int fastkey)
+  {
+  	hermes_t *hw = &priv->hw;
+  	int err = 0;
+  	int	master_wep_flag;
+  	int	auth_flag;
++ 	u16     wep_enabled;
++ 	//	int ii;
++ 
++ 	printk(KERN_INFO "in __orinoco_hw_setup_wep, fastkey is: %d transmit key is: %d\n", fastkey, priv->tx_key);
+  
+  	switch (priv->firmware_type) {
+  	case FIRMWARE_TYPE_AGERE: /* Agere style WEP */
++ 	  if (fastkey) {
++ 	    err = hermes_read_wordrec(hw, USER_BAP, HERMES_RID_CNFWEPENABLED_AGERE, &wep_enabled);
++ 	    if (wep_enabled != priv->wep_on) {
++ 	      printk(KERN_WARNING "Resetting encryption, cannot fastkey!  Should go around again!\n");
++ 	      return -EAGAIN;
++ 	    }
++ 	  }
++ 
+  		if (priv->wep_on) {
+  			err = hermes_write_wordrec(hw, USER_BAP,
+  						   HERMES_RID_CNFTXKEY_AGERE,
+***************
+*** 1141,1151 ****
+--- 1153,1165 ----
+  			if (err)
+  				return err;
+  		}
++ 		if (!fastkey) {
+  		err = hermes_write_wordrec(hw, USER_BAP,
+  					   HERMES_RID_CNFWEPENABLED_AGERE,
+  					   priv->wep_on);
+  		if (err)
+  			return err;
++ 		}
+  		break;
+  
+  	case FIRMWARE_TYPE_INTERSIL: /* Intersil style WEP */
+***************
+*** 1941,1946 ****
+--- 1955,1961 ----
+  		priv->has_mwo = (firmver >= 0x60000);
+  		priv->has_pm = (firmver >= 0x40020); /* Don't work in 7.52 ? */
+  		priv->ibss_port = 1;
++ 		priv->has_fastkey = (firmver >= 0x60000);
+  
+  		/* Tested with Agere firmware :
+  		 *	1.16 ; 4.08 ; 4.52 ; 6.04 ; 6.16 ; 7.28 => Jean II
+***************
+*** 3675,3682 ****
+  		}
+  
+  		err = orinoco_ioctl_setiwencode(dev, &wrq->u.encoding);
+! 		if (! err)
+  			changed = 1;
+  		break;
+  
+  	case SIOCGIWENCODE:
+--- 3690,3706 ----
+  		}
+  
+  		err = orinoco_ioctl_setiwencode(dev, &wrq->u.encoding);
+! 		if (! err && netif_running(dev)) {
+! 		  // Try fastkeying.
+! 		  orinoco_lock(priv, &flags);
+! 		  err = __orinoco_hw_setup_wep(priv, 1);
+! 		  orinoco_unlock(priv, &flags);
+! 
+! 		  if (err == -EAGAIN) {
+  			changed = 1;
++ 			err = 0;
++ 		  }
++ 		}
+  		break;
+  
+  	case SIOCGIWENCODE:
+Only in orinoco-0.13e-fastkey/: orinoco.c~
+Only in orinoco-0.13e-fastkey/: orinoco.d
+diff -r -c orinoco-0.13e/orinoco.h orinoco-0.13e-fastkey/orinoco.h
+*** orinoco-0.13e/orinoco.h	Mon May 12 00:22:27 2003
+--- orinoco-0.13e-fastkey/orinoco.h	Tue May 13 21:59:12 2003
+***************
+*** 90,95 ****
+--- 90,96 ----
+  	int has_pm;
+  	int has_preamble;
+  	int has_sensitivity;
++         int has_fastkey;
+  	int nicbuf_size;
+  	u16 channel_mask;
+  	int broken_disableport;
+Only in orinoco-0.13e-fastkey/: orinoco.h~
+Only in orinoco-0.13e-fastkey/: orinoco.o
+Only in orinoco-0.13e-fastkey/: orinoco_cs.d
+Only in orinoco-0.13e-fastkey/: orinoco_cs.o
+Only in orinoco-0.13e-fastkey/: orinoco_pci.d
+Only in orinoco-0.13e-fastkey/: orinoco_pci.o
+Only in orinoco-0.13e-fastkey/: orinoco_plx.d
+Only in orinoco-0.13e-fastkey/: orinoco_plx.o
+Only in orinoco-0.13e-fastkey/: orinoco_tmd.d
+Only in orinoco-0.13e-fastkey/: orinoco_tmd.o

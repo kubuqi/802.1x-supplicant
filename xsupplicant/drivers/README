@@ -1,0 +1,45 @@
+Drivers
+=======
+This directory is a far from all-inclusive set of drivers that have 
+one or more small fixes to allow the use of dynamic keys. The prevalant 
+problem is one of dropped associations when a key is set. We make no
+guarantees about the correctness of this code and we certainly don't
+guarantee these to be the latest versions. Also, these files are
+presented under the same licenses as their original distribution
+(noted in each) and do not necessarily have the same license as our
+code.
+
+
+Usage
+=====
+For all files, you should be able to just replace the original version
+with the one provided and rebuild the source. Information about how to
+do these builds is not provided here.
+
+
+Your Help
+=========
+We encourage you to take your favorite driver, test it, and let us
+know the results. If it's broken and we have the ability to test it we
+will do so and try to fix it. However, the best action would be to fix
+it yourself and send it to us for distribution.
+
+
+Other Drivers
+=============
+Many drivers out there will allow dynamic re-keying "as is" and do not
+need changes. We will attempt to keep the following list up to date,
+but again it is not comprehensive and could change rapidly.
+
+Web Page                        Primary supported hardware
+--------                        --------------------------
+airo-linux.sourceforge.net      Cisco Aironet cards
+
+
+
+Provided Fixes
+==============
+
+File           Description          OS path                Problem Fixed
+----           -----------          -------                -------------
+OpenBSD/an.c   Aironet driver      /usr/src/sys/dev/ic/    Reset on set key

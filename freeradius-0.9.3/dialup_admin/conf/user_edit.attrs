@@ -1,0 +1,48 @@
+#
+#	Attributes which will be visible in the user/group edit pages
+#
+#	Format: Attribute	Comment
+#
+#
+#Auth-Type			Auth Type
+#Simultaneous-Use		<a href="help/simultaneous_use_help.html" target=su_help onclick=window.open("help/simultaneous_use_help.html","su_help","width=560,height=170,toolbar=no,scrollbars=no,resizable=yes") title="Simultaneous Use Help Page"><font color="blue">Simultaneous Use</font></a>
+Framed-Protocol			Protocol
+Framed-IP-Address		<a href="help/framed_ip_address_help.html" target=fia_help onclick=window.open("help/framed_ip_address_help.html","fia_help","width=560,height=230,toolbar=no,scrollbars=no,resizable=yes") title="Framed-IP-Address Help Page"><font color="blue">IP Address</font></a>
+Framed-IP-Netmask		IP Netmask
+#Framed-Route		Route
+#Framed-Routing
+#Filter-Id
+Framed-MTU			MTU
+Framed-Compression		<a href="help/framed_compression_help.html" target=fc_help onclick=window.open("help/framed_compression_help.html","fc_help","width=600,height=210,toolbar=no,scrollbars=no,resizable=yes") title="Framed Compression Help Page"><font color="blue">Compression Used</font></a>
+Service-Type			Service Type
+#Login-IP-Host
+#Login-Service
+#Login-TCP-Port
+#Callback-Number
+#Callback-Id
+#Framed-IPX-Network
+#Class
+Session-Timeout			<a href="help/session_timeout_help.html" target=st_help onclick=window.open("help/session_timeout_help.html","st_help","width=600,height=170,toolbar=no,scrollbars=no,resizable=yes") title="Session Timeout Help Page"><font color="blue">Session Timeout</font></a>
+Idle-Timeout			<a href="help/idle_timeout_help.html" target=it_help onclick=window.open("help/idle_timeout_help.html","it_help","width=600,height=170,toolbar=no,scrollbars=no,resizable=yes") title="Idle Timeout Help Page"><font color="blue">Idle Timeout</font></a>
+#Termination-Action
+#Login-LAT-Service
+#Login-LAT-Node
+#Login-LAT-Group
+#Framed-AppleTalk-Link
+#Framed-AppleTalk-Network
+#Framed-AppleTalk-Zone
+Port-Limit			<a href="help/port_limit_help.html" target=pl_help onclick=window.open("help/port_limit_help.html","pl_help","width=600,height=170,toolbar=no,scrollbars=no,resizable=yes") title="Port Limit Help Page"><font color="blue">Port Limit</font></a>
+#Login-LAT-Port
+#Dialup-Access			<a href="help/dialup_access_help.html" target=da_help onclick=window.open("help/dialup_access_help.html","da_help","width=560,height=200,toolbar=no,scrollbars=no,resizable=yes") title="Dialup Access Help Page"><font color="blue">Dialup Access (use FALSE to lock)</font></a>
+Dialup-Lock-Msg			<a href="help/lock_message_help.html" target=lm_help onclick=window.open("help/lock_message_help.html","lm_help","width=600,height=210,toolbar=no,scrollbars=no,resizable=yes") title="Lock Message Help Page"><font color="blue">Lock Message</font></a>
+#Reply-Message			Reply Message
+#Max-Daily-Session		Daily Limit (secs)
+#Max-Weekly-Session		Weekly Limit (secs)
+#Login-Time			<a href="login_time_create.php3?val=$name1&first=yes" target=lt_create onclick=window.open("login_time_create.php3?val=$name1&first=yes","lt_create","width=600,height=490,toolbar=no,scrollbars=yes,resizable=yes") title="Login-Time Creation Page"><font color="blue">User Login Period </font></a>(<a href="help/login_time_help.html" target=lt_help onclick=window.open("help/login_time_help.html","lt_help","width=600,height=370,toolbar=no,scrollbars=no,resizable=yes") title="Login-Time Help Page"><font color="blue">UUCP </font></a>Format)
+#Expiration			<a href="help/expiration_help.html" target=lt_help onclick=window.open("help/expiration_help.html","lt_help","width=600,height=180,toolbar=no,scrollbars=no,resizable=yes") title="Expiration Help Page"><font color="blue">User Expiration Date</font></a>
+#
+# Uncomment this if you are using ldap and you are using user regular profiles.
+# Also make sure that Regular-Profile maps to the correct ldap attribute in
+# extra.ldap-attrmap
+#
+#Regular-Profile		User Regular Profile DN

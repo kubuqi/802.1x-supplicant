@@ -1,0 +1,39 @@
+Microsoft Visual Studio Solution File, Format Version 8.00
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libpcap", "..\libpcap\Win32\Prj\libpcap.vcproj", "{898832FA-7EF1-4A42-80A7-63CCC092C30F}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "rpcapd", "..\libpcap\rpcapd\rpcapd.vcproj", "{DB2E1D7F-D6AC-4E92-9A35-311C799DA320}"
+	ProjectSection(ProjectDependencies) = postProject
+		{7F0E3759-89F9-4940-B80C-CBDB9E07ACB6} = {7F0E3759-89F9-4940-B80C-CBDB9E07ACB6}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "wpcap", "wpcap.vcproj", "{7F0E3759-89F9-4940-B80C-CBDB9E07ACB6}"
+	ProjectSection(ProjectDependencies) = postProject
+		{898832FA-7EF1-4A42-80A7-63CCC092C30F} = {898832FA-7EF1-4A42-80A7-63CCC092C30F}
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfiguration) = preSolution
+		Debug = Debug
+		Release = Release
+	EndGlobalSection
+	GlobalSection(ProjectConfiguration) = postSolution
+		{898832FA-7EF1-4A42-80A7-63CCC092C30F}.Debug.ActiveCfg = Debug|Win32
+		{898832FA-7EF1-4A42-80A7-63CCC092C30F}.Debug.Build.0 = Debug|Win32
+		{898832FA-7EF1-4A42-80A7-63CCC092C30F}.Release.ActiveCfg = Release|Win32
+		{898832FA-7EF1-4A42-80A7-63CCC092C30F}.Release.Build.0 = Release|Win32
+		{DB2E1D7F-D6AC-4E92-9A35-311C799DA320}.Debug.ActiveCfg = Debug|Win32
+		{DB2E1D7F-D6AC-4E92-9A35-311C799DA320}.Debug.Build.0 = Debug|Win32
+		{DB2E1D7F-D6AC-4E92-9A35-311C799DA320}.Release.ActiveCfg = Release|Win32
+		{DB2E1D7F-D6AC-4E92-9A35-311C799DA320}.Release.Build.0 = Release|Win32
+		{7F0E3759-89F9-4940-B80C-CBDB9E07ACB6}.Debug.ActiveCfg = Debug|Win32
+		{7F0E3759-89F9-4940-B80C-CBDB9E07ACB6}.Debug.Build.0 = Debug|Win32
+		{7F0E3759-89F9-4940-B80C-CBDB9E07ACB6}.Release.ActiveCfg = Release|Win32
+		{7F0E3759-89F9-4940-B80C-CBDB9E07ACB6}.Release.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+	EndGlobalSection
+	GlobalSection(ExtensibilityAddIns) = postSolution
+	EndGlobalSection
+EndGlobal

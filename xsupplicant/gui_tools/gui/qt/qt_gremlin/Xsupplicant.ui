@@ -1,0 +1,338 @@
+<!DOCTYPE UI><UI version="3.0" stdsetdef="1">
+<class>Xsupplicant</class>
+<widget class="QDialog">
+    <property name="name">
+        <cstring>Xsupplicant</cstring>
+    </property>
+    <property name="geometry">
+        <rect>
+            <x>0</x>
+            <y>0</y>
+            <width>427</width>
+            <height>187</height>
+        </rect>
+    </property>
+    <property name="caption">
+        <string>QT Gremlin, At Your Service.</string>
+    </property>
+    <widget class="QPushButton">
+        <property name="name">
+            <cstring>authenticateButton</cstring>
+        </property>
+        <property name="geometry">
+            <rect>
+                <x>162</x>
+                <y>148</y>
+                <width>114</width>
+                <height>28</height>
+            </rect>
+        </property>
+        <property name="text">
+            <string>Authenticate</string>
+        </property>
+    </widget>
+    <spacer>
+        <property name="name">
+            <cstring>spacer3</cstring>
+        </property>
+        <property name="orientation">
+            <enum>Horizontal</enum>
+        </property>
+        <property name="sizeType">
+            <enum>Expanding</enum>
+        </property>
+        <property name="sizeHint">
+            <size>
+                <width>134</width>
+                <height>20</height>
+            </size>
+        </property>
+        <property name="geometry">
+            <rect>
+                <x>282</x>
+                <y>11</y>
+                <width>134</width>
+                <height>20</height>
+            </rect>
+        </property>
+    </spacer>
+    <widget class="QLabel">
+        <property name="name">
+            <cstring>infoLabel</cstring>
+        </property>
+        <property name="geometry">
+            <rect>
+                <x>26</x>
+                <y>11</y>
+                <width>250</width>
+                <height>20</height>
+            </rect>
+        </property>
+        <property name="text">
+            <string>XSupplicant is requesting a password.</string>
+        </property>
+    </widget>
+    <spacer>
+        <property name="name">
+            <cstring>spacer6</cstring>
+        </property>
+        <property name="orientation">
+            <enum>Horizontal</enum>
+        </property>
+        <property name="sizeType">
+            <enum>Expanding</enum>
+        </property>
+        <property name="sizeHint">
+            <size>
+                <width>145</width>
+                <height>20</height>
+            </size>
+        </property>
+        <property name="geometry">
+            <rect>
+                <x>11</x>
+                <y>152</y>
+                <width>145</width>
+                <height>20</height>
+            </rect>
+        </property>
+    </spacer>
+    <spacer>
+        <property name="name">
+            <cstring>spacer6_2</cstring>
+        </property>
+        <property name="orientation">
+            <enum>Horizontal</enum>
+        </property>
+        <property name="sizeType">
+            <enum>Expanding</enum>
+        </property>
+        <property name="sizeHint">
+            <size>
+                <width>134</width>
+                <height>20</height>
+            </size>
+        </property>
+        <property name="geometry">
+            <rect>
+                <x>282</x>
+                <y>152</y>
+                <width>134</width>
+                <height>20</height>
+            </rect>
+        </property>
+    </spacer>
+    <spacer>
+        <property name="name">
+            <cstring>spacer8</cstring>
+        </property>
+        <property name="orientation">
+            <enum>Horizontal</enum>
+        </property>
+        <property name="sizeType">
+            <enum>Expanding</enum>
+        </property>
+        <property name="sizeHint">
+            <size>
+                <width>16</width>
+                <height>20</height>
+            </size>
+        </property>
+        <property name="geometry">
+            <rect>
+                <x>11</x>
+                <y>11</y>
+                <width>16</width>
+                <height>20</height>
+            </rect>
+        </property>
+    </spacer>
+    <widget class="QLabel">
+        <property name="name">
+            <cstring>eapLabel</cstring>
+        </property>
+        <property name="geometry">
+            <rect>
+                <x>30</x>
+                <y>40</y>
+                <width>130</width>
+                <height>20</height>
+            </rect>
+        </property>
+        <property name="text">
+            <string>EAP Type:</string>
+        </property>
+    </widget>
+    <widget class="QLabel">
+        <property name="name">
+            <cstring>eapType</cstring>
+        </property>
+        <property name="geometry">
+            <rect>
+                <x>250</x>
+                <y>40</y>
+                <width>160</width>
+                <height>20</height>
+            </rect>
+        </property>
+        <property name="text">
+            <string>&lt;p align="center"&gt;NOT DEFINED!&lt;/p&gt;</string>
+        </property>
+    </widget>
+    <widget class="QLabel">
+        <property name="name">
+            <cstring>challengeMessage</cstring>
+        </property>
+        <property name="geometry">
+            <rect>
+                <x>250</x>
+                <y>60</y>
+                <width>160</width>
+                <height>20</height>
+            </rect>
+        </property>
+        <property name="text">
+            <string>&lt;p align="center"&gt;NO CHALLENGE&lt;/p&gt;</string>
+        </property>
+    </widget>
+    <widget class="QLabel">
+        <property name="name">
+            <cstring>promptLabel</cstring>
+        </property>
+        <property name="geometry">
+            <rect>
+                <x>20</x>
+                <y>90</y>
+                <width>130</width>
+                <height>20</height>
+            </rect>
+        </property>
+        <property name="text">
+            <string>Enter your Password:</string>
+        </property>
+    </widget>
+    <spacer>
+        <property name="name">
+            <cstring>spacer8_3</cstring>
+        </property>
+        <property name="orientation">
+            <enum>Horizontal</enum>
+        </property>
+        <property name="sizeType">
+            <enum>Expanding</enum>
+        </property>
+        <property name="sizeHint">
+            <size>
+                <width>16</width>
+                <height>20</height>
+            </size>
+        </property>
+        <property name="geometry">
+            <rect>
+                <x>5</x>
+                <y>90</y>
+                <width>16</width>
+                <height>20</height>
+            </rect>
+        </property>
+    </spacer>
+    <spacer>
+        <property name="name">
+            <cstring>spacer5</cstring>
+        </property>
+        <property name="orientation">
+            <enum>Horizontal</enum>
+        </property>
+        <property name="sizeType">
+            <enum>Expanding</enum>
+        </property>
+        <property name="sizeHint">
+            <size>
+                <width>88</width>
+                <height>20</height>
+            </size>
+        </property>
+        <property name="geometry">
+            <rect>
+                <x>156</x>
+                <y>90</y>
+                <width>88</width>
+                <height>20</height>
+            </rect>
+        </property>
+    </spacer>
+    <widget class="QLineEdit">
+        <property name="name">
+            <cstring>password</cstring>
+        </property>
+        <property name="geometry">
+            <rect>
+                <x>250</x>
+                <y>90</y>
+                <width>160</width>
+                <height>20</height>
+            </rect>
+        </property>
+        <property name="echoMode">
+            <enum>Password</enum>
+        </property>
+    </widget>
+    <widget class="QLabel">
+        <property name="name">
+            <cstring>challengeLabel</cstring>
+        </property>
+        <property name="geometry">
+            <rect>
+                <x>30</x>
+                <y>60</y>
+                <width>130</width>
+                <height>21</height>
+            </rect>
+        </property>
+        <property name="text">
+            <string>Challenge:</string>
+        </property>
+    </widget>
+</widget>
+<connections>
+    <connection>
+        <sender>authenticateButton</sender>
+        <signal>clicked()</signal>
+        <receiver>Xsupplicant</receiver>
+        <slot>setPassword()</slot>
+    </connection>
+    <connection>
+        <sender>authenticateButton</sender>
+        <signal>clicked()</signal>
+        <receiver>Xsupplicant</receiver>
+        <slot>hideSelf()</slot>
+    </connection>
+    <connection>
+        <sender>authenticateButton</sender>
+        <signal>clicked()</signal>
+        <receiver>Xsupplicant</receiver>
+        <slot>main()</slot>
+    </connection>
+</connections>
+<includes>
+    <include location="local" impldecl="in implementation">Xsupplicant.ui.h</include>
+</includes>
+<slots>
+    <slot>ipc_cleanup()</slot>
+    <slot>ipc_flush_requests( int reqtype )</slot>
+    <slot>ipc_handle_packet( int reqtype, char * packet )</slot>
+    <slot>ipc_disconnect()</slot>
+    <slot>setPassword()</slot>
+    <slot>block_while_not_xsup()</slot>
+    <slot>main()</slot>
+    <slot>hideSelf()</slot>
+</slots>
+<functions>
+    <function access="private" specifier="non virtual">init()</function>
+    <function access="private" specifier="non virtual">destroy()</function>
+    <function returnType="int">sendPassword()</function>
+    <function returnType="int">check_for_message()</function>
+</functions>
+<pixmapinproject/>
+<layoutdefaults spacing="6" margin="11"/>
+</UI>

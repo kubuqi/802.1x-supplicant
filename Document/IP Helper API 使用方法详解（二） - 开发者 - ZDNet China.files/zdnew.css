@@ -1,0 +1,69 @@
+.tlink1 {
+	FONT-SIZE: 12px; COLOR: #ffffff; FONT-FAMILY: "Tahoma"
+}
+.tlink2 {
+	FONT-WEIGHT: bold; FONT-SIZE: 12px; COLOR: #cc3300; FONT-FAMILY: "Tahoma"; BACKGROUND-COLOR: #ffcc66
+}
+.text1 {
+	FONT-SIZE: 12px; LINE-HEIGHT: 16px; FONT-FAMILY: "Tahoma"
+}
+.link {
+	FONT-SIZE: 12px; FONT-FAMILY: "Tahoma"
+}
+.slink {
+	FONT-SIZE: 11px; FONT-FAMILY: "Tahoma"
+}
+.h1 {
+	FONT-WEIGHT: bold; FONT-SIZE: 12px; COLOR: #ffffff; LINE-HEIGHT: 20px; FONT-FAMILY: "Tahoma"
+}
+.p1 {
+	FONT-SIZE: 7px; FONT-FAMILY: "Tahoma"
+}
+.h2 {
+	FONT-WEIGHT: bold; FONT-SIZE: 13px; COLOR: #333399; LINE-HEIGHT: 30px; FONT-FAMILY: "Tahoma"
+}
+.text2 {
+	FONT-WEIGHT: bold; FONT-SIZE: 12px; COLOR: #cc3300; FONT-FAMILY: "Tahoma"
+}
+.unnamed1 {
+	
+}
+.redtitle {
+	FONT-WEIGHT: bold; FONT-SIZE: 14px; COLOR: #990033; FONT-FAMILY: "Tahoma"
+}
+.footertext {
+	FONT-SIZE: 9pt; COLOR: #000000; LINE-HEIGHT: 16px; FONT-FAMILY: "Tahoma"
+}
+.footerlink:link {
+	FONT-SIZE: 9pt; COLOR: #000000; LINE-HEIGHT: 15pt; FONT-FAMILY: "Tahoma"; TEXT-DECORATION: none
+}
+.footerlink:visited {
+	FONT-SIZE: 9pt; COLOR: #000000; LINE-HEIGHT: 15pt; FONT-FAMILY: "Tahoma"; TEXT-DECORATION: none
+}
+.footerlink:hover {
+	FONT-SIZE: 9pt; COLOR: #000000; LINE-HEIGHT: 15pt; FONT-FAMILY: "Tahoma"; TEXT-DECORATION: underline
+}
+.yellow {
+	FONT-SIZE: 9pt; COLOR: #fc0; LINE-HEIGHT: 15pt; FONT-FAMILY: "Tahoma"; TEXT-DECORATION: none
+}
+A.yellow:hover {
+	FONT-SIZE: 9pt; COLOR: #fc0; LINE-HEIGHT: 15pt; FONT-FAMILY: "Tahoma"; TEXT-DECORATION: underline
+}
+.white {
+	FONT-SIZE: 9pt; COLOR: #fff; LINE-HEIGHT: 15pt; FONT-FAMILY: "Tahoma"; TEXT-DECORATION: none
+}
+A.white:hover {
+	FONT-SIZE: 9pt; COLOR: #fff; LINE-HEIGHT: 15pt; FONT-FAMILY: "Tahoma"; TEXT-DECORATION: underline
+}
+.choose:link {
+	FONT-WEIGHT: bold; FONT-SIZE: 10pt; COLOR: #ffffff; LINE-HEIGHT: 15pt; FONT-FAMILY: "Tahoma"; TEXT-DECORATION: none
+}
+.choose:visited {
+	FONT-WEIGHT: bold; FONT-SIZE: 10pt; COLOR: #ffffff; LINE-HEIGHT: 15pt; FONT-FAMILY: "Tahoma"; TEXT-DECORATION: none
+}
+.choose:hover {
+	FONT-WEIGHT: bold; FONT-SIZE: 10pt; COLOR: #000000; LINE-HEIGHT: 15pt; FONT-FAMILY: "Tahoma"; TEXT-DECORATION: underline
+}
+.choosetext {
+	FONT-WEIGHT: bold; FONT-SIZE: 10pt; COLOR: #000000; LINE-HEIGHT: 15pt; FONT-FAMILY: "Tahoma"; TEXT-DECORATION: none
+}

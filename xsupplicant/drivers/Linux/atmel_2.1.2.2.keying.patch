@@ -1,0 +1,206 @@
+Binary files atmelwlandriver/objs/lvnet and ../atmelwlandriver/objs/lvnet differ
+diff -rc atmelwlandriver/src/Pcmcia_Pci/ .lastbuild ../atmelwlandriver/src/Pcmcia_Pci/ .lastbuild
+*** atmelwlandriver/src/Pcmcia_Pci/ .lastbuild	Mon Jun  9 02:45:38 2003
+--- ../atmelwlandriver/src/Pcmcia_Pci/ .lastbuild	Sun Jul  6 19:25:41 2003
+***************
+*** 67,69 ****
+--- 67,119 ----
+  LB:=RD
+  LB:=RD
+  LB:=RD-d
++ LB:=RD
++ LB:=RD
++ LB:=RD-d
++ LB:=RE-d
++ LB:=504D
++ LB:=PCID
++ LB:=RD
++ LB:=RD
++ LB:=RD-d
++ LB:=RE-d
++ LB:=504D
++ LB:=PCID
++ LB:=RD
++ LB:=RD
++ LB:=RD
++ LB:=RD-d
++ LB:=RE-d
++ LB:=504D
++ LB:=PCID
++ LB:=RD
++ LB:=RD
++ LB:=RD-d
++ LB:=RE-d
++ LB:=504D
++ LB:=PCID
++ LB:=RD
++ LB:=RD
++ LB:=RD-d
++ LB:=RE-d
++ LB:=504D
++ LB:=PCID
++ LB:=RD
++ LB:=RD
++ LB:=RD-d
++ LB:=RE-d
++ LB:=504D
++ LB:=PCID
++ LB:=RD
++ LB:=RD
++ LB:=RD-d
++ LB:=RE-d
++ LB:=504D
++ LB:=PCID
++ LB:=RD
++ LB:=RD
++ LB:=RD
++ LB:=RD-d
++ LB:=RE-d
++ LB:=504D
++ LB:=PCID
+diff -rc atmelwlandriver/src/Pcmcia_Pci/fastvnet_cs.c ../atmelwlandriver/src/Pcmcia_Pci/fastvnet_cs.c
+*** atmelwlandriver/src/Pcmcia_Pci/fastvnet_cs.c	Mon Jun  9 02:45:38 2003
+--- ../atmelwlandriver/src/Pcmcia_Pci/fastvnet_cs.c	Sun Jul  6 19:24:36 2003
+***************
+*** 1097,1103 ****
+    PVNet_ADAPTER Adapter = &local->Adapter;
+    ULONG GenericULong;
+    //UCHAR                 ApInfoList[MAX_BSS_ENTRIES*sizeof(BSS_INFO)];
+!   int rc = 0, update = 0, WEP_OR_SUPPORT = 0, APindex, i;
+    DEVICE_CONFIGURATION DevConfig;
+  
+    // check the user. if not superuser return no perm.
+--- 1097,1103 ----
+    PVNet_ADAPTER Adapter = &local->Adapter;
+    ULONG GenericULong;
+    //UCHAR                 ApInfoList[MAX_BSS_ENTRIES*sizeof(BSS_INFO)];
+!   int rc = 0, update = 0, WEP_OR_SUPPORT = 0, APindex, i, WepKeyToSet;
+    DEVICE_CONFIGURATION DevConfig;
+  
+    // check the user. if not superuser return no perm.
+***************
+*** 1477,1483 ****
+  	  Adapter->WepInfo.WepMode = WEP_MODE_OPTIONAL;
+  	}
+  
+!       if ((wrq->u.data.length != 5) && (wrq->u.data.length != 13))
+  	{
+  	  EnableInterrupts (Adapter);
+  	  return -EINVAL;
+--- 1477,1484 ----
+  	  Adapter->WepInfo.WepMode = WEP_MODE_OPTIONAL;
+  	}
+  
+!       // If length is 0, then we just want to set the transmit key.
+!       if ((wrq->u.data.length != 5) && (wrq->u.data.length != 13) && (wrq->u.data.length != 0))
+  	{
+  	  EnableInterrupts (Adapter);
+  	  return -EINVAL;
+***************
+*** 1499,1509 ****
+  	{
+  	  if ((wrq->u.data.flags & IW_ENCODE_INDEX) == 0)
+  	    {
+  	      Adapter->WepInfo.WepKeyToUse = 0;
+  	    }
+  	  else
+! 	    Adapter->WepInfo.WepKeyToUse =
+! 	      (wrq->u.data.flags & IW_ENCODE_INDEX) - 1;
+  
+  	}
+        else
+--- 1500,1519 ----
+  	{
+  	  if ((wrq->u.data.flags & IW_ENCODE_INDEX) == 0)
+  	    {
++ 	      printk("Setting WEP transmit key to 0\n");
+  	      Adapter->WepInfo.WepKeyToUse = 0;
+  	    }
+  	  else
+! 	    {
+! 	      if (wrq->u.data.length == 0)
+! 		{
+! 		  Adapter->WepInfo.WepKeyToUse =
+! 		    (wrq->u.data.flags & IW_ENCODE_INDEX) - 1;
+! 		  printk("Setting WEP transmit key to %d from %d\n",Adapter->WepInfo.WepKeyToUse, (wrq->u.data.flags & IW_ENCODE_INDEX));
+! 		} else {
+! 		  WepKeyToSet = (wrq->u.data.flags & IW_ENCODE_INDEX) - 1;
+! 		}
+! 	    }
+  
+  	}
+        else
+***************
+*** 1513,1522 ****
+  	  EnableInterrupts (Adapter);
+  	  return -EINVAL;
+  	}
+!       copy_from_user (((PUCHAR) Adapter->WepInfo.WepKey1 +
+! 		       ((13 * Adapter->WepInfo.WepKeyToUse))),
+! 		      wrq->u.data.pointer, wrq->u.data.length);
+! 
+        update = 1;
+        WEP_OR_SUPPORT = WeP;
+        break;
+--- 1523,1536 ----
+  	  EnableInterrupts (Adapter);
+  	  return -EINVAL;
+  	}
+!       
+!       // If it is just a transmit key set, don't try to get a key.
+!       if (wrq->u.data.length != 0)
+! 	{
+! 	  copy_from_user (((PUCHAR) Adapter->WepInfo.WepKey1 +
+! 			 ((13 * WepKeyToSet))),
+! 			  wrq->u.data.pointer, wrq->u.data.length);
+! 	}
+        update = 1;
+        WEP_OR_SUPPORT = WeP;
+        break;
+***************
+*** 1605,1611 ****
+  	{
+  	case WeP:
+  	  ConfigureWEP (Adapter);
+! 	  ResetAdapter (Adapter, TRUE);
+  	  break;
+  	case SuP:
+  	  ChangeConfiguration (Adapter, &DevConfig);
+--- 1619,1630 ----
+  	{
+  	case WeP:
+  	  ConfigureWEP (Adapter);
+! 	  if (Adapter->WepInfo.EncryptionLevel == WEP_DISABLED) 
+! 	    {
+! 	      ResetAdapter (Adapter, TRUE);
+! 	    } else {
+! 	      printk("NOT RESETTING ADAPTER AFTER WEP KEY SET!\n");
+! 	    }
+  	  break;
+  	case SuP:
+  	  ChangeConfiguration (Adapter, &DevConfig);
+Only in ../atmelwlandriver/src/Pcmcia_Pci: fastvnet_cs.c~
+diff -rc atmelwlandriver/src/Pcmcia_Pci/vnet.c ../atmelwlandriver/src/Pcmcia_Pci/vnet.c
+*** atmelwlandriver/src/Pcmcia_Pci/vnet.c	Mon Jun  9 02:45:38 2003
+--- ../atmelwlandriver/src/Pcmcia_Pci/vnet.c	Sun Jul  6 17:31:09 2003
+***************
+*** 243,248 ****
+--- 243,250 ----
+  {
+  	USHORT AddressReg;
+  
++ 	DbgPrint("Issueing card reset!\n");
++ 
+  	if(Adapter->StationState == STATION_STATE_NO_CARD)
+  		return FALSE;
+  
+Only in ../atmelwlandriver/src/Pcmcia_Pci: vnet.c~
+Binary files atmelwlandriver/src/apps/cmd_line/lvnet and ../atmelwlandriver/src/apps/cmd_line/lvnet differ
+diff -rc atmelwlandriver/src/usb/.lastbuild ../atmelwlandriver/src/usb/.lastbuild
+*** atmelwlandriver/src/usb/.lastbuild	Mon Jun  9 02:45:40 2003
+--- ../atmelwlandriver/src/usb/.lastbuild	Sun Jul  6 19:26:16 2003
+***************
+*** 1 ****
+! LB := rfmdD
+--- 1 ----
+! LB := r505_2958D

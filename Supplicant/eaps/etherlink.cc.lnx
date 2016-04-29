@@ -1,0 +1,226 @@
+// ethernet datalink access class
+//
+char const _8021x_etherlink_rcsid[] = "$Id: etherlink.cc,v 1.5 2002/10/02 11:48:55 wcvs Exp $";
+
+//*  includes
+//
+#include "etherlink.hh"
+#include "eapol.hh"
+
+namespace eap
+{
+    extern "C" {
+#ifdef WIN32
+//#	include <PCAP.H>
+#else
+#	include <sys/socket.h>	
+#	include <sys/ioctl.h>
+#	include <net/if.h>
+#	include <net/ethernet.h>
+#	include <unistd.h>	
+#endif
+
+#ifdef USE_BPF
+#  include <sys/types.h>
+#  include <sys/time.h>
+#  include <sys/sysctl.h>	
+#  include <net/bpf.h>
+#  include <net/if_dl.h>
+#endif
+	
+#ifdef USE_PF_PACKET
+#  include <netpacket/packet.h>
+#endif
+
+#include <errno.h>	
+#include <stdio.h>
+#include <string.h>
+#include <fcntl.h>
+    }
+
+    //*  methods
+    //
+    etherlink::etherlink(char const *_iface, ui16 proto, size_t _mtu)
+    {
+	system_error X;
+	rx_frame = 0;
+
+#ifdef WIN32
+	fp = -1;
+	ifndx = 0;	//TODO: 
+#else
+	ll_fd = -1;
+	ifndx = if_nametoindex(_iface);
+#endif
+
+
+#ifdef USE_BPF
+	char buf[16];
+	unsigned x = 0;
+	struct ifreq ifrq;
+
+	// filter to return only EAPOL (0x888e) frames
+	//
+	struct bpf_insn insns[] = 
+	    {
+		BPF_STMT(BPF_LD+BPF_H+BPF_ABS, 12),
+		BPF_JUMP(BPF_JMP+BPF_JEQ+BPF_K, 0, 0, 1), 
+		BPF_STMT(BPF_RET+BPF_K, 1024),
+		BPF_STMT(BPF_RET+BPF_K, 0)
+	    };
+	struct bpf_program prg;
+
+	// find usable bpf device
+	//
+	while (1) {
+	    sprintf(buf, "/dev/bpf%u", x);
+	    ll_fd = open(buf, O_RDWR, 0);
+	    if (ll_fd != -1) break;
+
+	    if (errno == EBUSY) {
+		++x;
+		if (x == 100) X.raise("no usuable bpf device");
+
+		continue;
+	    }
+
+	    X.raise("etherlink ctor: open");
+	}
+
+	// initialize bpf device
+	//
+	memset(&ifrq, 0, sizeof(ifrq));
+	strlcpy(ifrq.ifr_name, _iface, IFNAMSIZ);
+	if (ioctl(ll_fd, BIOCSETIF, &ifrq) == -1) goto error;
+
+	x = 0;
+	if (ioctl(ll_fd, BIOCSSEESENT, &x) == -1) goto error;
+
+	x = 1;
+	if (ioctl(ll_fd, BIOCIMMEDIATE, &x) == -1) goto error;
+	
+	if (ioctl(ll_fd, BIOCGBLEN, &bpf_buflen) == -1) goto error;
+
+	prg.bf_len = 4;
+	prg.bf_insns = insns;
+	insns[1].k = proto;
+	if (ioctl(ll_fd, BIOCSETF, &prg) == -1) goto error;
+
+	rx_frame = new buffer(bpf_buflen);
+#endif
+#ifdef USE_PF_PACKET
+	struct sockaddr_ll ll_addr;
+	
+	ll_fd = socket(PF_PACKET, SOCK_RAW, htons(proto));
+	if (ll_fd == -1) goto error;
+
+	memset(&ll_addr, 0, sizeof(ll_addr));
+	ll_addr.sll_family = AF_PACKET;
+	ll_addr.sll_protocol = htons(proto);
+	ll_addr.sll_ifindex = ifndx;
+	if (bind(ll_fd, (struct sockaddr *)&ll_addr, sizeof(ll_addr)) == -1)
+	    goto error;
+
+	mtu = _mtu;
+	rx_frame = new buffer(mtu);
+#endif
+#ifdef Linux
+	iface = _iface;
+#endif
+	
+	return;
+    error:
+#ifdef WIN32
+	pcap_close(fp);
+	fp = -1;
+#else
+	close(ll_fd);
+	ll_fd = -1;
+#endif
+	X.raise("etherlink ctor");
+    }
+
+    ui8 *etherlink::rx(int ignore_errors)
+    {
+	system_error X;
+	ui8 *p;
+	ssize_t nr;
+
+#ifdef USE_BPF
+	nr = bpf_buflen;
+#endif
+#ifdef USE_PF_PACKET	
+	nr = mtu;
+#endif	
+
+	p = (ui8 *)*rx_frame;
+#ifdef WIN32
+	//TODO:nr = ...
+#else
+	nr = read(ll_fd, p, nr);
+#endif
+
+	if (nr <= 0) {
+	    if (ignore_errors) return 0;
+
+	    X.raise("rx: read error");
+	}
+
+#ifdef USE_BPF	
+	return p + ((struct bpf_hdr *)p)->bh_hdrlen;
+#else
+	return p;
+#endif	
+    }
+
+    void etherlink::tx(ui8 const *frame, size_t len, int ignore_errors)
+    {
+	system_error X;
+	ssize_t nw;
+#ifdef WIN32
+#else
+	nw = write(ll_fd, frame, len);
+#endif
+	if (nw == -1 && !ignore_errors) X.raise("tx: write");
+    }
+
+    void etherlink::get_mac(char *addr, size_t size)
+    {
+#ifdef FreeBSD
+	int mib[6];
+	char buf[sizeof(struct if_msghdr) + sizeof(struct sockaddr_dl)];
+	size_t bufsize;
+	struct sockaddr_dl *sa;
+
+	mib[0] = CTL_NET;
+	mib[1] = AF_ROUTE;
+	mib[2] = 0;
+	mib[3] = AF_LINK;
+	mib[4] = NET_RT_IFLIST;
+	mib[5] = ifndx;
+	bufsize = sizeof(buf);
+	sysctl(mib, 6, buf, &bufsize, 0, 0);
+	sa = (struct sockaddr_dl *)(buf + sizeof(struct if_msghdr));
+	if (size > sa->sdl_alen) {
+	    memset(addr, 0, size);
+	    size = sa->sdl_alen;
+	}
+	
+	memcpy(addr, LLADDR(sa), size);
+#endif
+
+#ifdef Linux
+	struct ifreq ifr;
+	system_error X;
+
+	memset(&ifr, 0, sizeof(ifr));
+	strncpy(ifr.ifr_name, iface, IFNAMSIZ);
+	
+	if (ioctl(ll_fd, SIOCGIFHWADDR, &ifr) == -1) X.raise("get_mac");
+	memcpy(addr, ifr.ifr_hwaddr.sa_data, ETHER_ADDR_LEN);
+#endif	
+
+#ifdef WIN32
+#endif
+    }
+}

@@ -1,0 +1,758 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!-- saved from url=(0156)http://64.233.167.104/search?q=cache:_jb3sleOCqYJ:www.zyxel.com/support/supportnote/ZyAIR_B1000/app/8021x.htm+802.1x+SUPPLICANT+md5-challenge+steps&hl=zh-CN -->
+<HTML><HEAD><TITLE>IEEE 802.1x Access Control</TITLE>
+<META http-equiv=Content-Type content="text/html; charset=ISO-8859-1">
+<META content="MSHTML 6.00.2800.1400" name=GENERATOR></HEAD>
+<BODY text=#000000 vLink=#551a8b aLink=#ff0000 link=#0000ee bgColor=#ffffff>
+<TABLE width="100%" border=1>
+  <TBODY>
+  <TR>
+    <TD>
+      <TABLE cellSpacing=0 cellPadding=10 width="100%" bgColor=#ffffff border=1 
+      color="#ffffff">
+        <TBODY>
+        <TR>
+          <TD><FONT face=arial,sans-serif color=black size=-1>This is <B><FONT 
+            color=#0039b6>G</FONT> <FONT color=#c41200>o</FONT> <FONT 
+            color=#f3c518>o</FONT> <FONT color=#0039b6>g</FONT> <FONT 
+            color=#30a72f>l</FONT> <FONT color=#c41200>e</FONT></B>'s <A 
+            href="http://www.google.com/help/features.html#cached"><FONT 
+            color=blue>cache</FONT></A> of <A 
+            href="http://www.zyxel.com/support/supportnote/ZyAIR_B1000/app/8021x.htm"><FONT 
+            color=blue>http://www.zyxel.com/support/supportnote/ZyAIR_B1000/app/8021x.htm</FONT></A>.<BR><B><FONT 
+            color=#0039b6>G</FONT> <FONT color=#c41200>o</FONT> <FONT 
+            color=#f3c518>o</FONT> <FONT color=#0039b6>g</FONT> <FONT 
+            color=#30a72f>l</FONT> <FONT color=#c41200>e</FONT></B>'s cache is 
+            the snapshot that we took of the page as we crawled the web.<BR>The 
+            page may have changed since that time. Click here for the <A 
+            href="http://www.zyxel.com/support/supportnote/ZyAIR_B1000/app/8021x.htm"><FONT 
+            color=blue>current page</FONT></A> without highlighting.<BR>To link 
+            to or bookmark this page, use the following url: 
+            <CODE>http://www.google.com/search?q=cache:_jb3sleOCqYJ:www.zyxel.com/support/supportnote/ZyAIR_B1000/app/8021x.htm+802.1x+SUPPLICANT+md5-challenge+steps&amp;hl=zh-CN</CODE></FONT><BR><BR>
+            <CENTER><FONT size=-2><I>Google is not affiliated with the authors 
+            of this page nor responsible for its 
+        content.</I></FONT></CENTER></TD></TR>
+        <TR>
+          <TD>
+            <TABLE cellSpacing=0 cellPadding=0 border=0>
+              <TBODY>
+              <TR>
+                <TD><FONT face=arial,sans-serif color=black size=-1>These 
+                  search terms have been highlighted:&nbsp;</FONT></TD>
+                <TD bgColor=#ffff66><B><FONT face=arial,sans-serif color=black 
+                  size=-1>802.1&nbsp;</FONT></B></TD>
+                <TD bgColor=#ffff66><B><FONT face=arial,sans-serif color=black 
+                  size=-1>x&nbsp;</FONT></B></TD>
+                <TD bgColor=#a0ffff><B><FONT face=arial,sans-serif color=black 
+                  size=-1>supplicant&nbsp;</FONT></B></TD>
+                <TD bgColor=#99ff99><B><FONT face=arial,sans-serif color=black 
+                  size=-1>md5&nbsp;</FONT></B></TD>
+                <TD bgColor=#99ff99><B><FONT face=arial,sans-serif color=black 
+                  size=-1>challenge&nbsp;</FONT></B></TD>
+                <TD bgColor=#ff9999><B><FONT face=arial,sans-serif color=black 
+                  size=-1>steps&nbsp;</FONT></B></TD></TR></TBODY></TABLE></TD></TR></TBODY></TABLE></TD></TR></TBODY></TABLE>
+<HR>
+<!-- saved from url=(0022)http://internet.e-mail -->
+<META content="MSHTML 6.00.2716.2200" name=GENERATOR>
+<META content="Microsoft FrontPage 4.0" name=GENERATOR>
+<META content="Mickey Tseng" name=Author>
+<P align=left><FONT face="Times New Roman"><B><SPAN lang=EN-US 
+style="mso-fareast-font-family: &#26032;&#32048;&#26126;&#39636;; mso-font-kerning: 1.0pt; mso-ansi-language: EN-US; mso-fareast-language: ZH-TW; mso-bidi-language: AR-SA"><B 
+style="mso-fareast-font-family: &#26032;&#32048;&#26126;&#39636;; mso-font-kerning: 1.0pt; mso-ansi-language: EN-US; mso-fareast-language: ZH-TW; mso-bidi-language: AR-SA; mso-bidi-font-weight: normal">Setup</B><B 
+style="mso-bidi-font-weight: normal"> </B><B 
+style="mso-fareast-font-family: &#26032;&#32048;&#26126;&#39636;; mso-font-kerning: 1.0pt; mso-ansi-language: EN-US; mso-fareast-language: ZH-TW; mso-bidi-language: AR-SA; mso-bidi-font-weight: normal">IEEE 
+<B style="COLOR: black; BACKGROUND-COLOR: #ffff66">802.1x</B> Access Control 
+(Authentication and Accounting)</B></SPAN></B></FONT></P>
+<UL>
+  <LI>
+  <P align=left>What is IEEE <B 
+  style="COLOR: black; BACKGROUND-COLOR: #ffff66">802.1x</B> ? 
+  <UL>
+    <LI>
+    <P align=left><FONT face="Times New Roman"><A 
+    href="http://www.zyxel.com/support/supportnote/ZyAIR_B1000/app/8021x.htm#Introduction">IEEE 
+    <B style="COLOR: black; BACKGROUND-COLOR: #ffff66">802.1x</B> 
+    Introduction</A></FONT> </P>
+    <LI>
+    <P align=left><FONT color=#000000><A 
+    href="http://www.zyxel.com/support/supportnote/ZyAIR_B1000/app/8021x.htm#Port State">Authentication 
+    Port State and Authentication Control</A></FONT> </P>
+    <LI>
+    <P align=left><FONT color=#000000><A 
+    href="http://www.zyxel.com/support/supportnote/ZyAIR_B1000/app/8021x.htm#Re-auth">Re-Authentication</A></FONT> 
+    </P>
+    <LI>
+    <P align=left><FONT color=#000000><A 
+    href="http://www.zyxel.com/support/supportnote/ZyAIR_B1000/app/8021x.htm#EAPOL">EAPOL</A> 
+    </FONT></P></LI></UL>
+  <LI>
+  <P align=left><FONT face="Times New Roman">Setup <B 
+  style="COLOR: black; BACKGROUND-COLOR: #ffff66">802.1x</B> in Wireless Access 
+  Point</FONT> 
+  <UL>
+    <LI>
+    <P align=left><A 
+    href="http://www.zyxel.com/support/supportnote/ZyAIR_B1000/app/8021x.htm#Enable 802.1x">Enable 
+    <B style="COLOR: black; BACKGROUND-COLOR: #ffff66">802.1x</B></A> </P>
+    <LI>
+    <P align=left><FONT face="Times New Roman"><A 
+    href="http://www.zyxel.com/support/supportnote/ZyAIR_B1000/app/8021x.htm#interna auth server">Using 
+    Internal Authentication Server</A></FONT> </P>
+    <LI>
+    <P align=left><FONT face="Times New Roman"><A 
+    href="http://www.zyxel.com/support/supportnote/ZyAIR_B1000/app/8021x.htm#External radius serrver">Using 
+    External RADIUS Authentication Server</A></FONT> </P></LI></UL>
+  <LI>
+  <P align=left><FONT face="Times New Roman"><A 
+  href="http://www.zyxel.com/support/supportnote/ZyAIR_B1000/app/8021x_client.htm">Setup 
+  <B style="COLOR: black; BACKGROUND-COLOR: #ffff66">802.1x</B> client in the 
+  Station</A></FONT> </P></LI></UL>
+<HR align=left width="95%" SIZE=3>
+
+<UL>
+  <LI><B><FONT face="Times New Roman" color=#000080><A 
+  name=Introduction></A></FONT><FONT face="Times New Roman"><I>IEEE <B 
+  style="COLOR: black; BACKGROUND-COLOR: #ffff66">802.1x</B> Introduction 
+  </I></FONT></B></LI></UL><FONT color=#000000>
+<P>IEEE <B style="COLOR: black; BACKGROUND-COLOR: #ffff66">802.1x</B> port-based 
+authentication is desired to prevent unauthorized devices (clients) from gaining 
+access to the network. As LANs extend to hotels, airports, and corporate 
+lobbies, insecure environments could be created.</FONT> <FONT face=TimesNewRoman 
+color=#000000><B style="COLOR: black; BACKGROUND-COLOR: #ffff66">802.1x</B> 
+port-based network access control makes use of the physical access 
+characteristics of <B>IEEE 802 LAN infrastructures</B></FONT><FONT 
+color=#000000>, such as 802.3 Ethernet, 802.11 Wireless LAN and VDSL LRE (Long 
+Reach Ethernet),</FONT><FONT face=TimesNewRoman color=#000000> in order to 
+provide a means of authenticating and authorizing devices attached to a LAN port 
+that has point-to-point connection characteristics, and of preventing access to 
+that port in cases the authentication process fails.</FONT></P>
+<P align=center><IMG 
+style="BORDER-RIGHT: 1px solid; BORDER-TOP: 1px solid; BORDER-LEFT: 1px solid; BORDER-BOTTOM: 1px solid" 
+height=418 src="IEEE 802_1x Access Control.files/8021x.gif" width=576 
+border=0></P><FONT color=#000000>
+<P>IEEE <B style="COLOR: black; BACKGROUND-COLOR: #ffff66">802.1x</B> 
+authentication is a client-server architecture delivered with EAPOL (Extensible 
+Authentication Protocol over LAN). The authentication server authenticates each 
+client connected to a Access Point (For Wireless LAN) or switch port (for 
+Ethernet) before accessing any services offered by the Wireless AP. <B 
+style="COLOR: black; BACKGROUND-COLOR: #ffff66">802.1x</B> contains tree major 
+components :</P><B>
+<P>1. Authenticator :</P></B><FONT face=TimesNewRoman color=#000000>
+<P>The device (i.e. Wireless AP) facilitates authentication for the <B 
+style="COLOR: black; BACKGROUND-COLOR: #a0ffff">supplicant</B> (Wireless client) 
+attached on the Wireless network.</FONT></FONT> <FONT color=#000000><FONT 
+face=TimesNewRoman color=#000000>Authenticator </FONT><FONT 
+color=#000000>controls the physical access to the network based on the 
+authentication status of the client. The authenticator acts as an intermediary 
+(proxy) between the client and the authentication server (i.e. RADIUS server), 
+requesting identity information from the client, verifying that information with 
+the authentication server, and relaying a response to the client.</P><B>
+<P>2. <B style="COLOR: black; BACKGROUND-COLOR: #a0ffff">Supplicant</B> 
+:</P></B></FONT><FONT face=TimesNewRoman color=#000000>
+<P>The station (i.e. Wireless client) is being authenticated by an authenticator 
+attached on the Wireless network. The <B 
+style="COLOR: black; BACKGROUND-COLOR: #a0ffff">supplicant</B> </FONT><FONT 
+color=#000000>requests access to the LAN services and responds to the requests 
+from the authenticator. The station must be running <B 
+style="COLOR: black; BACKGROUND-COLOR: #ffff66">802.1x</B>-compliant client 
+software such as that offered in the Microsoft Windows XP operating system, 
+Meeting House AEGIS <B 
+style="COLOR: black; BACKGROUND-COLOR: #ffff66">802.1x</B> client and Odyssey <B 
+style="COLOR: black; BACKGROUND-COLOR: #ffff66">802.1x</B> client.</P><B>
+<P>3. Authentication Server :</P></B></FONT><FONT face=TimesNewRoman 
+color=#000000>
+<P>The device (i.e. RADIUS server) provides an authentication service to an 
+authenticator. This service determines, from the credentials provided by the <B 
+style="COLOR: black; BACKGROUND-COLOR: #a0ffff">supplicant</B>, whether the <B 
+style="COLOR: black; BACKGROUND-COLOR: #a0ffff">supplicant</B> is authorized to 
+access the services provided by the authenticator.</FONT></FONT> <FONT 
+color=#000000>The authentication server performs the actual authentication of 
+the client. It validates the identity of the <B 
+style="COLOR: black; BACKGROUND-COLOR: #a0ffff">supplicant</B>. Because the 
+authenticator acts as the proxy, the authentication service is transparent to 
+the <B 
+style="COLOR: black; BACKGROUND-COLOR: #a0ffff">supplicant</B>.&nbsp;</FONT></P>
+<P><FONT color=#000000>Some Wireless AP (i.e. ZyXEL Wireless AP) have built-in 
+authentication server, external RADIUS authentication server is not needed. In 
+this case, Wireless AP is acted as both authenticator and authentication 
+server.</P>
+<UL>
+  <LI><B><I><A name="Port State"></A>Authentication Port State and 
+  Authentication Control</I></B> </LI></UL>
+<P>The port state determines whether or not the <B 
+style="COLOR: black; BACKGROUND-COLOR: #a0ffff">supplicant</B> (Wireless Client) 
+is granted access to the network behind Wireless AP. There are two 
+authentication port state on the AP, <B>authorized state</B> and <B>unauthorized 
+state</B>.&nbsp;</P>
+<P>By default, the port starts in the unauthorized state. While in this state, 
+the port disallows all incoming and outgoing data traffic except for <B 
+style="COLOR: black; BACKGROUND-COLOR: #ffff66">802.1x</B> packets. When a <B 
+style="COLOR: black; BACKGROUND-COLOR: #a0ffff">supplicant</B> is successfully 
+authenticated, the port transitions to the authorized state, allowing all 
+traffic for the client to flow normally. If a client that does not support <B 
+style="COLOR: black; BACKGROUND-COLOR: #ffff66">802.1x</B> is connected to an 
+unauthorized <B style="COLOR: black; BACKGROUND-COLOR: #ffff66">802.1x</B> port, 
+the authenticator requests the client’s identity. In this situation, the client 
+does not respond to the <B 
+style="COLOR: black; BACKGROUND-COLOR: #ffff66">802.1x</B> request, the port 
+remains in the unauthorized state, and the client is not granted access to the 
+network.</P>
+<P>When <B style="COLOR: black; BACKGROUND-COLOR: #ffff66">802.1x</B> is 
+enabled, the authenticator controls the port authorization state by using the 
+following control parameters. The following three authentication control 
+parameter are applied in Wireless AP.</P>
+<P align=center><IMG 
+style="BORDER-RIGHT: 1px solid; BORDER-TOP: 1px solid; BORDER-LEFT: 1px solid; BORDER-BOTTOM: 1px solid" 
+height=318 src="IEEE 802_1x Access Control.files/auth-ctrl.gif" width=650 
+border=0></P>
+<P><B>1. Force Authorized :</B> Disables <B 
+style="COLOR: black; BACKGROUND-COLOR: #ffff66">802.1x</B> and causes the port 
+to transition to the authorized state without any authentication exchange 
+required. The port transmits and receives normal traffic without <B 
+style="COLOR: black; BACKGROUND-COLOR: #ffff66">802.1x</B>-based authentication 
+of the client. This is the default port control setting. While AP is setup as 
+<B>Force Authorized</B>, Wireless client (supported <B 
+style="COLOR: black; BACKGROUND-COLOR: #ffff66">802.1x</B> client or none-<B 
+style="COLOR: black; BACKGROUND-COLOR: #ffff66">802.1x</B> client) can always 
+access the network.</P>
+<P><B>2. Force Unauthorized : </B>Causes the port to remain in the unauthorized 
+state, ignoring all attempts by the client to authenticate. The authenticator 
+cannot provide authentication services to the supplicants through the port. 
+While AP is setup as <B>Force Unauthorized</B>, Wireless clients (supported <B 
+style="COLOR: black; BACKGROUND-COLOR: #ffff66">802.1x</B> client or none-<B 
+style="COLOR: black; BACKGROUND-COLOR: #ffff66">802.1x</B> client) never have 
+the access for the network.</P>
+<P><B>3. Auto :</B> Enables <B 
+style="COLOR: black; BACKGROUND-COLOR: #ffff66">802.1x</B> and causes the port 
+to begin in the unauthorized state, allowing only EAPOL frames to be sent and 
+received through the port. The authentication process begins when the link state 
+of the port transitions from down to up, or when an EAPOL-start frame is 
+received requests the identity of the client and begins relaying authentication 
+messages between <B 
+style="COLOR: black; BACKGROUND-COLOR: #a0ffff">supplicant</B> and the 
+authentication server. Each <B 
+style="COLOR: black; BACKGROUND-COLOR: #a0ffff">supplicant</B> attempting to 
+access the network is uniquely identified by the authenticator by using the 
+client’s MAC address. While AP is setup as <B>Auto</B>, only Wireless client 
+supported <B style="COLOR: black; BACKGROUND-COLOR: #ffff66">802.1x</B> client 
+can access the network.<BR></P>
+<UL>
+  <LI><B><A name=Re-auth></A><I>Re-Authentication</I></B> </LI></UL>
+<P>The administrator can enable periodic <B 
+style="COLOR: black; BACKGROUND-COLOR: #ffff66">802.1x</B> client 
+re-authentication and specify how often it occurs. When re-authentication time 
+out, Authenticator will send EAP-Request/ Identity to reinitiate authentication 
+process.<BR>In ZyXEL Wireless AP <B 
+style="COLOR: black; BACKGROUND-COLOR: #ffff66">802.1x</B> implementation, if 
+you do not specify a time period before enabling re-authentication, the number 
+of seconds between re-authentication attempts is 1800 seconds (30 
+minutes).<BR></P>
+<UL>
+  <LI><B><I><A name=EAPOL></A>EAPOL (Extensible Authentication Protocol over 
+  LAN)</I></B> </LI></UL></FONT>
+<P>Authenticators and supplicants communicate with one another by using the 
+Extensible Authentication Protocol (EAP, RFC-2284). EAP was originally designed 
+to run over PPP and to authenticate dial-in users, but <B 
+style="COLOR: black; BACKGROUND-COLOR: #ffff66">802.1x</B> defines an 
+encapsulation method for passing EAP packets over Ethernet frames. This method 
+is referred to as <B>EAP over LANs, or EAPOL</B>. Ethernet type of EAPOL is 
+<B>88-8E</B> , two octets in length. EAPOL encapsulations are described for IEEE 
+802 compliant environment, such as 802.3 Ethernet, 802.11 Wireless LAN and Token 
+Ring/FDDI.</P>
+<P align=center><IMG 
+style="BORDER-RIGHT: 1px solid; BORDER-TOP: 1px solid; BORDER-LEFT: 1px solid; BORDER-BOTTOM: 1px solid" 
+height=217 src="IEEE 802_1x Access Control.files/eapol.gif" width=489 
+border=0></P>
+<P>The EAP protocol can support multiple authentication mechanisms, such as <B 
+style="COLOR: black; BACKGROUND-COLOR: #99ff99">MD5-challenge</B>, One-Time 
+Passwords, Generic Token Card, TLS and TTLS etc. Typically, the authenticator 
+will send an initial Identity Request followed by one or more Requests for 
+authentication information. When <B 
+style="COLOR: black; BACKGROUND-COLOR: #a0ffff">supplicant</B> receive the EAP 
+request, it will reply associated EAP response. So far, ZyXEL Wireless AP only 
+supports MD-5 challenge authentication mechanism, but will support TLS and TTLS 
+in the future.</P>
+<P><B>EAPOL Exchange between <B 
+style="COLOR: black; BACKGROUND-COLOR: #ffff66">802.1x</B> Authenticator and <B 
+style="COLOR: black; BACKGROUND-COLOR: #a0ffff">Supplicant</B></B></P>
+<P>The authenticator or the <B 
+style="COLOR: black; BACKGROUND-COLOR: #a0ffff">supplicant</B> can initiate 
+authentication. If you enable <B 
+style="COLOR: black; BACKGROUND-COLOR: #ffff66">802.1x</B> authentication on the 
+Wireless AP, the authenticator must initiate authentication when it determines 
+that the Wireless link state transitions from down to up. It then sends an 
+EAP-request/identity frame to the <B 
+style="COLOR: black; BACKGROUND-COLOR: #ffff66">802.1x</B> client to request its 
+identity (typically, the authenticator sends an initial identity/request frame 
+followed by one or more requests for authentication information). Upon receipt 
+of the frame, the <B 
+style="COLOR: black; BACKGROUND-COLOR: #a0ffff">supplicant</B> responds with an 
+EAP-response/identity frame.</P>
+<P>However, if during bootup, the <B 
+style="COLOR: black; BACKGROUND-COLOR: #a0ffff">supplicant</B> does not receive 
+an EAP-request/identity frame from the Wireless AP, the client can initiate 
+authentication by sending an <B>EAPOL-Start </B>frame, which prompts the switch 
+to request the <B 
+style="COLOR: black; BACKGROUND-COLOR: #a0ffff">supplicant</B>’s identity. In 
+above case, authenticator co-locate with authentication server. When the <B 
+style="COLOR: black; BACKGROUND-COLOR: #a0ffff">supplicant</B> supplies its 
+identity, the authenticator directly exchanges EAPOL to the <B 
+style="COLOR: black; BACKGROUND-COLOR: #a0ffff">supplicant</B> until 
+authentication succeeds or fails. If the authentication succeeds, the port 
+becomes authorized. If the authentication fails, the port becomes unauthorized. 
+When the <B style="COLOR: black; BACKGROUND-COLOR: #a0ffff">supplicant</B> does 
+not need Wireless access any more, it sends <B>EAPOL-Logoff</B> packet&nbsp; to 
+terminate its <B style="COLOR: black; BACKGROUND-COLOR: #ffff66">802.1x</B> 
+session, the port state will become unauthorized. The following figure shows the 
+EAPOL exchange ping-pong chart.</P>
+<P align=center><IMG 
+style="BORDER-RIGHT: 1px solid; BORDER-TOP: 1px solid; BORDER-LEFT: 1px solid; BORDER-BOTTOM: 1px solid" 
+height=464 src="IEEE 802_1x Access Control.files/eapol_exg.gif" width=593 
+border=0></P>
+<P>The EAPOL packet contains the following fields: protocol version, packet 
+type, packet body length and packet body. Most of the fields are obvious. The 
+packet type can have four different values, and these values are described 
+below:&nbsp;</P>
+<P align=center><IMG 
+style="BORDER-RIGHT: 1px solid; BORDER-TOP: 1px solid; BORDER-LEFT: 1px solid; BORDER-BOTTOM: 1px solid" 
+height=375 src="IEEE 802_1x Access Control.files/eapol_1.gif" width=765 
+border=0></P>
+<UL>
+  <LI>EAP-Packet : Both the <B 
+  style="COLOR: black; BACKGROUND-COLOR: #a0ffff">supplicant</B> and the 
+  authenticator send this packet when authentication is taking place. This is 
+  the packet that contains either the <B 
+  style="COLOR: black; BACKGROUND-COLOR: #99ff99">MD5-Challenge</B> or TLS 
+  information required for authentication. 
+  <LI>EAPOL-Start : This <B 
+  style="COLOR: black; BACKGROUND-COLOR: #a0ffff">supplicant</B> sends this 
+  packet when it wants to initiate the authentication process.&nbsp; 
+  <LI>EAPOL-Logoff : The <B 
+  style="COLOR: black; BACKGROUND-COLOR: #a0ffff">supplicant</B> sends this 
+  packet when it wants to terminate its <B 
+  style="COLOR: black; BACKGROUND-COLOR: #ffff66">802.1x</B> session.&nbsp; 
+  <LI>EAPOL-Key : This is used for TLS authentication method. The Wireless AP 
+  uses this packet to send the calculated WEP key to the <B 
+  style="COLOR: black; BACKGROUND-COLOR: #a0ffff">supplicant</B> after TLS 
+  negotiation has completed between the <B 
+  style="COLOR: black; BACKGROUND-COLOR: #a0ffff">supplicant</B> and the RADIUS 
+  server.&nbsp; </LI></UL>
+<HR>
+<FONT face="Times New Roman"><B><I>IEEE <B 
+style="COLOR: black; BACKGROUND-COLOR: #ffff66">802.1x</B> Configuration in 
+ZyXEL Wireless Access Point</I></B></FONT> 
+<UL>
+  <LI><FONT face="Times New Roman"><B><I><A name="Enable 802.1x"></A>Enable <B 
+  style="COLOR: black; BACKGROUND-COLOR: #ffff66">802.1x</B> in 
+  AP</I></B></FONT> </LI></UL>
+<P>When the IEEE <B style="COLOR: black; BACKGROUND-COLOR: #ffff66">802.1x</B> 
+authentication is enabled, the wireless client must be authenticated by the 
+ZyXEL AP before it can communicate on your network through ZyXEL AP. By default, 
+the <B style="COLOR: black; BACKGROUND-COLOR: #ffff66">802.1x</B> function is 
+disabled (Authentication Control= Force Authorized) to allow all wireless 
+client. You can use SMT or Web Configuration to configure it.&nbsp;</P>
+<P>Enter SMT Menu 23.4 to setup the <B 
+style="COLOR: black; BACKGROUND-COLOR: #ffff66">802.1x</B> authentication 
+control.</P>
+<TABLE cols=1 width=656 bgColor=#ffffcc border=1>
+  <TBODY>
+  <TR>
+    <TD width=646><FONT 
+      face="Times New Roman"><TT>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TT> 
+      <SPAN 
+      style="mso-font-kerning: 0pt; mso-ansi-language: ZH-TW; mso-hansi-font-family: Times New Roman"><SPAN 
+      style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</SPAN></SPAN></FONT> 
+
+      <P>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+      Menu 23.4 - System Security - 
+      IEEE802.1X<BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+      Authentication Control= <B><FONT color=#0000ee>Auto/ Force Authorized/ 
+      Force 
+      UnAuthorized</FONT></B><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+      ReAuthentication Timer (in second)= 1800</P>
+      <P> </P></TD></TR></TBODY></TABLE>
+<P><SPAN lang=EN-US style="mso-fareast-font-family: &#26032;&#32048;&#26126;&#39636;">Key Settings :&nbsp; 
+<O:P></O:P></SPAN></P>
+<TABLE 
+style="WIDTH: 100%; mso-cellspacing: 0cm; mso-padding-alt: 0cm 0cm 0cm 0cm" 
+cellSpacing=0 cellPadding=0 width="100%" border=1>
+  <TBODY>
+  <TR>
+    <TD 
+    style="PADDING-RIGHT: 0.75pt; PADDING-LEFT: 0.75pt; BACKGROUND: silver; PADDING-BOTTOM: 0.75pt; WIDTH: 18%; PADDING-TOP: 0.75pt" 
+    width="18%">
+      <P class=MsoNormal><SPAN lang=EN-US>Option</SPAN></P></TD>
+    <TD 
+    style="PADDING-RIGHT: 0.75pt; PADDING-LEFT: 0.75pt; BACKGROUND: silver; PADDING-BOTTOM: 0.75pt; WIDTH: 82%; PADDING-TOP: 0.75pt" 
+    width="82%">
+      <P class=MsoNormal><SPAN lang=EN-US>Descriptions</SPAN></P></TD></TR>
+  <TR>
+    <TD 
+    style="PADDING-RIGHT: 0.75pt; PADDING-LEFT: 0.75pt; PADDING-BOTTOM: 0.75pt; WIDTH: 18%; PADDING-TOP: 0.75pt" 
+    width="18%">
+      <P class=MsoNormal><SPAN lang=EN-US><B>Authentication Control</B> 
+      </O:P></SPAN></P></TD>
+    <TD 
+    style="PADDING-RIGHT: 0.75pt; PADDING-LEFT: 0.75pt; PADDING-BOTTOM: 0.75pt; WIDTH: 82%; PADDING-TOP: 0.75pt" 
+    width="82%"><U1:COLORSCHEME 
+      colors="#FFFFFF,#000000,#808080,#000000,#00CC99,#3333CC,#CCCCFF,#B2B2B2" 
+/>
+      <P><SPAN lang=EN-US style="mso-fareast-font-family: &#26032;&#32048;&#26126;&#39636;">Press [SPACE 
+      BAR] to select from <B>Force Authorized, Force UnAuthorized </B>or<B> 
+      Auto</B>. The default is Force Authorized.</SPAN></P>
+      <P><SPAN lang=EN-US style="mso-fareast-font-family: &#26032;&#32048;&#26126;&#39636;"><B>Auto :</B> 
+      </SPAN><FONT color=#000000>Enables <B 
+      style="COLOR: black; BACKGROUND-COLOR: #ffff66">802.1x</B> function to 
+      authorize all wireless client,&nbsp; only the wireless client supported <B 
+      style="COLOR: black; BACKGROUND-COLOR: #ffff66">802.1x</B> client can 
+      access the network.</FONT></P>
+      <P><FONT color=#000000><B>Force Authorized : </B>Disable <B 
+      style="COLOR: black; BACKGROUND-COLOR: #ffff66">802.1x</B> function, allow 
+      any wireless client access to your wireless network without 
+      authentication.</FONT></P>
+      <P><FONT color=#000000><B>Force UnAuthorized</B> <B>: </B>Deny all 
+      wireless client access to your wireless network.</FONT><SPAN lang=EN-US 
+      style="mso-fareast-font-family: &#26032;&#32048;&#26126;&#39636;"></O:P> </SPAN></P></TD></TR>
+  <TR>
+    <TD 
+    style="PADDING-RIGHT: 0.75pt; PADDING-LEFT: 0.75pt; PADDING-BOTTOM: 0.75pt; WIDTH: 18%; PADDING-TOP: 0.75pt" 
+    width="18%">
+      <P class=MsoNormal><B><SPAN lang=EN-US>ReAuthentication 
+      Timer</SPAN></B></P></TD>
+    <TD 
+    style="PADDING-RIGHT: 0.75pt; PADDING-LEFT: 0.75pt; PADDING-BOTTOM: 0.75pt; WIDTH: 82%; PADDING-TOP: 0.75pt" 
+    width="82%">
+      <P class=MsoNormal>Specify the time internal between authentication 
+      server's checks of wireless users connected to the network. The default 
+      time interval is <B>1800 </B>seconds. This field is configurable when 
+      Authentication Control = Auto.</P></TD></TR></TBODY></TABLE>
+<DIV class=MsoNormal style="TEXT-ALIGN: center" align=center></DIV>
+<P><SPAN lang=EN-US style="mso-fareast-font-family: &#26032;&#32048;&#26126;&#39636;">If you use WEB 
+Configuration,&nbsp;</SPAN></P>
+<OL>
+  <LI>From the Web Configurator main menu, Click Advanced -&gt; <B 
+  style="COLOR: black; BACKGROUND-COLOR: #ffff66">802.1x</B> Authentication 
+  Setting --&gt; then select <B>System </B>page. 
+  <LI class=MsoNormal 
+  style="mso-margin-top-alt: auto; mso-margin-bottom-alt: auto; mso-list: l0 level1 lfo1; tab-stops: list 36.0pt">Select 
+  <B>Auto</B> to enable <B 
+  style="COLOR: black; BACKGROUND-COLOR: #ffff66">802.1x</B> authentication 
+  function. 
+  <LI class=MsoNormal 
+  style="mso-margin-top-alt: auto; mso-margin-bottom-alt: auto; mso-list: l0 level1 lfo1; tab-stops: list 36.0pt"><SPAN 
+  lang=EN-US>Click <B>Apply</B> to make your setting work.</SPAN> </LI></OL>
+<P><IMG 
+style="BORDER-RIGHT: 1px solid; BORDER-TOP: 1px solid; BORDER-LEFT: 1px solid; BORDER-BOTTOM: 1px solid" 
+height=529 src="IEEE 802_1x Access Control.files/web_auth.gif" width=851 
+border=0></P>
+<P>After <B style="COLOR: black; BACKGROUND-COLOR: #ffff66">802.1x</B> 
+authentication function is enabled, you have to setup the authentication server, 
+you may use <A 
+href="http://www.zyxel.com/support/supportnote/ZyAIR_B1000/app/8021x.htm#interna auth server"><B>internal 
+authentication server</B></A> inside ZyXEL wireless AP or <A 
+href="http://www.zyxel.com/support/supportnote/ZyAIR_B1000/app/8021x.htm#External radius serrver"><B>external 
+RADIUS authentication server</B></A>.</P><SPAN lang=EN-US>
+<HR align=center width="100%" SIZE=2>
+</SPAN>
+<UL>
+  <LI>
+  <P align=left><SPAN lang=EN-US style="mso-fareast-font-family: &#26032;&#32048;&#26126;&#39636;"><B><I><A 
+  name="interna auth server"></A>Using Internal&nbsp; Authentication 
+  Server</I></B><O:P> </O:P></SPAN></P></LI></UL>
+<P>ZyXEL Wireless Access Point has an internal authentication server for 
+authenticating the wireless <B 
+style="COLOR: black; BACKGROUND-COLOR: #ffff66">802.1x</B> client users. It 
+builds total 32-users database and allows up to 32 authorized users to login to 
+the Wireless AP simultaneously. When you use internal authentication server, 
+ZyXEL wireless AP is acted as Authenticator and Authentication Server.</P>
+<P>By storing wireless <B 
+style="COLOR: black; BACKGROUND-COLOR: #ffff66">802.1x</B> client profiles 
+locally, your ZyXEL AP is able to authenticate wireless client without 
+interacting with a extra network RADIUS server. Follow the <B 
+style="COLOR: black; BACKGROUND-COLOR: #ff9999">steps</B> to add user accounts 
+on your ZyXEL AP.</P>
+<P>1. From the SMT main menu, enter 14 to display Menu 14 Dial-in User Setup</P>
+<TABLE cols=1 width=656 bgColor=#ffffcc border=1>
+  <TBODY>
+  <TR>
+    <TD width=646><FONT face="Times New Roman"><TT><BR>&nbsp; 
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TT> 
+      <SPAN style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+      &nbsp;&nbsp;</SPAN></FONT>Menu 14 - Dial-in User 
+      Setup<BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 1. 
+      dean&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+      9. ________&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 17. 
+      ________&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 25. 
+      ________<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2. 
+      ________&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 10. 
+      ________&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 18. 
+      ________&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 26. 
+      ________<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 3. 
+      ________&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 11. 
+      ________&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 19. 
+      ________&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 27. 
+      ________<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 4. 
+      ________&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 12. 
+      ________&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 20. 
+      ________&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 28. 
+      ________<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 5. 
+      ________&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 13. 
+      ________&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 21. 
+      ________&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 29. 
+      ________<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 6. 
+      ________&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 14. 
+      ________&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 22. 
+      ________&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 30. 
+      ________<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 7. 
+      ________&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 15. 
+      ________&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 23. 
+      ________&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 31. 
+      ________<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 8. 
+      ________&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 16. 
+      ________&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 24. 
+      ________&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 32. 
+      ________<BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+      Enter Menu Selection Number:<BR><BR></TD></TR></TBODY></TABLE>
+<P>2. Type a number and press [Enter] to edit the wireless <B 
+style="COLOR: black; BACKGROUND-COLOR: #ffff66">802.1x</B> client profile</P>
+<TABLE cols=1 width=656 bgColor=#ffffcc border=1>
+  <TBODY>
+  <TR>
+    <TD width=646><FONT face="Times New Roman"><TT>&nbsp;&nbsp;&nbsp;</TT> 
+      <SPAN 
+      style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<BR></SPAN></FONT>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+      Menu 14.1 - Edit Dial-in 
+      User<BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+      User Name= <FONT 
+      color=#0000ee><B>dean</B></FONT><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+      Active= <B><FONT 
+      color=#0000ee>Yes</FONT></B><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+      Password= <B><FONT 
+      color=#0000ee>********</FONT></B><BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+      Press ENTER to Confirm or ESC to Cancel:<BR></TD></TR></TBODY></TABLE>
+<P><B>Key settings :</B></P>
+<TABLE 
+style="WIDTH: 100%; mso-cellspacing: 0cm; mso-padding-alt: 0cm 0cm 0cm 0cm" 
+cellSpacing=0 cellPadding=0 width="100%" border=1>
+  <TBODY>
+  <TR>
+    <TD 
+    style="PADDING-RIGHT: 0.75pt; PADDING-LEFT: 0.75pt; BACKGROUND: silver; PADDING-BOTTOM: 0.75pt; WIDTH: 18%; PADDING-TOP: 0.75pt" 
+    width="18%">
+      <P class=MsoNormal><SPAN lang=EN-US>Option</SPAN></P></TD>
+    <TD 
+    style="PADDING-RIGHT: 0.75pt; PADDING-LEFT: 0.75pt; BACKGROUND: silver; PADDING-BOTTOM: 0.75pt; WIDTH: 82%; PADDING-TOP: 0.75pt" 
+    width="82%">
+      <P class=MsoNormal><SPAN lang=EN-US>Descriptions</SPAN></P></TD></TR>
+  <TR>
+    <TD 
+    style="PADDING-RIGHT: 0.75pt; PADDING-LEFT: 0.75pt; PADDING-BOTTOM: 0.75pt; WIDTH: 18%; PADDING-TOP: 0.75pt" 
+    width="18%">
+      <P class=MsoNormal><SPAN lang=EN-US><B>User Name</B></O:P> </SPAN></P></TD>
+    <TD 
+    style="PADDING-RIGHT: 0.75pt; PADDING-LEFT: 0.75pt; PADDING-BOTTOM: 0.75pt; WIDTH: 82%; PADDING-TOP: 0.75pt" 
+    width="82%"><U1:COLORSCHEME 
+      colors="#FFFFFF,#000000,#808080,#000000,#00CC99,#3333CC,#CCCCFF,#B2B2B2" 
+/>
+      <P><SPAN lang=EN-US style="mso-fareast-font-family: &#26032;&#32048;&#26126;&#39636;">Enter a username 
+      up to 31 alphanumeric characters long.</SPAN><SPAN lang=EN-US 
+      style="mso-fareast-font-family: &#26032;&#32048;&#26126;&#39636;"></O:P> </SPAN></P></TD></TR>
+  <TR>
+    <TD 
+    style="PADDING-RIGHT: 0.75pt; PADDING-LEFT: 0.75pt; PADDING-BOTTOM: 0.75pt; WIDTH: 18%; PADDING-TOP: 0.75pt" 
+    width="18%">
+      <P class=MsoNormal><B><SPAN lang=EN-US>Active</SPAN></B></P></TD>
+    <TD 
+    style="PADDING-RIGHT: 0.75pt; PADDING-LEFT: 0.75pt; PADDING-BOTTOM: 0.75pt; WIDTH: 82%; PADDING-TOP: 0.75pt" 
+    width="82%">
+      <P class=MsoNormal>Press [SPACE BAR] to select <B>Yes</B> and press 
+      [Enter] to activate this <B 
+      style="COLOR: black; BACKGROUND-COLOR: #ffff66">802.1x</B> client 
+      profile.</P></TD></TR>
+  <TR>
+    <TD 
+    style="PADDING-RIGHT: 0.75pt; PADDING-LEFT: 0.75pt; PADDING-BOTTOM: 0.75pt; WIDTH: 18%; PADDING-TOP: 0.75pt" 
+    width="18%"><B>Password</B> </TD>
+    <TD 
+    style="PADDING-RIGHT: 0.75pt; PADDING-LEFT: 0.75pt; PADDING-BOTTOM: 0.75pt; WIDTH: 82%; PADDING-TOP: 0.75pt" 
+    width="82%">Enter a password up to 31 characters long. 
+</TD></TR></TBODY></TABLE>
+<P><SPAN lang=EN-US style="mso-fareast-font-family: &#26032;&#32048;&#26126;&#39636;">If you use WEB 
+Configurator,&nbsp;</SPAN></P>
+<OL>
+  <LI>From the Web Configurator main menu, Click Advanced -&gt; <B 
+  style="COLOR: black; BACKGROUND-COLOR: #ffff66">802.1x</B> Authentication 
+  Setting --&gt; then select <B>List</B> page. 
+  <LI class=MsoNormal 
+  style="mso-margin-top-alt: auto; mso-margin-bottom-alt: auto; mso-list: l0 level1 lfo1; tab-stops: list 36.0pt">Select 
+  one of the profile and click <B>Edit </B>button to setup the <B 
+  style="COLOR: black; BACKGROUND-COLOR: #ffff66">802.1x</B> user profile.&nbsp; 
+  </LI></OL>
+<P><IMG 
+style="BORDER-RIGHT: 1px solid; BORDER-TOP: 1px solid; BORDER-LEFT: 1px solid; BORDER-BOTTOM: 1px solid" 
+height=513 src="IEEE 802_1x Access Control.files/8021x_user.gif" width=800 
+border=0><BR></P>
+<BLOCKQUOTE>
+  <P>3. <B>Active</B> this user profile, input the <B>User ID</B>, 
+  <B>Password</B> and confirm the Password, then <SPAN lang=EN-US>click 
+  <B>Apply</B> to make your setting work.</SPAN></P></BLOCKQUOTE>
+<P><IMG 
+style="BORDER-RIGHT: 1px solid; BORDER-TOP: 1px solid; BORDER-LEFT: 1px solid; BORDER-BOTTOM: 1px solid" 
+height=430 src="IEEE 802_1x Access Control.files/8021x_user1.gif" width=799 
+border=0></P>
+<HR align=left width="95%" SIZE=3>
+
+<UL>
+  <LI><SPAN lang=EN-US style="mso-fareast-font-family: &#26032;&#32048;&#26126;&#39636;"><B><I><A 
+  name="External radius serrver"></A>Using External RADIUS Authentication 
+  Server</I></B></SPAN> </LI></UL>
+<P><SPAN lang=EN-US style="mso-fareast-font-family: &#26032;&#32048;&#26126;&#39636;">In addition to the 
+internal authentication server inside ZyXEL AP, you can use external RADIUS 
+authentication server to centrally manage the user account profile. RADIUS is 
+based on a client-server model that supports authentication, authorization and 
+accounting. The wireless AP is the client and the server is the RADIUS 
+server.</SPAN></P>
+<P>The authenticator includes the RADIUS client, which is responsible for 
+encapsulating and decapsulating the Extensible Authentication Protocol (EAP) 
+frames and interacting with the authentication server. When the authenticator 
+receives EAPOL frames and relays them to the authentication server, the Ethernet 
+header is stripped and the remaining EAP frame is re-encapsulated in the RADIUS 
+format. The EAP frames are not modified or examined during encapsulation, and 
+the authentication server must support EAP within the native frame format. When 
+the authenticator receives frames from the authentication server, the server’s 
+frame header is removed, leaving the EAP frame, which is then encapsulated for 
+Ethernet and sent to the <B 
+style="COLOR: black; BACKGROUND-COLOR: #a0ffff">supplicant</B>.</P>
+<P align=center><IMG 
+style="BORDER-RIGHT: 1px solid; BORDER-TOP: 1px solid; BORDER-LEFT: 1px solid; BORDER-BOTTOM: 1px solid" 
+height=312 src="IEEE 802_1x Access Control.files/radius.gif" width=711 
+border=0></P>
+<P align=left>When the client supplies its identity, the authenticator begins 
+its role as the intermediary, passing EAP frames between the <B 
+style="COLOR: black; BACKGROUND-COLOR: #a0ffff">supplicant</B> and the 
+authentication server until authentication succeeds or fails. If the 
+authentication succeeds, the switch port becomes authorized. The specific 
+exchange of EAP frames depends on the authentication method being used. The 
+figure below shows a message exchange initiated by the client using the <B 
+style="COLOR: black; BACKGROUND-COLOR: #99ff99">MD5 Challenge</B> authentication 
+method with a RADIUS server.</P>
+<P align=center><IMG 
+style="BORDER-RIGHT: 1px solid; BORDER-TOP: 1px solid; BORDER-LEFT: 1px solid; BORDER-BOTTOM: 1px solid" 
+height=465 src="IEEE 802_1x Access Control.files/eap_radius.gif" width=713 
+border=0></P>
+<P>1. From the SMT main menu, enter Menu 23.2 to setup System Security - RADIUS 
+Server to setup the RADIUS authentication server.</P>
+<TABLE cols=1 width=656 bgColor=#ffffcc border=1>
+  <TBODY>
+  <TR>
+    <TD width=646><FONT face="Times New Roman"><TT><BR>&nbsp; 
+      &nbsp;</TT></FONT><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+      Menu 23.2 - System Security - RADIUS 
+      Server<BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+      Authentication 
+      Server:<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+      Active= <B><FONT 
+      color=#0000ee>Yes</FONT></B><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+      Server Address= <FONT 
+      color=#0000ee><B>192.168.1.100</B></FONT><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+      Port #= <B><FONT 
+      color=#0000ee>1812</FONT></B><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+      Shared Secret= 
+      *****<BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+      Accounting 
+      Server:<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+      Active= 
+      Yes<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+      Server Address= 
+      192.168.1.100<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+      Port #= 
+      1813<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+      Shared Secret= 
+      ******<BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+      Press ENTER to Confirm or ESC to Cancel: <BR></TD></TR></TBODY></TABLE>
+<P><B>Key settings for authentication server:</B></P>
+<TABLE 
+style="WIDTH: 100%; mso-cellspacing: 0cm; mso-padding-alt: 0cm 0cm 0cm 0cm" 
+cellSpacing=0 cellPadding=0 width="100%" border=1>
+  <TBODY>
+  <TR>
+    <TD 
+    style="PADDING-RIGHT: 0.75pt; PADDING-LEFT: 0.75pt; BACKGROUND: silver; PADDING-BOTTOM: 0.75pt; WIDTH: 18%; PADDING-TOP: 0.75pt" 
+    width="18%">
+      <P class=MsoNormal><SPAN lang=EN-US>Option</SPAN></P></TD>
+    <TD 
+    style="PADDING-RIGHT: 0.75pt; PADDING-LEFT: 0.75pt; BACKGROUND: silver; PADDING-BOTTOM: 0.75pt; WIDTH: 82%; PADDING-TOP: 0.75pt" 
+    width="82%">
+      <P class=MsoNormal><SPAN lang=EN-US>Descriptions</SPAN></P></TD></TR>
+  <TR>
+    <TD 
+    style="PADDING-RIGHT: 0.75pt; PADDING-LEFT: 0.75pt; PADDING-BOTTOM: 0.75pt; WIDTH: 18%; PADDING-TOP: 0.75pt" 
+    width="18%">
+      <P class=MsoNormal><SPAN lang=EN-US><B>User Name</B></O:P> </SPAN></P></TD>
+    <TD 
+    style="PADDING-RIGHT: 0.75pt; PADDING-LEFT: 0.75pt; PADDING-BOTTOM: 0.75pt; WIDTH: 82%; PADDING-TOP: 0.75pt" 
+    width="82%"><U1:COLORSCHEME 
+      colors="#FFFFFF,#000000,#808080,#000000,#00CC99,#3333CC,#CCCCFF,#B2B2B2" 
+/>
+      <P><SPAN lang=EN-US style="mso-fareast-font-family: &#26032;&#32048;&#26126;&#39636;">Enter a username 
+      up to 31 alphanumeric characters long.</SPAN><SPAN lang=EN-US 
+      style="mso-fareast-font-family: &#26032;&#32048;&#26126;&#39636;"></O:P> </SPAN></P></TD></TR>
+  <TR>
+    <TD 
+    style="PADDING-RIGHT: 0.75pt; PADDING-LEFT: 0.75pt; PADDING-BOTTOM: 0.75pt; WIDTH: 18%; PADDING-TOP: 0.75pt" 
+    width="18%">
+      <P class=MsoNormal><B><SPAN lang=EN-US>Active</SPAN></B></P></TD>
+    <TD 
+    style="PADDING-RIGHT: 0.75pt; PADDING-LEFT: 0.75pt; PADDING-BOTTOM: 0.75pt; WIDTH: 82%; PADDING-TOP: 0.75pt" 
+    width="82%">
+      <P class=MsoNormal>Press [SPACE BAR] to select <B>Yes</B> and press 
+      [Enter] to enable <B 
+      style="COLOR: black; BACKGROUND-COLOR: #ffff66">802.1x</B> user 
+      authentication through an external RADIUS authentication server. Select 
+      <B>No</B> to enable authentication using ZyXEL AP internal authentication 
+      server.</P></TD></TR>
+  <TR>
+    <TD 
+    style="PADDING-RIGHT: 0.75pt; PADDING-LEFT: 0.75pt; PADDING-BOTTOM: 0.75pt; WIDTH: 18%; PADDING-TOP: 0.75pt" 
+    width="18%"><B>Server Address</B> </TD>
+    <TD 
+    style="PADDING-RIGHT: 0.75pt; PADDING-LEFT: 0.75pt; PADDING-BOTTOM: 0.75pt; WIDTH: 82%; PADDING-TOP: 0.75pt" 
+    width="82%">Enter the IP address of the external RADIUS authentication 
+      server. </TD></TR>
+  <TR>
+    <TD 
+    style="PADDING-RIGHT: 0.75pt; PADDING-LEFT: 0.75pt; PADDING-BOTTOM: 0.75pt; WIDTH: 18%; PADDING-TOP: 0.75pt" 
+    width="18%"><B>Port</B> </TD>
+    <TD 
+    style="PADDING-RIGHT: 0.75pt; PADDING-LEFT: 0.75pt; PADDING-BOTTOM: 0.75pt; WIDTH: 82%; PADDING-TOP: 0.75pt" 
+    width="82%">The default port of RADIUS server for authentication is 
+      <B>1812</B>. You need not change this value unless your network 
+      administrator instructs you to do so. </TD></TR>
+  <TR>
+    <TD 
+    style="PADDING-RIGHT: 0.75pt; PADDING-LEFT: 0.75pt; PADDING-BOTTOM: 0.75pt; WIDTH: 18%; PADDING-TOP: 0.75pt" 
+    width="18%"><B>Shared Secret</B> </TD>
+    <TD 
+    style="PADDING-RIGHT: 0.75pt; PADDING-LEFT: 0.75pt; PADDING-BOTTOM: 0.75pt; WIDTH: 82%; PADDING-TOP: 0.75pt" 
+    width="82%">Specify a password (up to 31 characters) as the key to be 
+      shared between external RADIUS authentication server and ZyXEL AP (RADIUS 
+      client). The key is not send to the network. This key must be the same on 
+      the external RADIUS authentication server and ZyXEL AP. 
+</TD></TR></TBODY></TABLE>
+<P>2. If accounting is required, you must setup the external RADIUS accounting 
+server. Normally, RADIUS authentication server and RADIUS accounting server are 
+put in the same machine, however, they their own separated UDP port and shared 
+secret. You can refer to RADIUS authentication configuration.</P>
+<P><SPAN lang=EN-US style="mso-fareast-font-family: &#26032;&#32048;&#26126;&#39636;">If you use WEB 
+Configurator,&nbsp;</SPAN>from the Web Configurator main menu, Click Advanced 
+-&gt; RADIUS to setup the RADIUS authentication and accounting server 
+configuration.</P>
+<P align=center><IMG 
+style="BORDER-RIGHT: 1px solid; BORDER-TOP: 1px solid; BORDER-LEFT: 1px solid; BORDER-BOTTOM: 1px solid" 
+height=588 src="IEEE 802_1x Access Control.files/web_radius.gif" width=801 
+border=0> 
+<P align=left>&nbsp;</P>
+<HR align=left width="95%" SIZE=3>
+
+<P align=center><FONT face="Times New Roman">All contents copyright © 2002 ZyXEL 
+Communications Corporation.</FONT> </P></BODY></HTML>

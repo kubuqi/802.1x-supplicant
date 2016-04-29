@@ -1,0 +1,27 @@
+<chapter id="ch2">
+<title>Supported Platforms</title>
+
+<para>Xsupplicant is designed to work with Linux.  Early versions of 
+xsupplicant also supported *BSD and Mac OS X, but this support was pulled 
+out for various reasons.  Mac OS X support was pulled because Apple 
+is now providing a built-in supplicant as of Mac OS X 10.3 (Panther).  
+*BSD support was initially removed largely due to a lack of active 
+*BSD development.  Some *BSD code does remain, however, and we encourage 
+any *BSD developers out there to test xsupplicant and submit patches or 
+file bug reports to improve *BSD support.  There has been talk of adding 
+Mac OS X support back into xsupplicant, because Apple's client only works 
+with their own Airport cards.  Xsupplicant could potentially fill the gap 
+left by Apple for those users that wish to use 3rd party cards, or 
+wireless standards not supported by Apple, such as 802.11a, but such 
+support would require 3rd party APIs to properly handle Dynamic WEP.
+
+Xsupplicant releases are typically tested and developed on Slackware Linux 
+(AND OTHERS?).  What about adding a table of tested radius servers and 
+which EAP types we have tested against on those servers?</para>
+
+<para>insert table showing a variety of platforms and 1x projects and where
+each one works.  (platforms = linux, mac os x, mac 9, windows flavors, 
+freebsd, openbsd, others?)  (projects = open1x, meetinghouse, funk, 
+Alfa+Ariss, wEAP, native on some platforms, others?)</para>
+
+</chapter>

@@ -1,0 +1,29 @@
+<chapter id="ch5">
+<title>Configuration</title>
+
+<section>
+<title>Overview</title>
+<para>how the config files all work together</para>
+</section>
+
+<section>
+<title>System Wide Config File</title>
+<para>this would be the one under /etc, talk about syntax, available
+options and the like</para>
+</section>
+
+<section>
+<title>User Config File</title>
+<para>this would be any user config information, including key info (but 
+leave a larger dicussion on key formats and such until later)...here we are
+only concerned with the placement of such files and any user config files
+that need to be in place to point to the keys, etc</para>
+</section>
+
+<section>
+<title>Using a GUI for configuration</title>
+<para>info, as appropriate, talking about available GUIs and what they
+are capable of doing</para>
+</section>
+
+</chapter>

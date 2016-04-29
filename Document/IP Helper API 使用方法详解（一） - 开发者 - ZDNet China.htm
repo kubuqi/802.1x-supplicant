@@ -1,0 +1,870 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!-- saved from url=(0073)http://www.zdnet.com.cn/developer/code/story/0,2000081534,39046680,00.htm -->
+<HTML><HEAD><TITLE>IP Helper API 使用方法详解（一） - 开发者 - ZDNet China</TITLE><!-- title --><!-- /title -->
+<META http-equiv=content-type content="text/html; charset=gb2312">
+<META content="MSHTML 6.00.2800.1400" name=GENERATOR></HEAD>
+<BODY text=#000000 vLink=#0033cc aLink=#6666ff link=#333399 bgColor=#232850 
+onload="MM_preloadImages('/i/homepage/images/navigation_main_red_4.gif','/i/homepage/images/navigation_main_red_6.gif','/i/homepage/images/navigation_main_red_8.gif','/i/homepage/images/navigation_main_red_10.gif','/i/homepage/images/navigation_main_red_12.gif','/i/homepage/images/navigation_main_red_14.gif','/i/homepage/images/navigation_main_red_16.gif')"><LINK 
+href="IP Helper API 使用方法详解（一） - 开发者 - ZDNet China.files/css.css" type=text/css 
+rel=STYLESHEET><LINK title=Planet 
+href="IP Helper API 使用方法详解（一） - 开发者 - ZDNet China.files/planet.css" 
+type=text/css rel=STYLESHEET><LINK 
+href="IP Helper API 使用方法详解（一） - 开发者 - ZDNet China.files/zdnew.css" type=text/css 
+rel=stylesheet><!--start head-->
+<TABLE cellSpacing=0 cellPadding=0 width=750 align=center border=0>
+  <TBODY>
+  <TR>
+    <TD width=750 
+    background="IP Helper API 使用方法详解（一） - 开发者 - ZDNet China.files/masterhead_back.jpg" 
+    height=72></TD></TR>
+  <TR>
+    <TD>
+      <SCRIPT language=JavaScript type=text/JavaScript>
+<!--
+function MM_swapImgRestore() { //v3.0
+  var i,x,a=document.MM_sr; for(i=0;a&&i<a.length&&(x=a[i])&&x.oSrc;i++) x.src=x.oSrc;
+}
+
+function MM_preloadImages() { //v3.0
+  var d=document; if(d.images){ if(!d.MM_p) d.MM_p=new Array();
+    var i,j=d.MM_p.length,a=MM_preloadImages.arguments; for(i=0; i<a.length; i++)
+    if (a[i].indexOf("#")!=0){ d.MM_p[j]=new Image; d.MM_p[j++].src=a[i];}}
+}
+
+function MM_findObj(n, d) { //v4.01
+  var p,i,x;  if(!d) d=document; if((p=n.indexOf("?"))>0&&parent.frames.length) {
+    d=parent.frames[n.substring(p+1)].document; n=n.substring(0,p);}
+  if(!(x=d[n])&&d.all) x=d.all[n]; for (i=0;!x&&i<d.forms.length;i++) x=d.forms[i][n];
+  for(i=0;!x&&d.layers&&i<d.layers.length;i++) x=MM_findObj(n,d.layers[i].document);
+  if(!x && d.getElementById) x=d.getElementById(n); return x;
+}
+
+function MM_swapImage() { //v3.0
+  var i,j=0,x,a=MM_swapImage.arguments; document.MM_sr=new Array; for(i=0;i<(a.length-2);i+=3)
+   if ((x=MM_findObj(a[i]))!=null){document.MM_sr[j++]=x; if(!x.oSrc) x.oSrc=x.src; x.src=a[i+2];}
+}
+//-->
+</SCRIPT>
+
+      <TABLE cellSpacing=0 cellPadding=0 width=750 
+      background="IP Helper API 使用方法详解（一） - 开发者 - ZDNet China.files/navigation_main_back.gif" 
+      border=0>
+        <TBODY>
+        <TR>
+          <TD><IMG height=27 alt="" src="" width=16></TD>
+          <TD><A 
+            onmouseover="MM_swapImage('Image731','','/i/homepage/images/navigation_main_red_2.gif',1)" 
+            onmouseout=MM_swapImgRestore() href="http://www.zdnet.com.cn/"><IMG 
+            height=27 
+            src="IP Helper API 使用方法详解（一） - 开发者 - ZDNet China.files/navigation_main_darkred_2.gif" 
+            width=58 border=0 name=Image731></A></TD>
+          <TD><IMG height=27 alt="" 
+            src="IP Helper API 使用方法详解（一） - 开发者 - ZDNet China.files/navigation_main_darkred_3.gif" 
+            width=7></TD>
+          <TD><A 
+            onmouseover="MM_swapImage('Image19','','/i/homepage/images/navigation_main_red_4.gif',1)" 
+            onmouseout=MM_swapImgRestore() 
+            href="http://www.zdnet.com.cn/news"><IMG height=27 src="" width=88 
+            border=0 name=Image19></A></TD>
+          <TD><IMG height=27 alt="" 
+            src="IP Helper API 使用方法详解（一） - 开发者 - ZDNet China.files/navigation_main_darkred_5.gif" 
+            width=7></TD>
+          <TD><A 
+            onmouseover="MM_swapImage('Image20','','/i/homepage/images/navigation_main_red_6.gif',1)" 
+            onmouseout=MM_swapImgRestore() 
+            href="http://www.zdnet.com.cn/bizstrategy"><IMG height=27 
+            src="IP Helper API 使用方法详解（一） - 开发者 - ZDNet China.files/navigation_main_darkred_6.gif" 
+            width=88 border=0 name=Image20></A></TD>
+          <TD><IMG height=27 alt="" src="" width=7></TD>
+          <TD><A 
+            onmouseover="MM_swapImage('Image21','','/i/homepage/images/navigation_main_red_8.gif',1)" 
+            onmouseout=MM_swapImgRestore() 
+            href="http://www.zdnet.com.cn/techupdate"><IMG height=27 
+            src="IP Helper API 使用方法详解（一） - 开发者 - ZDNet China.files/navigation_main_darkred_8.gif" 
+            width=88 border=0 name=Image21></A></TD>
+          <TD><IMG height=27 alt="" src="" width=7></TD>
+          <TD><A 
+            onmouseover="MM_swapImage('Image22','','/i/homepage/images/navigation_main_red_10.gif',1)" 
+            onmouseout=MM_swapImgRestore() 
+            href="http://www.zdnet.com.cn/products"><IMG height=27 src="" 
+            width=88 border=0 name=Image22></A></TD>
+          <TD><IMG height=27 alt="" 
+            src="IP Helper API 使用方法详解（一） - 开发者 - ZDNet China.files/navigation_main_darkred_11.gif" 
+            width=7></TD>
+          <TD><A href="http://www.zdnet.com.cn/developer"><IMG height=27 
+            src="IP Helper API 使用方法详解（一） - 开发者 - ZDNet China.files/navigation_main_blue_12.gif" 
+            width=88 border=0></A></TD>
+          <TD><IMG height=27 alt="" 
+            src="IP Helper API 使用方法详解（一） - 开发者 - ZDNet China.files/navigation_main_darkred_13.gif" 
+            width=7></TD>
+          <TD><A 
+            onmouseover="MM_swapImage('Image24','','/i/homepage/images/navigation_main_red_14.gif',1)" 
+            onmouseout=MM_swapImgRestore() 
+            href="http://www.zdnet.com.cn/download"><IMG height=27 
+            src="IP Helper API 使用方法详解（一） - 开发者 - ZDNet China.files/navigation_main_darkred_14.gif" 
+            width=88 border=0 name=Image24></A></TD>
+          <TD><IMG height=27 alt="" 
+            src="IP Helper API 使用方法详解（一） - 开发者 - ZDNet China.files/navigation_main_darkred_15.gif" 
+            width=8></TD>
+          <TD><A 
+            onmouseover="MM_swapImage('Image25','','/i/homepage/images/navigation_main_red_16.gif',1)" 
+            onmouseout=MM_swapImgRestore() 
+            href="http://www.zdnet.com.cn/smb"><IMG height=27 
+            src="IP Helper API 使用方法详解（一） - 开发者 - ZDNet China.files/navigation_main_darkred_16.gif" 
+            width=88 border=0 name=Image25></A></TD>
+          <TD><IMG height=27 alt="" src="" width=10></TD></TR>
+        <TR>
+          <TD colSpan=17><IMG height=8 alt="" 
+            src="IP Helper API 使用方法详解（一） - 开发者 - ZDNet China.files/navigation_main_darkred_18.gif" 
+            width=750></TD></TR></TBODY></TABLE></TD></TR></TBODY></TABLE><!-- End head--><!--start nav-->
+<TABLE cellSpacing=0 cellPadding=0 width=750 align=center border=0>
+  <TBODY>
+  <TR>
+    <TD width=1 bgColor=#83a3cb><IMG height=7 alt="" 
+      src="IP Helper API 使用方法详解（一） - 开发者 - ZDNet China.files/margin.gif" 
+      width=1><BR></TD>
+    <TD class=m1 align=middle width=748 bgColor=#1e5c99 height=20>
+      <DIV align=center>
+      <TABLE height=20 cellSpacing=0 cellPadding=0 width=748 bgColor=#1e5c99 
+      border=0>
+        <TBODY>
+        <TR>
+          <TD class=m1 vAlign=top align=middle><A class=white 
+            href="http://www.zdnet.com.cn/developer/news"><B>新闻</B></A> <B 
+            class=yellow>|</B> <A class=yellow 
+            href="http://www.zdnet.com.cn/developer/code"><B>编程</B></A> <B 
+            class=yellow>|</B> <A class=white 
+            href="http://www.zdnet.com.cn/developer/tech"><B>架构</B></A> <B 
+            class=yellow>|</B> <A class=white 
+            href="http://www.zdnet.com.cn/developer/study"><B>管理</B></A> <B 
+            class=yellow>|</B> <A class=white 
+            href="http://www.zdnet.com.cn/developer/rescnter"><B>资源</B></A> <B 
+            class=yellow>|</B> <A class=white 
+            href="http://www.zdnet.com.cn/developer/traincert"><B>认证</B></A> <B 
+            class=yellow>|</B> <A class=white 
+            href="http://www.zdnet.com.cn/developer/design"><B>设计者</B></A></TD></TR></TBODY></TABLE></DIV></TD>
+    <TD width=1 bgColor=#83a3cb><IMG height=7 
+      src="IP Helper API 使用方法详解（一） - 开发者 - ZDNet China.files/margin.gif" 
+      width=1><BR></TD></TR></TBODY></TABLE><!-- End nav--><!--start nav_small-->
+<TABLE cellSpacing=0 cellPadding=0 width=750 align=center border=0>
+  <TBODY>
+  <TR>
+    <TD width=1 bgColor=#83a3cb rowSpan=2><IMG height=7 alt="" 
+      src="IP Helper API 使用方法详解（一） - 开发者 - ZDNet China.files/margin.gif" 
+    width=1></TD>
+    <TD class=m1 align=middle width=748 bgColor=#1e5c99>
+      <DIV align=center>
+      <TABLE cellSpacing=0 cellPadding=0 width="96%" border=0>
+        <TBODY>
+        <TR>
+          <TD bgColor=#6284b1><IMG height=1 
+            src="IP Helper API 使用方法详解（一） - 开发者 - ZDNet China.files/margin.gif" 
+            width=1></TD></TR></TBODY></TABLE></DIV></TD>
+    <TD width=1 bgColor=#83a3cb rowSpan=2><IMG height=7 
+      src="IP Helper API 使用方法详解（一） - 开发者 - ZDNet China.files/margin.gif" 
+      width=1><BR></TD></TR>
+  <TR>
+    <TD class=m1 align=middle bgColor=#1e5c99>
+      <TABLE height=20 cellSpacing=0 cellPadding=0 width=748 bgColor=#1e5c99 
+      border=0>
+        <TBODY>
+        <TR>
+          <TD class=m1 vAlign=top align=middle><A class=white 
+            href="http://www.zdnet.com.cn/developer/category/Csharp">C#/C++/C</A> 
+            <FONT color=#6284b1>|</FONT> <A class=white 
+            href="http://www.zdnet.com.cn/developer/category/Java">Java</A> 
+            <FONT color=#6284b1>|</FONT> <A class=white 
+            href="http://www.zdnet.com.cn/developer/category/Windows">Windows 
+            开发</A> <FONT color=#6284b1>|</FONT> <A class=white 
+            href="http://www.zdnet.com.cn/developer/category/Webdevelop">Web 
+            开发</A> <FONT color=#6284b1>|</FONT> <A class=white 
+            href="http://www.zdnet.com.cn/developer/category/Linux">Unix/Linux</A> 
+            <FONT color=#6284b1>|</FONT> <A class=white 
+            href="http://www.zdnet.com.cn/developer/category/devprocess">开发过程</A></TD></TR></TBODY></TABLE></TD></TR></TBODY></TABLE><!-- End nav_small-->
+<TABLE cellSpacing=0 cellPadding=0 width=750 align=center border=0>
+  <TBODY>
+  <TR>
+    <TD width=1 bgColor=#83a3cb><IMG height=500 
+      src="D:\personal\liuto\IP Helper API 使用方法详解（一） - 开发者 - ZDNet China.files\margin(1).gif" 
+      width=1></TD>
+    <TD width=9 bgColor=#1e5c99><IMG height=1 
+      src="D:\personal\liuto\IP Helper API 使用方法详解（一） - 开发者 - ZDNet China.files\margin(1).gif" 
+      width=9></TD>
+    <TD width=1 bgColor=#ffffff><IMG height=500 
+      src="D:\personal\liuto\IP Helper API 使用方法详解（一） - 开发者 - ZDNet China.files\margin(1).gif" 
+      width=1></TD>
+    <TD vAlign=top align=middle width=728 bgColor=#ffffff><!--start leaderboard--><!--Adforward Begin:--><!--<SCRIPT LANGUAGE="JavaScript1.1" SRC="http://zdnet.allyes.com/main/adfshow?user=AllyesNetwork|developer|LB_developer&db=zdnet&border=0&local=yes&js=ie"></SCRIPT>--><!--Adforward End-->
+      <SCRIPT language=JavaScript1.1 
+      src="IP Helper API 使用方法详解（一） - 开发者 - ZDNet China.files/developer;sz=1x1;num=" 
+      +? ord="(begin.getTime()" + ???; startYear.getTime()) - var 
+      startYear.setYear(begin.getYear()); 2000?); 4, Date(?January 
+      startYear="new" Date(); begin="new">
+</SCRIPT>
+      <NOSCRIPT><A 
+      href="http://ad.cn.doubleclick.net/jump/banners.zdnet.com.cn/developer;sz=1x1;num=" 
+      ord + ?></A></NOSCRIPT><!--end leadboard -->
+      <TABLE cellSpacing=0 cellPadding=0 width="100%" border=0>
+        <TBODY>
+        <TR>
+          <TD vAlign=top width=558>
+            <TABLE cellSpacing=0 cellPadding=0 width=558 border=0>
+              <TBODY>
+              <TR>
+                <TD vAlign=top>
+                  <TABLE cellSpacing=0 cellPadding=0 width=558 border=0>
+                    <TBODY>
+                    <TR>
+                      <TD colSpan=3 height=10><IMG height=10 
+                        src="D:\personal\liuto\IP Helper API 使用方法详解（一） - 开发者 - ZDNet China.files\margin(1).gif" 
+                        width=1></TD></TR>
+                    <TR>
+                      <TD width=10><IMG height=1 
+                        src="D:\personal\liuto\IP Helper API 使用方法详解（一） - 开发者 - ZDNet China.files\margin(1).gif" 
+                        width=10></TD>
+                      <TD vAlign=top><!--start story --><!-- BEGIN:CHANNEL HEADER --><!-- END:CHANNEL HEADER -->
+                        <P><BR><B><SPAN class=h2>IP Helper API 
+                        使用方法详解（一）</B></SPAN> <BR><BR><SPAN class=hui>作者： <A 
+                        href="mailto:smartnose@etang.com"><FONT 
+                        color=blue>刘巍</FONT></A></SPAN><BR><SPAN 
+                        class=hui>Wednesday, August 7 2002 12:46 PM</SPAN> <!-- BEGIN:STORY -->
+                        <TABLE>
+                          <TBODY>
+                          <TR>
+                            <TD class=text1>
+                              <P><A 
+                              href="http://www.zdnet.com.cn/developer/keywords/liuwei/index.htm?" 
+                              target=new><IMG height=100 alt=作者：刘巍 
+                              src="IP Helper API 使用方法详解（一） - 开发者 - ZDNet China.files/smart.jpg" 
+                              width=77 align=left border=0> </A>
+                              <H5>IP Helper API 简介</H5>
+                              <TABLE cellSpacing=0 cellPadding=0 width=0 
+                              align=right border=0>
+                                <TBODY>
+                                <TR>
+                                <TD><!--start banner ad--><!--ba-->
+                                <SCRIPT language=JavaScript1.1 
+                                src="IP Helper API 使用方法详解（一） - 开发者 - ZDNet China.files/code;sz=1x1;ord=1922200111"> </SCRIPT>
+                                <NOSCRIPT><A 
+                                href="http://ad.cn.doubleclick.net/jump/messagingplus.zdnet.com.cn/developer/code;sz=1x1;ord=1922200111?"><IMG 
+                                src="IP Helper API 使用方法详解（一） - 开发者 - ZDNet China.files/817-grey.gif" 
+                                border=0></A> 
+                                </NOSCRIPT><!--end banner ad--></TD></TR></TBODY></TABLE>
+                              <P>IP Helper 
+                              是一套用于管理本地网络设置的API（应用程序编程接口）它的功能十分强大，通过使用这一套API，你可以方便的改变计算机的网络设置或者提取有关的信息。而且它还提供了一种消息机制，能够在本地计算机的网络设置发生改变时通知你的应用程序。也就是说以前设置IP，掩码等等另人难以入眠的种种烦琐的工作现在都可以轻松搞定了。而且实际上，它不仅仅能够提取本机的网络设置信息，还能够获得网络上其它计算机的IP使用情况和MAC地址。这正是后面另一篇文章的例子程序中要使用的功能。</P>
+                              <H5>哪儿可以搞到IP Helper API?</H5>
+                              <P>Windows 
+                              98以上的所有操作系统在系统目录的system32下都带有iphlpapi.dll这个库文件，而且对于NT 
+                              4.0在加装了Service Pack 
+                              2以后也就有了这个库文件。这只能说明我们的程序可以在这些系统上运行而不需要额外的库文件，但是对于C程序员来说还必须有相应的头文件等等东西。这个东东网上不太多，在华中理工和清华9#的FTP上有它的头文件，文件很小，只有几K（头文件而已，大不到哪儿去）。当然，你也可以问微软要，下载SDK或者是定购SDK光盘（这是我梦想的事情）。最后是对MSDN的一个勘误：MSDN所声称的静态链接库iphlpapi.lib是不存在的（至少我没有找到），还是老老实实的使用动态库吧。</P>
+                              <H5>从最简单的开始</H5>
+                              <P>最简单的当然是看看我们计算机上的网络设置是什么而不要动手修改。附表中列出了一个简单的网络设置查看程序，在这个程序中我分类使用了主要的API函数，为了交代问题而不让你陷入到MFC的汪洋大海中去，我把它做成了控制台界面的，而且做了详尽的注释，你可以把其中的代码剪切粘贴下来在任何地方使用。让我来解释一下这些代码：</P>
+                              <H5>提取网卡信息</H5><PRE><FONT face="Courier New">
+hInst=LoadLibrary("iphlpapi.dll");
+if(!hInst)
+  cout&lt;&lt;"iphlpapi.dll not supported in this platform!\n";
+</FONT>
+</PRE>
+                              <P>这三行代码的作用是加载iphlpapi库文件，在极个别的情况下，你使用了win95以下的操作系统或者不小心删除了iphlpapi.dll，第三行的语句才会被打印出来，这也是程序失败的唯一原因。 
+
+                              <P>希望你还记得如何使用.dll。长久以来我们一直都在幸福的使用着VC的静态链接库，在没有静态链接库的情况下我们还有傻瓜化的控件。下面的几行代码显示了调用DLL中函数的过程：</P><PRE><FONT face="Courier New">
+pGAInfo=(PGAINFO)GetProcAddress(hInst,"GetAdaptersInfo");
+ULONG ulSize=0;
+pGAInfo(pInfo,&amp;ulSize);
+pInfo=(PIP_ADAPTER_INFO)new(char[ulSize]);
+pGAInfo(pInfo,&amp;ulSize);
+</FONT></PRE>
+                              <P>第一行代码是获得函数GetAdaptersInfo的入口地址，以便我们在后面通过指针调用函数。这个函数的功能是提取网卡的信息，并接收两个参数，第一个参数是用来保存网卡信息的内存缓冲的首地址，而第二个参数是这个缓冲的大小。但上面的代码看起来有些奇怪对么？由于我们事先不知道本地机器上有多少张网卡，所以也就没法知道应该分配多大的缓存。好在GetAdaptersInfo函数在缓冲的大小不够时会在第二个参数也就是ulSize中填入应该分配的缓冲的大小。这样，我们就可以调用两次GetAdaptersInfo，第一次是获取缓冲区的大小，然后分配这个缓冲以后再次调用它以获得实际的网卡信息。</P>
+                              <P>令人不解的是，GetAdaptersInfo通过pInfo返回的信息竟然是以静态链表的方式组织的，下面就是访问链表的代码：</P><PRE><FONT face="Courier New">
+while(pInfo)
+{
+  。。。。。。。。。。。。。。。。。。。。//访问网卡数据
+  //将当前指针移向下一个结点
+  pInfo=pInfo-&gt;Next;	
+}
+</FONT></PRE>
+                              <P>为了说明问题，我再一次省略了其中的代码。下面看看GetAdaptersInfo都返回了些什么样的信息，下面是对pInfo所指向的数据结构的解释：</P><PRE><FONT face="Courier New">
+typedef struct _IP_ADAPTER_INFO {
+  struct _IP_ADAPTER_INFO* Next;
+//链表指针域，我们通过这个来遍历静态键表
+  DWORD ComboIndex;//保留未用
+  char AdapterName[MAX_ADAPTER_NAME_LENGTH + 4];
+//网卡名
+char Description[MAX_ADAPTER_DESCRIPTION_LENGTH + 4];
+//对网卡的描述，实际上好象是//驱动程序的名字
+  UINT AddressLength;
+//物理地址的长度，通过这个我们才能正确的显示下面数组中的物理地
+//址
+  BYTE Address[MAX_ADAPTER_ADDRESS_LENGTH];
+//物理地址，每个字节存放一个十六进制的数
+//值，我们配合上一个数据域在printf中用/x格式把每个字节输出。
+  DWORD Index;//网卡索引号
+  UINT Type;//网卡类型
+  UINT DhcpEnabled;//是否启用了DHCP动态IP分配？
+  PIP_ADDR_STRING CurrentIpAddress;//当前使用的IP地址
+  IP_ADDR_STRING IpAddressList;
+//绑定到此网卡的IP地址链表，重要项目
+  IP_ADDR_STRING GatewayList;
+//网关地址链表，重要项目
+  IP_ADDR_STRING DhcpServer;
+//DHCP服务器地址，只有在DhcpEnabled==TRUE的情况下才有
+//效
+  BOOL HaveWins;//是否启用了WINS?
+   IP_ADDR_STRING PrimaryWinsServer;
+//主WINS地址
+  IP_ADDR_STRING SecondaryWinsServer;
+//辅WINS地址
+  time_t LeaseObtained;
+//当前DHCP租借获取的时间
+  time_t LeaseExpires; 
+//当前DHCP租借失效时间。这两个数据结构只有在启用了DHCP时才
+//有用。
+} IP_ADAPTER_INFO, *PIP_ADAPTER_INFO;
+</FONT></PRE>
+                              <P>现在应该可以看懂这个程序了吧。还必须告诉你的是这个数据结构中的几个IP地址字符串IpAddressList、GatewayList等等都是以链表的方式组织的（微软偏好链表？）。这就是为什么我的程序里面充满了循环。实际上你看到的所有数据都可以在控制面板|网络|属性|TCP/IP的属性页的高级选项里看见。</P></TD></TR></TBODY></TABLE><!-- END:STORY --><!-- BEGIN:PREVIOUS/NEXT --><BR 
+                        clear=all>
+                        <DIV align=right><A 
+                        href="http://www.zdnet.com.cn/developer/code/story/0,2000081534,39046680-2,00.htm"><FONT 
+                        face="Arial, Helvetica" 
+                        size=-1>下一页&gt;&gt;</FONT></A>&nbsp; </DIV><!-- END:PREVIOUS/NEXT --><!-- BEGIN:TALKBACK --><SPAN 
+                        class=h2><FONT color=#880000>本文为ZDNet 
+                        China版权所有，未经许可严禁转载。</FONT></SPAN> <BR><BR><FONT 
+                        face=tahoma size=-1><A 
+                        href="http://www.zdnet.com.cn/developer/code/story/talkback.htm?AT=39046680-2000081534t-20000560c"><IMG 
+                        src="" border=0> </A>
+                        <P></FONT><!--end talkback --><!-- BEGIN:PAGE FUNCTIONS -->
+                        <HR color=#444444 SIZE=1>
+
+                        <TABLE cellSpacing=0 borderColorDark=#cccccc 
+                        cellPadding=2 width="100%" borderColorLight=#ffffff 
+                        border=0>
+                          <TBODY>
+                          <TR>
+                            <TD noWrap align=middle><SPAN class=gslink12><FONT 
+                              style="FONT-SIZE: 9pt">| <A class=gslink12 
+                              href="http://www.zdnet.com.cn/common/emailfriend/emailfriend.htm?AT=39046680-2000081534t-20000560c">推荐朋友</A> 
+                              | <A class=gslink12 
+                              href="http://www.zdnet.com.cn/common/printfriendly/printfriendly.htm?AT=39046680-2000081534t-20000560c">打印本文</A> 
+                              |</FONT></SPAN> </TD></TR></TBODY></TABLE><!-- END:PAGE FUNCTIONS --><!-- BEGIN:RELATED LINKS -->
+                        <UL></UL></SPAN><!-- END:RELATED LINKS --><!-- BEGIN:TALKBACK --><!-- END:TALKBACK --><!--end story --></TD>
+                      <TD width=10><IMG height=1 
+                        src="D:\personal\liuto\IP Helper API 使用方法详解（一） - 开发者 - ZDNet China.files\margin(1).gif" 
+                        width=10></TD></TR></TBODY></TABLE></TD></TR></TBODY></TABLE></TD>
+          <TD vAlign=top width=160><!--start rightnav -->
+            <TABLE cellSpacing=0 cellPadding=0 width=160 border=0>
+              <TBODY>
+              <TR>
+                <TD><!--hand--><A 
+                  href="http://www.zdnet.com.cn/biztech/technet/index.htm"><IMG 
+                  height=71 
+                  src="IP Helper API 使用方法详解（一） - 开发者 - ZDNet China.files/technet_logo.gif" 
+                  width=160 border=0></A> <!--hand --><!--start date -->
+                  <TABLE cellSpacing=0 cellPadding=2 width="100%" border=0>
+                    <TBODY>
+                    <TR>
+                      <TD align=right><!--date--><SPAN class=Text2>2004 年 6月 
+                        24日</SPAN> <SPAN class=Text2>&nbsp;</SPAN> <!--end date--></TD></TR></TBODY></TABLE><!--end date --><!--start search -->
+                  <SCRIPT language=javascript>
+<!--
+function form_submit1()
+{
+if (form_submit())
+	{
+	form1.submit ();
+	}
+return false;
+}
+
+function form_submit()
+{
+
+	var n,thestr,alert_str,re;
+	//要屏蔽的字符
+	alert_str="#[]{}&, "
+
+	thestr=document.form1.searchstring.value;
+			if (thestr=="")
+			{
+				alert("输入内容不能为空！")
+			    return false;
+			}
+	 
+	  str_len=thestr.length ; 
+	       
+		// alert("str_len="+str_len); 
+		    //去除头尾
+		    thestr_head=thestr;
+		    thestr_head_noalert=thestr;
+		    //去头
+		    for (k=0;k<str_len;k++)
+		    {	
+				//去头
+				thestr_head_temp=thestr_head.substring(k,k+1);
+				//alert(thestr_head_temp)
+				if (alert_str.indexOf(thestr_head_temp) !=-1)
+				{
+					//alert("zhao dao le")
+					thestr_head_noalert=thestr_head.substr(k+1)
+					continue;
+					//alert(thestr_head)	
+				}
+				else
+				{
+					break;
+				}
+				
+			}
+			 
+		    //去尾
+		    thestr_end=thestr_head_noalert
+		    thestr_end_noalert=thestr_head_noalert
+		    str_nohead_len=thestr_end.length
+		    //alert(str_nohead_len)
+		    for (m=str_nohead_len;m>0;m--)
+		    {	
+				//去尾
+				thestr_end_temp=thestr_end.substring(m,m-1);
+				//alert(thestr_end_temp)
+				if (alert_str.indexOf(thestr_end_temp) !=-1)
+				{
+					//alert("zhao dao le")
+					thestr_end_noalert=thestr_end.substring(0,m-1)
+					//alert(thestr_end)	
+					continue;
+				}
+				else
+				{
+					break;
+				}
+			 }
+			 
+			 //alert(thestr_end_noalert)
+			  //检查中间
+			 
+			 thestr_mid=thestr_end_noalert
+			 
+			 //替换掉中间空格 /\s/g 增则表达式 空格 汉字空格
+			 //re=/\s/g
+			 //thestr_mid_nospace=thestr_mid.replace(re,"A")
+			 thestr_mid_nospace=thestr_mid
+		     //检查中间的除掉空格的特殊字符
+		     thstr_nospace_len=thestr_mid_nospace.length
+		     alert_str_nospace="#[]{}&,";
+		    for (x=0;x<thstr_nospace_len;x++)
+		    {	
+				//着字符检查
+				thestr_mid_nospace_temp=thestr_mid_nospace.substring(x,x+1);
+				//alert(thestr_head_temp)
+				if (alert_str_nospace.indexOf(thestr_mid_nospace_temp) !=-1)
+				{
+					//alert("zhao dao le")
+					alert("关键词不允许出现下列字符："+alert_str_nospace)
+					//aform.elements (j).focus();
+					return false;
+				}
+			 }
+			//alert(thestr_mid)
+			document.form1.searchstring.value=thestr_mid
+			//alert(aform.elements (j).value)
+			//return 1
+		
+		
+	//return 1;
+	return true;
+
+}
+-->
+			</SCRIPT>
+
+                  <TABLE cellSpacing=0 cellPadding=0 width="100%" border=0>
+                    <TBODY>
+                    <TR>
+                      <TD align=middle bgColor=#efefef><IMG height=16 
+                        src="IP Helper API 使用方法详解（一） - 开发者 - ZDNet China.files/search.gif" 
+                        width=160> </TD></TR></TBODY></TABLE>
+                  <TABLE cellSpacing=0 cellPadding=0 width="100%" border=0>
+                    <TBODY>
+                    <TR>
+                      <TD bgColor=#efefef>
+                        <FORM id=form1 name=form1 action=/search/index.htm 
+                        method=post><SPAN class=text1><INPUT id=searchstring 
+                        size=18 name=query width="54"> <SELECT id=searchclass 
+                        name=collection> <OPTION value=zdnetall selected>All 
+                          ZDNet</OPTION> <OPTION value=news>新闻</OPTION> <OPTION 
+                          value=biztech>商务</OPTION> <OPTION 
+                          value=techupdate>技术</OPTION> <OPTION 
+                          value=developer>开发</OPTION> <OPTION 
+                          value=products>产品</OPTION> <OPTION 
+                          value=download>下载</OPTION> <OPTION 
+                          value=gamespot>游戏</OPTION></SELECT><INPUT id=Submit1 type=submit value=搜索 name=Submit1></SPAN> 
+                        </FORM></TD></TR></TBODY></TABLE><!--end search --><!--start newsletter-->
+                  <TABLE cellSpacing=0 cellPadding=0 width=160 bgColor=#eeeeee 
+                  border=0>
+                    <TBODY>
+                    <TR>
+                      <TD><IMG height=16 
+                        src="IP Helper API 使用方法详解（一） - 开发者 - ZDNet China.files/newsletter_bar.gif" 
+                        width=160></TD></TR>
+                    <TR>
+                      <TD 
+                        class=text1>订阅＂技术圈＂杂志!请在下面选择您感兴趣的专题，填写e-mail地址，然后按订阅按钮：</TD></TR>
+                    <TR>
+                      <TD class=text1>
+                        <FORM 
+                        action=http://members.cnet.com.cn/reg/prog/techmail.jsp 
+                        method=post target=_blank><INPUT type=checkbox CHECKED 
+                        value=itapp name=chkmail> 应用开发管理<BR><INPUT type=checkbox 
+                        CHECKED value=itvsnet name=chkmail> VS.NET 周刊<BR><INPUT 
+                        type=checkbox CHECKED value=itdatabase name=chkmail> 
+                        Database 周刊<BR><INPUT type=checkbox CHECKED value=itwebs 
+                        name=chkmail> WEB Service周刊<BR><INPUT type=checkbox 
+                        CHECKED value=itjava name=chkmail> JAVA 周刊<BR><INPUT 
+                        type=checkbox CHECKED value=itcert name=chkmail> IT 
+                        认证<BR><INPUT type=checkbox CHECKED value=etechwindows 
+                        name=chkmail> Windows服务器周刊<BR><INPUT type=checkbox 
+                        CHECKED value=enet name=chkmail> 互联网开发<BR><INPUT 
+                        maxLength=30 size=15 name=email><INPUT type=submit value=订阅 name=submit></FORM></TD></TR>
+                    <TR>
+                      <TD>&nbsp;</TD></TR></TBODY></TABLE><!--end newsletter--><!--start special -->
+                  <TABLE class=text1 cellSpacing=0 cellPadding=0 width="99%" 
+                  border=0>
+                    <TBODY>
+                    <TR>
+                      <TD class=text1 vAlign=bottom align=middle 
+                        bgColor=#999999><FONT color=#ffffff><B>Developer 
+                        合作专区</B></FONT></TD></TR>
+                    <TR>
+                      <TD align=middle bgColor=#999999>
+                        <TABLE class=text1 cellSpacing=0 cellPadding=0 
+                        width="99%" bgColor=#fdfdf1 border=0>
+                          <TBODY>
+                          <TR>
+                            <TD></TD></TR></TBODY></TABLE></TD></TR>
+                    <TR>
+                      <TD bgColor=#fdfdf1><IMG height=1 
+                        src="IP Helper API 使用方法详解（一） - 开发者 - ZDNet China.files/bottom_master.gif" 
+                        width=160></TD></TR></TBODY></TABLE>
+                  <TABLE class=text1 cellSpacing=0 cellPadding=0 width="99%" 
+                  border=0>
+                    <TBODY>
+                    <TR>
+                      <TD class=text1 vAlign=bottom align=middle 
+                        bgColor=#999999><FONT 
+                      color=#ffffff><B>最新精彩专区</B></FONT></TD></TR>
+                    <TR>
+                      <TD align=middle bgColor=#999999>
+                        <TABLE class=text1 cellSpacing=0 cellPadding=0 
+                        width="99%" bgColor=#fdfdf1 border=0>
+                          <TBODY>
+                          <TR>
+                            <P>
+                            <TD class=text1><BR><IMG hspace=3 src=""><LEFT><A 
+                              href="http://www.zdnet.com.cn/developer/design/story/0,1000001288,39256080,00.htm"><B>设计者－软件篇(最新)</B></A></LEFT> 
+
+                              <P><IMG hspace=3 
+                              src="IP Helper API 使用方法详解（一） - 开发者 - ZDNet China.files/save_icon.gif"><LEFT><A 
+                              href="http://www.zdnet.com.cn/developer/design/story/0,1000001288,39252062,00.htm"><B>设计者－硬件篇</B></A></LEFT> 
+
+                              <P><IMG hspace=3 
+                              src="IP Helper API 使用方法详解（一） - 开发者 - ZDNet China.files/save_icon.gif"><LEFT><A 
+                              href="http://www.zdnet.com.cn/developer/tech/story/0,2000081602,39249175,00.htm"><B>xml 
+                              技术专区</B></A></LEFT> 
+                              <P><IMG hspace=3 
+                              src="IP Helper API 使用方法详解（一） - 开发者 - ZDNet China.files/save_icon.gif"><LEFT><A 
+                              href="http://www.zdnet.com.cn/developer/code/story/0,2000081534,39247402,00.htm"><B>PHP技术专区</B></A></LEFT> 
+
+                              <P><IMG hspace=3 
+                              src="IP Helper API 使用方法详解（一） - 开发者 - ZDNet China.files/save_icon.gif"><LEFT><A 
+                              href="http://www.zdnet.com.cn/developer/code/story/0,2000081534,39244640,00.htm"><B>JSP技术专区</B></A></LEFT> 
+
+                              <P><IMG hspace=3 
+                              src="IP Helper API 使用方法详解（一） - 开发者 - ZDNet China.files/save_icon.gif"><LEFT><A 
+                              href="http://www.zdnet.com.cn/developer/tech/story/0,2000081602,39247342,00.htm"><B>求职技巧专题</B></A></LEFT> 
+
+                              <P><IMG hspace=3 
+                              src="IP Helper API 使用方法详解（一） - 开发者 - ZDNet China.files/save_icon.gif"><LEFT><A 
+                              href="http://www.zdnet.com.cn/developer/code/story/0,2000081534,39238987,00.htm"><B>JavaScript实用代码</B></A></LEFT> 
+
+                              <P><IMG hspace=3 
+                              src="IP Helper API 使用方法详解（一） - 开发者 - ZDNet China.files/save_icon.gif"> 
+                              <LEFT><A 
+                              href="http://www.zdnet.com.cn/developer/tech/story/0,2000081602,39213960,00.htm"><B>从零开始学Java</B></A></LEFT> 
+
+                              <P><IMG hspace=3 
+                              src="IP Helper API 使用方法详解（一） - 开发者 - ZDNet China.files/save_icon.gif"><LEFT><A 
+                              href="http://www.zdnet.com.cn/developer/tech/story/0,2000081602,39236600,00.htm"><B>Java技术文章top10 
+                              </B></A></LEFT>
+                              <P><IMG hspace=3 
+                              src="IP Helper API 使用方法详解（一） - 开发者 - ZDNet China.files/save_icon.gif"><LEFT><A 
+                              href="http://www.zdnet.com.cn/developer/tech/story/0,2000081602,39236263,00.htm"><B>学习ASP的经典6步</B></A></LEFT> 
+
+                              <P><IMG hspace=3 
+                              src="IP Helper API 使用方法详解（一） - 开发者 - ZDNet China.files/save_icon.gif"><LEFT><A 
+                              href="http://www.zdnet.com.cn/developer/tech/story/0,2000081602,39235160,00.htm"><B>Windows 
+                              实用技巧</B></A></LEFT> 
+                              <P><IMG hspace=3 
+                              src="IP Helper API 使用方法详解（一） - 开发者 - ZDNet China.files/save_icon.gif"><LEFT><A 
+                              href="http://www.zdnet.com.cn/developer/tech/story/0,2000081602,39233967,00.htm"><B>轻松走进项目管理 
+                              </B></A></LEFT>
+                              <P><IMG hspace=3 
+                              src="IP Helper API 使用方法详解（一） - 开发者 - ZDNet China.files/save_icon.gif"><LEFT><A 
+                              href="http://www.zdnet.com.cn/developer/traincert/story/0,2000081610,39191667,00.htm"><B>MCSE 
+                              2003攻略</B></A></LEFT> 
+                              <P><IMG hspace=3 
+                              src="IP Helper API 使用方法详解（一） - 开发者 - ZDNet China.files/save_icon.gif"> 
+                              <LEFT><A 
+                              href="http://www.zdnet.com.cn/developer/tech/story/0,2000081602,39224940,00.htm"><B>Oracle 
+                              数据库专题</B></A></LEFT> 
+                              <P><IMG hspace=3 
+                              src="IP Helper API 使用方法详解（一） - 开发者 - ZDNet China.files/save_icon.gif"> 
+                              <LEFT><A 
+                              href="http://www.zdnet.com.cn/developer/tech/story/0,2000081602,39223050,00.htm"><B>恶性蠕虫病毒专题 
+                              </B></A></LEFT>
+                              <P><IMG hspace=3 
+                              src="IP Helper API 使用方法详解（一） - 开发者 - ZDNet China.files/save_icon.gif"> 
+                              <LEFT><A 
+                              href="http://www.zdnet.com.cn/developer/tech/story/0,2000081602,39218100,00.htm"><B>走进Apache的世界 
+                              </B></A></LEFT>
+                              <P></P></TD></P></TR></TBODY></TABLE></TD></TR>
+                    <TR>
+                      <TD bgColor=#fdfdf1><IMG height=1 
+                        src="IP Helper API 使用方法详解（一） - 开发者 - ZDNet China.files/bottom_master.gif" 
+                        width=160></TD></TR></TBODY></TABLE><!--end special --><!--start news-->
+                  <TABLE cellSpacing=0 cellPadding=0 width=160 bgColor=#fafafc 
+                  border=0>
+                    <TBODY>
+                    <TR>
+                      <TD><IMG height=16 
+                        src="IP Helper API 使用方法详解（一） - 开发者 - ZDNet China.files/rnews.gif" 
+                        width=160></TD></TR>
+                    <TR>
+                      <TD vAlign=top align=right 
+                      background="IP Helper API 使用方法详解（一） - 开发者 - ZDNet China.files/rightbg.gif">
+                        <TABLE cellSpacing=0 cellPadding=0 width=159 border=0>
+                          <TBODY>
+                          <TR>
+                            <TD align=middle bgColor=#fafafc>
+                              <TABLE cellSpacing=2 cellPadding=2 width="95%" 
+                              border=0>
+                                <TBODY>
+                                <TR>
+                                <TD vAlign=top>&#8226; </TD>
+                                <TD class=v12><A 
+                                href="http://www.zdnet.com.cn/developer/news/story/0,2000081594,39259720,00.htm">[安全]蠕虫Bobax利用了Sasser</A></TD></TR>
+                                <TR>
+                                <TD vAlign=top>&#8226; </TD>
+                                <TD class=v12><A 
+                                href="http://www.zdnet.com.cn/developer/news/story/0,2000081594,39259700,00.htm">[安全]思科公司开始调查源代码泄漏事件</A></TD></TR>
+                                <TR>
+                                <TD vAlign=top>&#8226; </TD>
+                                <TD class=v12><A 
+                                href="http://www.zdnet.com.cn/developer/news/story/0,2000081594,39259660,00.htm">微软公布其服务器产品开发路线图</A></TD></TR>
+                                <TR>
+                                <TD vAlign=top>&#8226; </TD>
+                                <TD class=v12><A 
+                                href="http://www.zdnet.com.cn/developer/news/story/0,2000081594,39259640,00.htm">[安全]思科源代码泄漏并不严重</A></TD></TR>
+                                <TR>
+                                <TD vAlign=top>&#8226; </TD>
+                                <TD class=v12><A 
+                                href="http://www.zdnet.com.cn/developer/news/story/0,2000081594,39254900,00.htm">构建超级电脑的操作系统</A></TD></TR></TBODY></TABLE></TD></TR></TBODY></TABLE></TD></TR></TBODY></TABLE><!--end news--><!--start tech-->
+                  <TABLE cellSpacing=0 cellPadding=0 width=160 bgColor=#fafafc 
+                  border=0>
+                    <TBODY>
+                    <TR>
+                      <TD><IMG height=16 src="" width=160></TD></TR>
+                    <TR>
+                      <TD vAlign=top align=right 
+                      background="IP Helper API 使用方法详解（一） - 开发者 - ZDNet China.files/rightbg.gif">
+                        <TABLE cellSpacing=0 cellPadding=0 width=159 border=0>
+                          <TBODY>
+                          <TR>
+                            <TD align=middle bgColor=#fafafc>
+                              <TABLE cellSpacing=2 cellPadding=2 width="95%" 
+                              border=0>
+                                <TBODY>
+                                <TR>
+                                <TD vAlign=top>&#8226; </TD>
+                                <TD class=v12><A 
+                                href="http://www.zdnet.com.cn/developer/tech/story/0,2000081602,39261240,00.htm">[Java]最好的对象映射就这么简单</A></TD></TR>
+                                <TR>
+                                <TD vAlign=top>&#8226; </TD>
+                                <TD class=v12><A 
+                                href="http://www.zdnet.com.cn/developer/tech/story/0,2000081602,39261200,00.htm">[网络技术]在Web页面显示当前的温度</A></TD></TR>
+                                <TR>
+                                <TD vAlign=top>&#8226; </TD>
+                                <TD class=v12><A 
+                                href="http://www.zdnet.com.cn/developer/tech/story/0,2000081602,39258121,00.htm">[SQL]联系使用Excel和SQL</A></TD></TR>
+                                <TR>
+                                <TD vAlign=top>&#8226; </TD>
+                                <TD class=v12><A 
+                                href="http://www.zdnet.com.cn/developer/tech/story/0,2000081602,39258100,00.htm">[SQL]向SQL2k移植SQL 
+                                7数据库</A></TD></TR>
+                                <TR>
+                                <TD vAlign=top>&#8226; </TD>
+                                <TD class=v12><A 
+                                href="http://www.zdnet.com.cn/developer/tech/story/0,2000081602,39258040,00.htm">使用ems和百分比进行字体调整时遇到的问题</A></TD></TR></TBODY></TABLE></TD></TR></TBODY></TABLE></TD></TR></TBODY></TABLE><!--end tech--><!--start downline-->
+                  <TABLE cellSpacing=0 cellPadding=0 width=160 bgColor=#7992cc 
+                  border=0>
+                    <TBODY>
+                    <TR>
+                      <TD 
+              height=1></TD></TR></TBODY></TABLE><!--end downline--></TR></TBODY></TABLE><!--end rightnav --></TD></TR></TBODY></TABLE>
+      <TABLE cellSpacing=0 cellPadding=0 width=728 border=0>
+        <TBODY>
+        <TR>
+          <TD><IMG height=1 
+            src="D:\personal\liuto\IP Helper API 使用方法详解（一） - 开发者 - ZDNet China.files\margin(1).gif" 
+            width=1></TD></TR></TBODY></TABLE></TD>
+    <TD width=1 bgColor=#ffffff><IMG height=500 
+      src="D:\personal\liuto\IP Helper API 使用方法详解（一） - 开发者 - ZDNet China.files\margin(1).gif" 
+      width=1></TD>
+    <TD width=9 bgColor=#1e5c99><IMG height=1 
+      src="D:\personal\liuto\IP Helper API 使用方法详解（一） - 开发者 - ZDNet China.files\margin(1).gif" 
+      width=9></TD>
+    <TD align=right width=1 bgColor=#83a3cb><IMG height=500 
+      src="D:\personal\liuto\IP Helper API 使用方法详解（一） - 开发者 - ZDNet China.files\margin(1).gif" 
+      width=1></TD></TR></TBODY></TABLE><!--start footer table -->
+<TABLE height=6 cellSpacing=0 cellPadding=0 width=750 align=center border=0>
+  <TBODY>
+  <TR>
+    <TD width=1 bgColor=#83a3cb><IMG height=1 src="" width=1></TD>
+    <TD align=middle width=748 bgColor=#1e5c99>
+      <TABLE cellSpacing=0 cellPadding=0 width="100%" border=0>
+        <TBODY>
+        <TR>
+          <TD align=middle><IMG height=10 
+            src="IP Helper API 使用方法详解（一） - 开发者 - ZDNet China.files/margin.gif" 
+            width=1></TD></TR>
+        <TR>
+          <TD align=middle><!--start navigation-->
+            <TABLE cellSpacing=0 cellPadding=0 width=748 bgColor=#1e5c99 
+            border=0>
+              <TBODY>
+              <TR>
+                <TD><IMG height=35 alt="" 
+                  src="IP Helper API 使用方法详解（一） - 开发者 - ZDNet China.files/navigation_main1_darkred_1.gif" 
+                  width=14></TD>
+                <TD><A 
+                  onmouseover="MM_swapImage('Image732','','/i/homepage/images/navigation_main1_red_2.gif',1)" 
+                  onmouseout=MM_swapImgRestore() 
+                  href="http://www.zdnet.com.cn/"><IMG height=35 
+                  src="IP Helper API 使用方法详解（一） - 开发者 - ZDNet China.files/navigation_main1_darkred_2.gif" 
+                  width=58 border=0 name=Image732></A></TD>
+                <TD><IMG height=35 alt="" 
+                  src="IP Helper API 使用方法详解（一） - 开发者 - ZDNet China.files/navigation_main1_darkred_3.gif" 
+                  width=7></TD>
+                <TD><A 
+                  onmouseover="MM_swapImage('Image118','','/i/homepage/images/navigation_main1_red_4.gif',1)" 
+                  onmouseout=MM_swapImgRestore() 
+                  href="http://www.zdnet.com.cn/news"><IMG height=35 src="" 
+                  width=88 border=0 name=Image118></A></TD>
+                <TD><IMG height=35 alt="" 
+                  src="IP Helper API 使用方法详解（一） - 开发者 - ZDNet China.files/navigation_main1_darkred_5.gif" 
+                  width=7></TD>
+                <TD><A 
+                  onmouseover="MM_swapImage('Image119','','/i/homepage/images/navigation_main1_red_6.gif',1)" 
+                  onmouseout=MM_swapImgRestore() 
+                  href="http://www.zdnet.com.cn/bizstrategy"><IMG height=35 
+                  src="" width=88 border=0 name=Image119></A></TD>
+                <TD><IMG height=35 alt="" src="" width=7></TD>
+                <TD><A 
+                  onmouseover="MM_swapImage('Image120','','/i/homepage/images/navigation_main1_red_8.gif',1)" 
+                  onmouseout=MM_swapImgRestore() 
+                  href="http://www.zdnet.com.cn/techupdate"><IMG height=35 
+                  src="IP Helper API 使用方法详解（一） - 开发者 - ZDNet China.files/navigation_main1_darkred_8.gif" 
+                  width=88 border=0 name=Image120></A></TD>
+                <TD><IMG height=35 alt="" src="" width=7></TD>
+                <TD><A 
+                  onmouseover="MM_swapImage('Image121','','/i/homepage/images/navigation_main1_red_10.gif',1)" 
+                  onmouseout=MM_swapImgRestore() 
+                  href="http://www.zdnet.com.cn/products"><IMG height=35 
+                  src="IP Helper API 使用方法详解（一） - 开发者 - ZDNet China.files/navigation_main1_darkred_10.gif" 
+                  width=88 border=0 name=Image121></A></TD>
+                <TD><IMG height=35 alt="" 
+                  src="IP Helper API 使用方法详解（一） - 开发者 - ZDNet China.files/navigation_main1_darkred_11.gif" 
+                  width=7></TD>
+                <TD><A href="http://www.zdnet.com.cn/developer"><IMG height=35 
+                  src="" width=88 border=0></A></TD>
+                <TD><IMG height=35 alt="" 
+                  src="IP Helper API 使用方法详解（一） - 开发者 - ZDNet China.files/navigation_main1_darkred_13.gif" 
+                  width=7></TD>
+                <TD><A 
+                  onmouseover="MM_swapImage('Image123','','/i/homepage/images/navigation_main1_red_14.gif',1)" 
+                  onmouseout=MM_swapImgRestore() 
+                  href="http://www.zdnet.com.cn/download"><IMG height=35 src="" 
+                  width=88 border=0 name=Image123></A></TD>
+                <TD><IMG height=35 alt="" 
+                  src="IP Helper API 使用方法详解（一） - 开发者 - ZDNet China.files/navigation_main1_darkred_15.gif" 
+                  width=8></TD>
+                <TD><A 
+                  onmouseover="MM_swapImage('Image124','','/i/homepage/images/navigation_main1_red_16.gif',1)" 
+                  onmouseout=MM_swapImgRestore() 
+                  href="http://www.zdnet.com.cn/smb"><IMG height=35 
+                  src="IP Helper API 使用方法详解（一） - 开发者 - ZDNet China.files/navigation_main1_darkred_16.gif" 
+                  width=88 border=0 name=Image124></A></TD>
+                <TD><IMG height=35 alt="" 
+                  src="IP Helper API 使用方法详解（一） - 开发者 - ZDNet China.files/navigation_main1_darkred_17.gif" 
+                  width=10></TD></TR></TBODY></TABLE><!--end navigation--></TD></TR>
+        <TR>
+          <TD align=middle><IMG height=10 
+            src="IP Helper API 使用方法详解（一） - 开发者 - ZDNet China.files/margin.gif" 
+            width=1></TD></TR></TBODY></TABLE></TD>
+    <TD width=1 bgColor=#83a3cb><IMG height=1 
+      src="IP Helper API 使用方法详解（一） - 开发者 - ZDNet China.files/blank.gif" 
+    width=1></TD></TR>
+  <TR align=middle bgColor=#83a3cb>
+    <TD class=footertext colSpan=3 height=10>CNET Networks: <A 
+      class=footerlink href="http://www.eweekchina.com/" target=_blank>每周电脑报</A> 
+      | <A class=footerlink href="http://www.gamespot.net.cn/" 
+      target=_blank>游戏基地</A> | <A class=footerlink 
+      href="http://www.pcmag.com.cn/" target=_blank>个人电脑</A> | <A 
+      class=footerlink href="http://www.smartpartner.com.cn/" 
+      target=_blank>计算机产品与流通</A> | <A class=footerlink 
+      href="http://www.cnet.com/aboutcnet/company/international.html" 
+      target=_blank>CNET国际站点</A> </TD></TR>
+  <TR align=middle bgColor=#83a3cb>
+    <TD class=footertext colSpan=3 height=1>
+      <TABLE cellSpacing=0 cellPadding=0 width="98%" border=0>
+        <TBODY>
+        <TR>
+          <TD align=middle bgColor=#6284af><IMG height=1 
+            src="IP Helper API 使用方法详解（一） - 开发者 - ZDNet China.files/margin.gif" 
+            width=1></TD></TR></TBODY></TABLE></TD></TR>
+  <TR align=middle bgColor=#83a3cb>
+    <TD class=footertext colSpan=3 height=10><A class=footerlink 
+      href="http://www.cnet.com/" target=_blank>CNET.com</A> | <A 
+      class=footerlink href="http://www.download.com/" target=_blank>CNET 
+      Download.com</A> | <A class=footerlink href="http://news.com.com/" 
+      target=_blank>CNET News.com</A> | <A class=footerlink 
+      href="http://reviews.cnet.com/" target=_blank>CNET Reviews</A> | <A 
+      class=footerlink href="http://shopper.cnet.com/" target=_blank>CNET 
+      Shopper.com</A> </TD></TR>
+  <TR align=middle bgColor=#83a3cb>
+    <TD class=footertext colSpan=3 height=1>
+      <TABLE cellSpacing=0 cellPadding=0 width="98%" border=0>
+        <TBODY>
+        <TR>
+          <TD align=middle bgColor=#6284af><IMG height=1 
+            src="IP Helper API 使用方法详解（一） - 开发者 - ZDNet China.files/margin.gif" 
+            width=1></TD></TR></TBODY></TABLE></TD></TR>
+  <TR align=middle bgColor=#83a3cb>
+    <TD class=footertext colSpan=3 height=10><A class=footerlink 
+      href="http://www.gamespot.com/" target=_blank>GameSpot</A> | <A 
+      class=footerlink href="http://www.mysimon.com/" target=_blank>mySimon</A> 
+      | <A class=footerlink href="http://www.search.com/" 
+      target=_blank>Search.com</A> | <A class=footerlink 
+      href="http://techrepublic.com.com/" target=_blank>TechRepublic</A> | <A 
+      class=footerlink href="http://www.zdnet.com/" 
+  target=_blank>ZDNet</A></TD></TR></TBODY></TABLE><!--end footer table --><!--start copyright-->
+<TABLE cellSpacing=0 cellPadding=3 width=750 align=center border=0>
+  <TBODY>
+  <TR>
+    <TD class=white vAlign=bottom align=left>Copyright (c) 2002 CNET Networks 
+      版权所有。 ZDNet 是CNET Networks公司注册服务商标。<BR>ZDNet 公司标识是 CNET Networks公司注册服务商标。 
+      <FONT class=yellow><BR>中华人民共和国电信与信息服务业务经营许可证编号：京ICP证010391号</FONT></TD>
+    <TD><A 
+      href="http://www.hd315.gov.cn/beian/view.asp?bianhao=010202001021500016"><IMG 
+      src="IP Helper API 使用方法详解（一） - 开发者 - ZDNet China.files/biaoshi.gif" 
+      border=0></A><IFRAME 
+      src="IP Helper API 使用方法详解（一） - 开发者 - ZDNet China.files/test_traffic.htm" 
+      width=0 
+height=0></IFRAME></TD></TR></TBODY></TABLE><!--end copyright--></BODY></HTML>

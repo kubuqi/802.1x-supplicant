@@ -1,0 +1,8 @@
+To compile type:
+
+qmake qt_gremlin_xsupplicant.pro; make
+
+You should probably have this program autostart by sticking it in your 
+~/.xinitrc file.  It will sit in the background patiently until an xsupplicant
+process is available.
+

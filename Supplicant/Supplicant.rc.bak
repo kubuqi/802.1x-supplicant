@@ -1,0 +1,425 @@
+// Microsoft Visual C++ generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "afxres.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// Chinese (P.R.C.) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_CHS)
+#ifdef _WIN32
+LANGUAGE LANG_CHINESE, SUBLANG_CHINESE_SIMPLIFIED
+#pragma code_page(936)
+#endif //_WIN32
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Bitmap
+//
+
+IDB_LOGO                BITMAP                  "res\\LOGO.bmp"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Menu
+//
+
+IDR_MAINFRAME MENU 
+BEGIN
+    POPUP "主菜单"
+    BEGIN
+        MENUITEM "显示连接状态",                ID_SHOW_CONNECTION
+        MENUITEM "断开连接",                    ID_DISCONNECT
+        MENUITEM SEPARATOR
+        MENUITEM "检查软件升级",                ID_ONLINE_UPDATE
+        MENUITEM "设置",                        ID_PROPERTIES
+        MENUITEM SEPARATOR
+        MENUITEM "关于",                        ID_APP_ABOUT
+        MENUITEM "帮助",                        ID_HELP
+        MENUITEM SEPARATOR
+        MENUITEM "退出",                        ID_EXIT
+    END
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_ABOUTBOX DIALOGEX 0, 0, 230, 111
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "关于 Supplicant"
+FONT 9, "宋体", 0, 0, 0x0
+BEGIN
+    DEFPUSHBUTTON   "确定",1,88,89,50,14,WS_GROUP
+    ICON            IDR_MAINFRAME,-1,23,24,20,20
+    LTEXT           "Supplicant 1.01 beta",-1,57,15,117,8,SS_NOPREFIX
+    LTEXT           "1.0 Release Build 0909",1020,57,28,153,8
+    CONTROL         "",-1,"Static",SS_BLACKRECT | SS_SUNKEN,27,84,173,1
+    LTEXT           "Copyright (C) 2003",-1,57,39,88,8
+    LTEXT           "http://www.tp-link.com.cn",-1,57,63,132,8
+    LTEXT           "Shenzhen TP-LINK Technologies Co., Ltd.",-1,57,51,160,8
+END
+
+IDD_LOGIN_DIALOG DIALOGEX 0, 0, 216, 207
+STYLE DS_SETFONT | DS_MODALFRAME | WS_MINIMIZEBOX | WS_VISIBLE | WS_CAPTION | 
+    WS_SYSMENU
+EXSTYLE WS_EX_APPWINDOW
+CAPTION "连接网络--HammerSupplicant"
+FONT 9, "宋体", 0, 0, 0x1
+BEGIN
+    EDITTEXT        IDC_USERNAME,50,113,153,12,ES_AUTOHSCROLL
+    EDITTEXT        IDC_PASSWORD,50,128,153,12,ES_PASSWORD | ES_AUTOHSCROLL
+    CONTROL         "保存密码",IDC_KEEP_PASSWORD,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,50,145,48,12
+    CONTROL         "自动加载",IDC_AUTO_RUN,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,49,159,48,10
+    CONTROL         "启动DHCP",IDC_DHCP_ENABLE,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,134,146,48,10
+    CONTROL         "自动连接",IDC_AUTO_CONNECT,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,134,159,48,10
+    DEFPUSHBUTTON   "连接(&C)",ID_CONNECT,16,182,50,15
+    PUSHBUTTON      "退出(&X)",IDCANCEL,83,182,50,15
+    PUSHBUTTON      "属性(&P)",ID_PROPERTIES,152,182,50,15
+    CONTROL         130,IDB_LOGO,"Static",SS_BITMAP | SS_CENTERIMAGE,7,7,202,
+                    87,WS_EX_STATICEDGE
+    LTEXT           "用户名：",-1,13,115,33,8
+    LTEXT           "密  码：",-1,13,130,33,8
+    GROUPBOX        "",-1,7,100,202,74
+END
+
+IDD_CONNECTING DIALOGEX 0, 0, 187, 57
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "正在连接"
+FONT 9, "宋体", 0, 0, 0x0
+BEGIN
+    PUSHBUTTON      "取消",IDCANCEL,127,37,50,15
+    ICON            IDR_CONNECTED,-1,14,7,20,20
+    LTEXT           "寻找认证服务器 ... ...",IDC_LOGIN_MSG,49,11,120,9
+END
+
+IDD_CONNECTION_STATE DIALOGEX 0, 0, 210, 157
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "连接状态"
+FONT 9, "宋体", 0, 0, 0x0
+BEGIN
+    PUSHBUTTON      "断开(&D)",ID_DISCONNECT,7,137,50,15
+    PUSHBUTTON      "取消(&C)",IDCANCEL,153,137,50,15
+    GROUPBOX        "连接",-1,7,7,196,51
+    LTEXT           "状态:",-1,20,20,21,8
+    LTEXT           "持续时间:",-1,20,32,37,8
+    LTEXT           "速度:",-1,20,44,21,8
+    RTEXT           "已连接上",ID_CONNECTION_STATE,101,20,92,8
+    RTEXT           "00:24:16",ID_CONNECTED_TIME,60,32,133,8
+    RTEXT           "100 Mbps",ID_CONNECTION_SPEED,101,44,92,8
+    GROUPBOX        "活动",-1,7,71,196,62
+    ICON            IDR_CONNECTED,ID_CONNECTION_ICON,118,84,20,20
+    LTEXT           "数据包:",-1,20,111,29,8
+    LTEXT           "收到",-1,61,92,17,8
+    RTEXT           "发送",-1,171,92,22,8
+    LTEXT           "23456",ID_RECEIVED_PACKET,61,111,47,8
+    RTEXT           "234567",ID_SENT_PACKET,144,111,49,8
+END
+
+IDD_COMMON_PAGE DIALOGEX 0, 0, 232, 173
+STYLE DS_SETFONT | WS_CHILD | WS_CAPTION
+CAPTION "常规属性"
+FONT 9, "宋体", 0, 0, 0x0
+BEGIN
+    COMBOBOX        IDC_ACCESS_SERVER_TYPE,23,38,179,39,CBS_DROPDOWNLIST | 
+                    WS_VSCROLL | WS_TABSTOP
+    COMBOBOX        IDC_AUTH_TYPE,23,77,179,39,CBS_DROPDOWNLIST | WS_VSCROLL | 
+                    WS_TABSTOP
+    COMBOBOX        IDC_NETWORK_INTERFACE,23,116,179,37,CBS_DROPDOWNLIST | 
+                    WS_VSCROLL | WS_TABSTOP
+    LTEXT           "所连接的接入服务器类型",-1,23,25,111,10
+    LTEXT           "身份验证方法",-1,23,65,69,10
+    LTEXT           "网  卡",-1,23,102,69,10
+    GROUPBOX        "常规选项",-1,6,7,219,138
+END
+
+IDD_RUNNING_PAGE DIALOGEX 0, 0, 232, 173
+STYLE DS_SETFONT | WS_CHILD | WS_CAPTION
+CAPTION "运行属性"
+FONT 9, "宋体", 0, 0, 0x0
+BEGIN
+    CONTROL         "保存密码（程序下次运行密码自动加载）",IDC_KEEP_PASSWORD,
+                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,19,21,165,10
+    CONTROL         "自动加载（操作系统启动时，自动加载运行程序）",
+                    IDC_AUTO_RUN,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,19,60,
+                    192,10
+    CONTROL         "自动连接（运行程序时，不用点击，自动连接认证）",
+                    IDC_AUTO_CONNECT,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,
+                    19,77,197,10
+    CONTROL         "始终连接",IDC_CONNECTION_ALWAYS,"Button",
+                    BS_AUTORADIOBUTTON | WS_GROUP,19,117,48,10
+    CONTROL         "网络空闲时自动断开，设定的时间（秒）",
+                    IDC_CONNECTION_TIMEOUT,"Button",BS_AUTORADIOBUTTON,19,
+                    132,160,10
+    EDITTEXT        IDC_IDLE_DISCONNECT_TIME,19,148,40,12,ES_AUTOHSCROLL
+    GROUPBOX        "密码处理方式",-1,6,7,219,32
+    GROUPBOX        "运行方式",-1,6,45,219,51
+    GROUPBOX        "连接方式",-1,6,102,219,61
+END
+
+IDD_EXTENDED_PAGE DIALOGEX 0, 0, 232, 173
+STYLE DS_SETFONT | WS_CHILD | WS_CAPTION
+CAPTION "扩展属性"
+FONT 9, "宋体", 0, 0, 0x0
+BEGIN
+    EDITTEXT        IDC_RECONNECT_INTERVAL,139,15,29,12,ES_AUTOHSCROLL
+    EDITTEXT        IDC_RECONNECT_RETRIES,139,32,29,12,ES_AUTOHSCROLL
+    CONTROL         "启动系统检查功能",IDC_DISABLE_REAUTHENTICATION,"Button",
+                    BS_AUTORADIOBUTTON | WS_GROUP,101,70,80,10
+    CONTROL         "关闭系统检查功能",1034,"Button",BS_AUTORADIOBUTTON,101,
+                    85,80,10
+    CONTROL         "关闭自动升级功能",ID_DISABLE_ONLINE_UPDATE,"Button",
+                    BS_AUTORADIOBUTTON | WS_GROUP,101,122,80,10
+    CONTROL         "启动自动升级功能",ID_ENABLE_ONLINE_UPDATE,"Button",
+                    BS_AUTORADIOBUTTON,101,136,80,10
+    EDITTEXT        IDC_ONLINE_UPDATE_INTERVAL,175,152,29,12,ES_AUTOHSCROLL | 
+                    NOT WS_VISIBLE
+    LTEXT           "软件升级周期（天）",IDC_UPDATE_INTERVAL_TEXT,101,154,73,
+                    11,NOT WS_VISIBLE
+    GROUPBOX        "",IDC_STATIC,6,7,219,41
+    GROUPBOX        "",IDC_STATIC,6,58,219,41
+    GROUPBOX        "",IDC_STATIC,6,109,219,61
+    LTEXT           "重连参数：",IDC_STATIC,22,18,62,12
+    LTEXT           "系统检查参数：",IDC_STATIC,22,70,62,12
+    LTEXT           "软件升级参数：",IDC_STATIC,22,122,62,12
+    LTEXT           "每次间隔",IDC_STATIC,101,18,34,11
+    LTEXT           "重连次数",IDC_STATIC,101,34,34,11
+    LTEXT           "秒",IDC_STATIC,174,18,15,8
+    LTEXT           "次",IDC_STATIC,174,34,15,8
+END
+
+IDD_NETWORK_PAGE DIALOGEX 0, 0, 232, 173
+STYLE DS_SETFONT | WS_CHILD | WS_CAPTION
+CAPTION "网络属性"
+FONT 9, "宋体", 0, 0, 0x0
+BEGIN
+    COMBOBOX        IDC_IP_OBTAIN_TYPE,96,25,106,40,CBS_DROPDOWNLIST | 
+                    CBS_SORT | WS_DISABLED | WS_VSCROLL | WS_TABSTOP
+    CONTROL         "IPAddress1",IDC_LOCAL_ADDR,"SysIPAddress32",WS_TABSTOP,
+                    96,54,106,12
+    CONTROL         "IPAddress2",IDC_GATEWAY_ADDR,"SysIPAddress32",
+                    WS_TABSTOP,96,82,106,12
+    CONTROL         "IPAddress3",IDC_DHCP_ADDR,"SysIPAddress32",WS_TABSTOP,
+                    96,110,106,12
+    GROUPBOX        "",-1,6,7,219,138
+    LTEXT           "IP获取方式：",-1,20,28,49,8
+    LTEXT           "网络IP地址：",-1,20,56,49,8
+    LTEXT           "网关：",-1,20,84,25,8
+    LTEXT           "DHCP服务器：",-1,20,112,49,8
+END
+
+IDD_DOWNLOAD_DLG DIALOGEX 0, 0, 245, 63
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION
+EXSTYLE WS_EX_APPWINDOW
+CAPTION "软件升级"
+FONT 9, "宋体", 400, 0, 0x86
+BEGIN
+    DEFPUSHBUTTON   "取消",IDCANCEL,189,24,49,16,WS_GROUP
+    CONTROL         "",IDC_PROGRESS_BAR,"msctls_progress32",WS_BORDER,7,47,
+                    231,9
+    LTEXT           "Static",IDC_URL,7,7,231,8
+    LTEXT           "Static",IDC_PROGRESS_TEXT,7,26,173,8
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDR_MAINFRAME           ICON                    "res\\Main.ico"
+148                     ICON                    "res\\ico148.ico"
+149                     ICON                    "res\\ico149.ico"
+150                     ICON                    "res\\ico150.ico"
+IDR_CONNECTED           ICON                    "res\\ico151.ico"
+IDR_UNCONNECTED         ICON                    "res\\ico154.ico"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Version
+//
+
+1 VERSIONINFO
+ FILEVERSION 1,0,1,0
+ PRODUCTVERSION 1,0,1,0
+ FILEFLAGSMASK 0x3fL
+#ifdef _DEBUG
+ FILEFLAGS 0x1L
+#else
+ FILEFLAGS 0x0L
+#endif
+ FILEOS 0x4L
+ FILETYPE 0x1L
+ FILESUBTYPE 0x0L
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "080404b0"
+        BEGIN
+            VALUE "CompanyName", "Not Yet"
+            VALUE "FileDescription", "802.1X supplicant"
+            VALUE "FileVersion", "1, 0, 1, 0"
+            VALUE "InternalName", "Supplicant"
+            VALUE "LegalCopyright", "版权所有 (C) 2002"
+            VALUE "LegalTrademarks", "Not Yet"
+            VALUE "OriginalFilename", "Supplicant.EXE"
+            VALUE "ProductName", "802.1x Supplicant"
+            VALUE "ProductVersion", "1, 0, 1, 0"
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x804, 1200
+    END
+END
+
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE 
+BEGIN
+    "#include ""afxres.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE 
+BEGIN
+    "\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO 
+BEGIN
+    IDD_CONNECTION_STATE, DIALOG
+    BEGIN
+        BOTTOMMARGIN, 153
+    END
+
+    IDD_DOWNLOAD_DLG, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 238
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 56
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE 
+BEGIN
+    IDS_ABOUTBOX            "关于Supplicant(&A)..."
+    IDP_SOCKETS_INIT_FAILED "Windows 通信端口初始化失败。"
+    IDS_IS_RUNNING          "Supplicant 已经在运行!   "
+    IDS_PRODUCT_NAME        "Supplicant"
+    IDS_NO_IF_FOUND         "找不到可用的网卡，请确定网络连接正确设置!  "
+    IDS_SEARCHING_SERVER    "正在查找认证服务器"
+    IDS_FOUND_SERVER        "找到认证服务器，等待验证身份"
+    IDS_CHECKING_PWD        "正在验证用户名和密码"
+    IDS_LOGIN_OK            "认证通过，成功登录网络"
+    IDS_TIME_OUT            "操作超时，登录网络失败"
+END
+
+STRINGTABLE 
+BEGIN
+    IDS_CHECK_FAIL          "认证失败，请检查用户名和密码"
+    IDS_CONNECTED_EXIT_CONFIRM "网络处于连接状态，是否要断开并退出？ "
+    114                     "%d天 %02d:%02d:%02d"
+    IDS_CONNECTED_TIME_TEMPLATE "%H:%M:%S"
+    IDS_CONNECTED           "已连接"
+    IDS_UNCONNECTED         "未连接"
+    118                     "%d.0 Mbps"
+    IDS_SERVER_DISCONNECTED "网络连接被中止！ "
+    120                     "Supplicant\n速度：%d.0 Mbps\n发送：%d 包\n接收：%d 包"
+    121                     "Supplicant 需要运行在Windows 98 / ME / NT 4.0 / XP 平台! "
+    IDS_OPEN_NIC_FAIL       "打开网卡失败，无法连接网络!  "
+    123                     "请先输入用户名和密码!  "
+    124                     "帐号剩余时间: %02d:%02d:%02d"
+    125                     "%d天 %02d:%02d:%02d  剩余时间: %02d:%02d:%02d"
+    126                     "%02d:%02d:%02d     剩余时间: %02d:%02d:%02d"
+    127                     "网络 NDIS 驱动程序没有安装或损坏，请重新安装! "
+END
+
+STRINGTABLE 
+BEGIN
+    128                     "Release %02d%02d%02d Build %d"
+    129                     "网络物理连接断开，请检查网络连接！ "
+    IDS_CABLE_DISCONNECTED  "网络连接断开，请检查网线！ "
+    131                     "系统使用的网卡多于一个，只允许一个网卡和认证系统相连。"
+    132                     "系统配置的IP地址多于一个，只允许一个IP地址和认证系统相连。"
+    133                     "网络被终止，如果您启动了代理服务器请关闭重新连接。"
+    134                     "检测线程故障，请重新启动该软件拨号！"
+    IDS_MANUFACTURER_NAME   "ZHOU-YU"
+    IDS_PROPERTY_SETTING_DLG "属性设置"
+    IDS_UPDATE_CONNECT_FAIL "无法连接到升级服务器"
+    IDS_UPDATE_SERVER_RESPONSE_ERR "升级服务器返回信息不可识别"
+    IDS_UPDATE_UPTODATE     "当前版本已经是最新版本"
+    IDS_INVALID_URL         "无效的URL地址"
+    IDS_BINDSTATUS01        "Finding resource..."
+    IDS_PROGRESS            "已经下载%ul字节中的%ul字节"
+    IDS_CANCELED            "Canceled."
+END
+
+STRINGTABLE 
+BEGIN
+    IDS_VERSION             "1.0.0"
+    IDS_UPDATE_OK           "软件升级完成，请重新启动本程序"
+    IDS_COPY_FAIL           "拷贝新软件失败！"
+    IDS_HAS_NEW_VERSION     "发现新版本软件，是否升级？"
+END
+
+#endif    // Chinese (P.R.C.) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

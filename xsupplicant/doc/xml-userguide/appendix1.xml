@@ -1,0 +1,16 @@
+<chapter id="ap1">
+<title>Setup for Authenticators and RADIUS Servers</title>
+
+<section>
+<title>Authenticators</title>
+<para>not a complete setup guide for all APs on the market, instead some
+comments on how to setup the more common APs to work with open1x.  also
+provide pointers to more complete setup & config guides</para>
+</section>
+
+<section>
+<title>RADIUS Servers</title>
+<para>same as above, but for RADIUS servers</para>
+</section>
+
+</chapter>

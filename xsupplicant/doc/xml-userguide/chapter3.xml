@@ -1,0 +1,35 @@
+<chapter id="ch3">
+<title>Getting The Software</title>
+
+<section>
+<title>Download Stable Releases</title>
+<para>Users should normally download a stable release from URL_HERE</para>
+</section>
+
+<section>
+<title>Pre-Packaged Releases for Some Distibutions</title>
+<para>At some point we plan on releasing pre-packaged versions of xsupplicant 
+for distributions such as Debian, RedHat, SuSe, Slackware, etc... 
+If you would like to see your favorite distribution supported, please 
+let us know (Or better yet, send us the package)!</para>
+</section>
+
+<section>
+<title>CVS</title>
+<para>We do not recommend CVS downloads for people unfamiliar with it. 
+CVS often contains new features that have not yet made it into a 
+stable release, but it can also be extremely unstable.  We also do not 
+have the time to explain how CVS works (there is good documentation on the web 
+regarding CVS and its many features/options).  We encourage users to submit 
+patches against CVS, but patches may not necessarily be commited immediately.  
+
+To download xsupplicant via CVS 
+you can use the following commands: </para>
+
+<para>cvs -z3 -d:pserver:anonymous@cvs.sourceforge.net:/cvsroot/open1x login
+cvs -z3 -d:pserver:anonymous@cvs.sourceforge.net:/cvsroot/open1x co xsupplicant
+</para>
+
+</section>
+
+</chapter>

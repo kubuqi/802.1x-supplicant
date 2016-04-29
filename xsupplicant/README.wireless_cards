@@ -1,0 +1,138 @@
+Not all wireless cards that are supported by Linux will work with XSupplicant.
+There are several reasons for this, but most are related to issues with drivers.
+
+DRIVER MAINTAINERS :  Please see the section at the end of this document for 
+information on what needs to be implemented in order to allow your driver to 
+work with 802.1x, and dynamic keying!
+
+We (the Open1x developers) have tested all of the cards Linux supports, that
+we have been able to get our hands on.  Below are the cards that we have 
+tested, and the results we found.
+
+*****  Linux Based  ******
+
+  Card Name   |   Chipset   |  Auth (Y/N) |  dWEP (Y/N)  |  Notes
+--------------+-------------+-------------+--------------+--------------------
+Orinoco       |  Agere      |   Yes       |   Yes        | Requires a patch to
+WaveLAN       |  Hermes     |             |              | allow dynamic
+802.11b cards |             |             |              | rekeying to work.
+              |             |             |              | (Patch included in
+              |             |             |              | XSupplicant.)
+              |             |             |              | Tested with version
+              |             |             |              | 0.13e
+--------------+-------------+-------------+--------------+--------------------
+SMC SMC2635W  |  ADMTek     |   Yes       |   Kind of    | Authenticates,
+              |             |             |              | but cannot pass
+              |             |             |              | traffic.
+              |             |             |              | Tested with version
+              |             |             |              | 1.05.
+--------------+-------------+-------------+--------------+--------------------
+LinkSys WPC11 |  Prism      |   Yes       |   Yes        | Tested with wlan-ng
+Version 3     |             |             |              | driver version 
+              |             |             |              | 0.2.1preX****
+--------------+-------------+-------------+--------------+--------------------
+SMC SMC2632W  |  Atmel      |   Yes       |   Yes***     | Tested with Atmel
+Version 3     |             |             |              | driver 2.1.2.2
+--------------+-------------+-------------+--------------+--------------------
+Atheros-based |  Atheros    |   Yes       |   Yes        | Requires a patch for
+MADWifi Cards |             |             |              | WEP to function.
+              |             |             |              | (Patch included in 
+              |             |             |              | XSupplicant.)
+              |             |             |              | Tested with MADWifi 
+              |             |             |              | CVS March 23 200
+--------------+-------------+-------------+--------------+--------------------
+Cisco 340/350 |  Cisco?     |   No        |    No        | The Cisco driver
+              |             |             |              | Hijacks 0x888e which
+              |             |             |              | prevents xsupplicant
+              |             |             |              | from obtaining the
+              |             |             |              | frames.  We are 
+              |             |             |              | evalutating this 
+              |             |             |              | problem.
+--------------+-------------+-------------+--------------+--------------------
+Intel Pro 2100| Intel 2100  |   No        |    No        | This driver does not              
+Centrino      |             |             |              | yet support WEP.
+              |             |             |              | 
+              |             |             |              | 
+--------------+-------------+-------------+--------------+--------------------
+DriverLoader  | Various*    | Maybe*      | Maybe*       | See the DriverLoader
+              |             |             |              | section for more info.
+--------------+-------------+-------------+--------------+--------------------
+ndiswrapper   | Various*    | Maybe*      | Maybe*       | See the ndiswrapper
+              |             |             |              | section for more info.
+--------------+-------------+-------------+--------------+--------------------
+
+* See the appropriate section below for more information on this driver wrapper.
+
+** This card seems to reset when new WEP keys are applied.  This card may be
+   impaired, or not work at all.
+
+*** Default driver resets when new WEP keys are applied.  There is a patch
+    included with XSupplicant (in the drivers directory) that fixes this
+    problem.
+
+**** Some people have reported that the current releases of the wlan-ng driver
+     do not work.  If you have problems, please try the hostap wlan driver
+     instead.
+
+
+
+-- Getting a driver to work with 802.1x, dynamic WEP, and Linux --
+------------------------------------------------------------------
+
+In most cases, getting a wireless card driver to work correctly with 802.1x,
+and Linux is fairly simple.  Current driver implementations will issue a card
+reset when the WEP keys are set.  When the card is reset, it will start a new
+802.11 authentication/association.  This in turn causes a new 802.1x 
+authentication to happen.  Once the 802.1x authentication is complete, and a 
+WEP key is set, the card is again reset. 
+
+As you can see, this behavior will cause the card to reset itself constantly,
+and keep the card from passing traffic correctly.  The solution to this problem
+is as simple as *NOT* having the card reset when a WEP key is set! It should be 
+noted that driver resets which do not cause re-association should not exhibit 
+this problem, since "reset" might mean different things under the hood to 
+different drivers.
+
+One other issue that seems to be common among wireless card drivers is the
+assumption that the last WEP key set should be the WEP key used to transmit.
+Prior to 802.1x, this made some amount of sense, and would work with no
+problems.  However, because 802.1x enables the use of more than one key (one 
+for transmit, one for recieve, one for broadcast, etc.) the assumption that
+the last key set is the transmit key generally doesn't work.  Instead, when
+the IOCTL to set the key is made, the only time that the index for the 
+transmit key should change, is when the key length is zero.
+
+
+-- Driver wrappers for Windows driver compatibility --
+
+There are currently two projects that we are aware of that attempt to provide 
+the ability to load and use Windows wireless card drivers under Linux - 
+DriverLoader, a commercial product, and ndiswrapper, an Open Source product.
+
+We have not yet extensively tested either of these tools with xsupplicant.  
+As such, your mileage may vary.  Please let us know about your experiences 
+with either DriverLoader or ndiswrapper.
+
+
+-- DriverLoader - http://www.linuxant.com/driverloader/ --
+
+We are in the process of trying to contact the Linuxant crew regarding their 
+claim that "IEEE 802.1x authentication is also supported with xsupplicant." 
+It should be mentioned that we do not and have not in any way endorsed the 
+Linuxant group's DriverLoader project.  That said, we would very much like 
+to see this product work with xsupplicant.
+
+We are beginning to evaluate this product for xsupplicant compatibility, 
+although this is  difficult due to the commercial nature of DriverLoader.
+
+Please report any success or failure you have experience with DriverLoader.
+
+-- ndiswrapper - http://ndiswrapper.sourceforge.net/ --
+
+We are beginning to evaluate this product for xsupplicant compatibility.
+
+We do not in any way endorse ndiswrapper, but we would very much like for 
+xsupplicant to be compatible with the project.
+
+Please report any success or failure you have experience with ndiswrapper.
+

@@ -1,0 +1,9 @@
+<chapter id="ch7">
+<title>Troubleshooting</title>
+
+<para>a listing of various problems that users may run into and how to
+address the problems...compilation issues, failure to authenticate, 
+seg faults while running the program (of course, this will never happen!),
+etc</para>
+
+</chapter>

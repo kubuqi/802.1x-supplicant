@@ -1,0 +1,36 @@
+<chapter id="ch4">
+<title>Installation</title>
+
+<section>
+<title>Prereqs</title>
+<para>What you need installed before installing xsupplicant</para>
+</section>
+
+<section>
+<title>Running the configure script</title>
+<para>The following configuration options are available for xsupplicant:
+
+(We should probably stick this information in a nicely formatted table)
+
+--enable-eap-sim - Enables EAP SIM authentication. (REQUIRES EXTERNAL LIBRARY)
+--enable-card-reset - Enables card resets when roaming.
+--enable-static-openssl - Statically link OpenSSL into the xsupplicant binary.
+--with-ossl-root - Specify the path to the directory holding the OpenSSL source tree.
+
+</para>
+</section>
+
+<section>
+<title>make && make install</title>
+<para>this should always work if the configure script runs to completion, 
+but if there are problems, see the next section.</para>
+</section>
+
+<section>
+<title>When things go wrong.</title>
+<para>if anything doesn't work, then here's the todo list for fixing the 
+problem.  basically, I will say 1) double check prereqs, fix as needed
+2) email list with specific information about the problem.</para>
+</section>
+
+</chapter>

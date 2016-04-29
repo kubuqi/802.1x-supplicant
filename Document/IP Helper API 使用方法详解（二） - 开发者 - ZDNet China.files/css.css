@@ -1,0 +1,36 @@
+.yellow {
+	FONT-SIZE: 12px; COLOR: #ffcc66; LINE-HEIGHT: 150%; FONT-FAMILY: "Tahoma"
+}
+.hui {
+	FONT-SIZE: 12px; COLOR: #666666; LINE-HEIGHT: 120%; FONT-FAMILY: "Tahoma"
+}
+.black {
+	FONT-SIZE: 12px; COLOR: #000000; LINE-HEIGHT: 120%; FONT-FAMILY: "Tahoma"
+}
+.blue {
+	FONT-SIZE: 12px; COLOR: #31309c; LINE-HEIGHT: 120%; FONT-FAMILY: "Tahoma"; TEXT-DECORATION: underline
+}
+H1 {
+	FONT-SIZE: 14px; COLOR: #0059b5; LINE-HEIGHT: 120%; FONT-FAMILY: "Tahoma"; TEXT-DECORATION: underline
+}
+.deepyellow {
+	FONT-SIZE: 12px; COLOR: #ff9900; LINE-HEIGHT: 120%; FONT-FAMILY: "Tahoma"; TEXT-DECORATION: underline
+}
+.text1 {
+	FONT-SIZE: 12px; FONT-FAMILY: "Tahoma"
+}
+.white {
+	FONT-SIZE: 12px; COLOR: #ffffff; LINE-HEIGHT: 120%; FONT-FAMILY: "Tahoma"; TEXT-DECORATION: none
+}
+.h2 {
+	FONT-WEIGHT: bold; FONT-SIZE: 14px; COLOR: #000099; FONT-FAMILY: "Tahoma"
+}
+.small {
+	FONT-SIZE: 10px; COLOR: #000000; LINE-HEIGHT: 130%; FONT-STYLE: normal; FONT-FAMILY: "Tahoma"
+}
+.barblue {
+	FONT-WEIGHT: bold; FONT-SIZE: 12px; COLOR: #83a3cb; FONT-FAMILY: "Tahoma"; TEXT-DECORATION: none
+}
+PRE {
+	FONT-SIZE: 9pt; COLOR: blue; LINE-HEIGHT: 100%; FONT-FAMILY: "Courier New", "Courier", "mono"
+}

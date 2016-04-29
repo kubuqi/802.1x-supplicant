@@ -1,0 +1,30 @@
+Microsoft Visual Studio Solution File, Format Version 8.00
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Supplicant", "Supplicant.vcproj", "{5EDD5F44-C1FD-40C0-97BE-D4013001B9A9}"
+	ProjectSection(ProjectDependencies) = postProject
+		{D69D5E99-D12F-4EC6-9F27-C545AC880E0F} = {D69D5E99-D12F-4EC6-9F27-C545AC880E0F}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "EAP", "EAP\EAP.vcproj", "{D69D5E99-D12F-4EC6-9F27-C545AC880E0F}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfiguration) = preSolution
+		Debug = Debug
+		Release = Release
+	EndGlobalSection
+	GlobalSection(ProjectConfiguration) = postSolution
+		{5EDD5F44-C1FD-40C0-97BE-D4013001B9A9}.Debug.ActiveCfg = Debug|Win32
+		{5EDD5F44-C1FD-40C0-97BE-D4013001B9A9}.Debug.Build.0 = Debug|Win32
+		{5EDD5F44-C1FD-40C0-97BE-D4013001B9A9}.Release.ActiveCfg = Release|Win32
+		{5EDD5F44-C1FD-40C0-97BE-D4013001B9A9}.Release.Build.0 = Release|Win32
+		{D69D5E99-D12F-4EC6-9F27-C545AC880E0F}.Debug.ActiveCfg = Debug|Win32
+		{D69D5E99-D12F-4EC6-9F27-C545AC880E0F}.Debug.Build.0 = Debug|Win32
+		{D69D5E99-D12F-4EC6-9F27-C545AC880E0F}.Release.ActiveCfg = Release|Win32
+		{D69D5E99-D12F-4EC6-9F27-C545AC880E0F}.Release.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+	EndGlobalSection
+	GlobalSection(ExtensibilityAddIns) = postSolution
+	EndGlobalSection
+EndGlobal

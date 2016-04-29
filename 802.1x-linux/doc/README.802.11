@@ -1,0 +1,24 @@
+$Id: README.802.11,v 1.1 2002/10/17 11:07:48 rw Exp $
+
+Protocol difference between 802.11 and 802.3
+--------------------------------------------
+
+1. The NIC forms an association with a certain AP prior to any
+   communications taking place, in the process of which both learn
+   about each other's MAC-adress. Instead of a 'well-known' group
+   address, the actual hardware address of the AP must be used for
+   802.1x communication.
+
+2. The AP may (meaningfully) utilize EAPOL_KEY frames to supply
+   WEP-encryption-keys. As this (to the best of my knowledge) not
+   relevant for cable ethernet, support is unimplemented.
+
+3. Roaming should theoretically work, as the client will detect if
+   the PAE-adress changes and try to initiate a fresh authentication.
+
+An implementation should be a subclass of ll_ether, with recv_hook
+implementing an adress check and resetting of the destination hardware
+adress in case that of the PAE changes. WEP dynamic rekeying support
+should be added to ll_eapol as (virtual) no-op and appropriately
+overridden in the descendant class of ll_802_3 * and probably a command line 
+option like -11, to use either ll_802_11 oder ll_802_3 as 'real' io-object.

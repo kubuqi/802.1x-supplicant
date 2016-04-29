@@ -1,0 +1,91 @@
+架设freeradius+mysql 的radius服务器 
+
+
+平台: RedHat Linux 7.2 
+一、安装mysql 
+rpm –ivh MySQL-client-4.0.18-0.i386.rpm 
+rpm –ivh MySQL-devel-4.0.18-0.i386.rpm
+rpm –ivh MySQL-server-4.0.17-0.i386.rpm
+rpm –ivh MySQL-shared-4.0.18-0.i386.rpm
+rpm -ivh MySQL-shared-compat-4.0.18-0.i386.rpm
+启动mysql服务 
+service mysqld start 
+更改mysql的root密码（注意：mysql的root 和系统的root是2个不用的概念） 
+mysql –uroot –p 
+创建radius数据库 
+creat database radius; 
+use mysql; 
+update user set password=password(‘你的密码’) where user=’root’; 
+允许远程机器连接 
+update user set host=’%’ where user=’root’; 
+退出及重新启动mysql 
+quit 
+service mysqld restart 
+
+二、安装freeradius 
+从www.freeradius.org上下载freeraidus,版本是0.9.3
+编译和安装 
+tar xvfz freeradius.tar.gz 
+cd xvfz freeradius-0.9.3
+./configure 
+make 
+make install 
+建立mysql的数据库raius的表 
+cd src/modules/rlm_sql/drivers/rlm_sql_mysql 
+mysql –uroot –p密码 radius < db_mysql.sql 
+更改freeradius的设置 
+cd /usr/local/etc/raddb 
+更改radiusd.conf,让其支持sql (如下面所说) 
+authorize { 
+preprocess 
+chap 
+mschap 
+suffix 
+sql 
+} 
+accouting { 
+…. 
+sql 
+… 
+} 
+更改sql.conf 
+server=”localhost” 
+login=”root” 
+password=”mysql的root的密码” 
+radius_db=”radius” 
+更改 client.conf支持所用的NAS具体可以看该文档，要注意的是secret是NAS和radius服务器的共享密码 
+再加入如下：
+client 202.204.112.248 {
+        secret          = testing123
+        shortname       = 202.204.112.248
+}
+数据库加入测试账号 
+加入组 
+mysql –uroot –p密码 radius 
+insert into radgroupreply (groupname,attribute,op,values) values (‘user’，‘Auth-Type’,’:=’,’Local’); 
+insert into radgroupreply (groupname,attribute,op,values) values (‘user’，‘Service-Type’,’:=’,’Framed-User’); 
+insert into radgroupreply (groupname,attribute,op,values) values (‘user’，‘Framed-IP-Address’,’:=’,’255.255.255.254’); 
+insert into radgroupreply (groupname,attribute,op,values) values (‘user’，‘Framed-IP-Netmask’,’:=’,’255.255.255.0’); 
+加入测试账号 
+insert into radcheck (username,attribute,op,value) values (‘test’,’User-Password’,’:=’,’test’) 
+测试账号加入组 
+insert into usergroup (username,groupname) values (‘test’,’user’); 
+
+四、启动radius服务、测试账号 
+启动到debug模式 
+radiusd –X 
+有时候会报找不到文件rlm_sql_mysql这个时候只要把库文件加入系统搜索的目录里 
+比如： 
+cp /usr/local/lib/* /usr/lib 
+测试账号 
+radtest test teset localhost 0 testing123 
+如果能看到radius的应答，恭喜服务器设置成功了。 
+
+CREATE TABLE `IPMAC` (
+`id` INT(11) UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY, 
+`ip` VARCHAR(16) DEFAULT '0.0.0.0' NOT NULL, 
+`op` CHAR(2) DEFAULT '==' NOT NULL, 
+`mac` VARCHAR(32) DEFAULT '00:00:00:00:00:00' NOT NULL,
+INDEX (`ip`)
+)
+COMMENT = 'IP-MAC table added by zhanglu'; 

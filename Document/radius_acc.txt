@@ -1,0 +1,1030 @@
+rad_recv: Access-Request packet from host 10.0.0.47:1812, id=16, length=196
+	User-Name = "test"
+	NAS-Port = 1
+	Service-Type = Framed-User
+	NAS-Port-Type = Ethernet
+	Framed-Protocol = PPP
+	EAP-Message = 0x020200090174657374
+	Framed-IP-Address = 10.0.0.212
+	Calling-Station-Id = "00:d0:59:08:3d:9c"
+	Attr-538181663 = 0x0a00002f
+	Attr-538181664 = 0x000007ff
+	Attr-538181665 = 0x486172626f75722330303a30353a33623a31303a31633a3532233123
+	Attr-538181646 = 0x486172626f7572
+	Attr-538181648 = 0x303030353362313031633532
+	Attr-538181649 = 0x00000001
+	NAS-Identifier = "Harbour"
+	NAS-IP-Address = 10.0.0.47
+	Message-Authenticator = 0xfecc266e00a4eee29e4d4aced631d826
+modcall: entering group authorize for request 0
+rlm_preprocess: bjfu_hacking test with token @
+  modcall[authorize]: module "preprocess" returns ok for request 0
+  rlm_eap: EAP packet type notification id 2 length 9
+  rlm_eap: EAP Start not found
+  modcall[authorize]: module "eap" returns updated for request 0
+    rlm_realm: No '@' in User-Name = "test", looking up realm NULL
+    rlm_realm: No such realm "NULL"
+  modcall[authorize]: module "suffix" returns noop for request 0
+rlm_ldap: - authorize
+rlm_ldap: performing user authorization for test
+radius_xlat:  '(uid=test)'
+radius_xlat:  'dc=VM-debian,dc=com'
+ldap_get_conn: Got Id: 0
+rlm_ldap: attempting LDAP reconnection
+rlm_ldap: (re)connect to localhost:389, authentication 0
+rlm_ldap: bind as cn=admin,dc=VM-debian,dc=com/vmware to localhost:389
+rlm_ldap: waiting for bind result ...
+rlm_ldap: performing search in dc=VM-debian,dc=com, with filter (uid=test)
+rlm_ldap: Added password testing123 in check items
+rlm_ldap: looking for check items in directory...
+rlm_ldap: looking for reply items in directory...
+rlm_ldap: user test authorized to use remote access
+ldap_release_conn: Release Id: 0
+  modcall[authorize]: module "ldap" returns ok for request 0
+radius_xlat:  'test'
+rlm_sql (sql): sql_set_user escaped user --> 'test'
+radius_xlat:  'SELECT id,UserName,Attribute,Value,op FROM radcheck WHERE Username = 'test' ORDER BY id'
+rlm_sql (/usr/local/var/log/radius/sqltrace.sql): Reserving sql socket id: 0
+radius_xlat:  'SELECT id,Framed_IP_Address,Attribute,Value,op FROM IPMAC WHERE Framed_IP_Address = '10.0.0.212' ORDER BY id'
+rlm_sql_mysql: query:  SELECT id,Framed_IP_Address,Attribute,Value,op FROM IPMAC WHERE Framed_IP_Address = '10.0.0.212' ORDER BY id
+rlm_sql (/usr/local/var/log/radius/sqltrace.sql): Released sql socket id: 0
+  modcall[authorize]: module "sql" returns ok for request 0
+rlm_checkval: Item Name: Calling-Station-Id, Value: 00:d0:59:08:3d:9c
+rlm_checkval: Value Name: Calling-Station-Id, Value: 00:d0:59:08:3d:9c
+  modcall[authorize]: module "checkval" returns ok for request 0
+modcall: group authorize returns updated for request 0
+  rad_check_password:  Found Auth-Type EAP
+auth: type "EAP"
+modcall: entering group authenticate for request 0
+  rlm_eap: EAP packet type notification id 2 length 9
+  rlm_eap: EAP Start not found
+  rlm_eap: EAP Identity
+  rlm_eap: processing type md5
+rlm_eap_md5: Issuing Challenge
+  modcall[authenticate]: module "eap" returns ok for request 0
+modcall: group authenticate returns ok for request 0
+Sending Access-Challenge of id 16 to 10.0.0.47:1812
+	EAP-Message = 0x0103001604100058f562152cbe35957509cd23671301
+	Message-Authenticator = 0x00000000000000000000000000000000
+	State = 0xf529dafaaa26fa7a13e90bdae4b4c676fad26141691127b001263e2ea9002be4b06d2428
+Finished request 0
+Going to the next request
+--- Walking the entire request list ---
+Cleaning up request 0 ID 16 with timestamp 4161d2f0
+Nothing to do.  Sleeping until we see a request.
+rad_recv: Access-Request packet from host 10.0.0.47:1812, id=17, length=196
+	User-Name = "test"
+	NAS-Port = 1
+	Service-Type = Framed-User
+	NAS-Port-Type = Ethernet
+	Framed-Protocol = PPP
+	EAP-Message = 0x020400090174657374
+	Framed-IP-Address = 10.0.0.212
+	Calling-Station-Id = "00:d0:59:08:3d:9c"
+	Attr-538181663 = 0x0a00002f
+	Attr-538181664 = 0x000007ff
+	Attr-538181665 = 0x486172626f75722330303a30353a33623a31303a31633a3532233123
+	Attr-538181646 = 0x486172626f7572
+	Attr-538181648 = 0x303030353362313031633532
+	Attr-538181649 = 0x00000001
+	NAS-Identifier = "Harbour"
+	NAS-IP-Address = 10.0.0.47
+	Message-Authenticator = 0xc47e500d516b85b6fead8227a4eed956
+modcall: entering group authorize for request 1
+rlm_preprocess: bjfu_hacking test with token @
+  modcall[authorize]: module "preprocess" returns ok for request 1
+  rlm_eap: EAP packet type notification id 4 length 9
+  rlm_eap: EAP Start not found
+  modcall[authorize]: module "eap" returns updated for request 1
+    rlm_realm: No '@' in User-Name = "test", looking up realm NULL
+    rlm_realm: No such realm "NULL"
+  modcall[authorize]: module "suffix" returns noop for request 1
+rlm_ldap: - authorize
+rlm_ldap: performing user authorization for test
+radius_xlat:  '(uid=test)'
+radius_xlat:  'dc=VM-debian,dc=com'
+ldap_get_conn: Got Id: 0
+rlm_ldap: performing search in dc=VM-debian,dc=com, with filter (uid=test)
+rlm_ldap: Added password testing123 in check items
+rlm_ldap: looking for check items in directory...
+rlm_ldap: looking for reply items in directory...
+rlm_ldap: user test authorized to use remote access
+ldap_release_conn: Release Id: 0
+  modcall[authorize]: module "ldap" returns ok for request 1
+radius_xlat:  'test'
+rlm_sql (sql): sql_set_user escaped user --> 'test'
+radius_xlat:  'SELECT id,UserName,Attribute,Value,op FROM radcheck WHERE Username = 'test' ORDER BY id'
+rlm_sql (/usr/local/var/log/radius/sqltrace.sql): Reserving sql socket id: 0
+radius_xlat:  'SELECT id,Framed_IP_Address,Attribute,Value,op FROM IPMAC WHERE Framed_IP_Address = '10.0.0.212' ORDER BY id'
+rlm_sql_mysql: query:  SELECT id,Framed_IP_Address,Attribute,Value,op FROM IPMAC WHERE Framed_IP_Address = '10.0.0.212' ORDER BY id
+rlm_sql (/usr/local/var/log/radius/sqltrace.sql): Released sql socket id: 0
+  modcall[authorize]: module "sql" returns ok for request 1
+rlm_checkval: Item Name: Calling-Station-Id, Value: 00:d0:59:08:3d:9c
+rlm_checkval: Value Name: Calling-Station-Id, Value: 00:d0:59:08:3d:9c
+  modcall[authorize]: module "checkval" returns ok for request 1
+modcall: group authorize returns updated for request 1
+  rad_check_password:  Found Auth-Type EAP
+auth: type "EAP"
+modcall: entering group authenticate for request 1
+  rlm_eap: EAP packet type notification id 4 length 9
+  rlm_eap: EAP Start not found
+  rlm_eap: EAP Identity
+  rlm_eap: processing type md5
+rlm_eap_md5: Issuing Challenge
+  modcall[authenticate]: module "eap" returns ok for request 1
+modcall: group authenticate returns ok for request 1
+Sending Access-Challenge of id 17 to 10.0.0.47:1812
+	EAP-Message = 0x01050016041029ca47080a8f729676923b0b5acef9b4
+	Message-Authenticator = 0x00000000000000000000000000000000
+	State = 0x45a0a3f03574e75a2566a9d959f774b1fbd2614164bc25d0fd078934941353e3ef29cbd0
+Finished request 1
+Going to the next request
+--- Walking the entire request list ---
+Waking up in 6 seconds...
+rad_recv: Access-Request packet from host 10.0.0.47:1812, id=18, length=285
+	State = 0x45a0a3f03574e75a2566a9d959f774b1fbd2614164bc25d0fd078934941353e3ef29cbd0
+	User-Name = "test"
+	Acct-Session-Id = "000000025600100d059083d9c000007"
+	NAS-Port = 1
+	Service-Type = Framed-User
+	NAS-Port-Type = Ethernet
+	EAP-Message = 0x0205001a04106d8c629d37889221f4b76cff11d8e02574657374
+	Framed-Protocol = PPP
+	Framed-IP-Address = 10.0.0.212
+	Calling-Station-Id = "00:d0:59:08:3d:9c"
+	Attr-538181663 = 0x0a00002f
+	Attr-538181664 = 0x000007ff
+	Attr-538181665 = 0x486172626f75722330303a30353a33623a31303a31633a3532233123
+	Attr-538181646 = 0x486172626f7572
+	Attr-538181648 = 0x303030353362313031633532
+	Attr-538181649 = 0x00000001
+	NAS-Identifier = "Harbour"
+	NAS-IP-Address = 10.0.0.47
+	Message-Authenticator = 0x15d2436baff869936edb60a73a5aeac6
+modcall: entering group authorize for request 2
+rlm_preprocess: bjfu_hacking test with token @
+  modcall[authorize]: module "preprocess" returns ok for request 2
+  rlm_eap: EAP packet type notification id 5 length 26
+  rlm_eap: EAP Start not found
+  modcall[authorize]: module "eap" returns updated for request 2
+    rlm_realm: No '@' in User-Name = "test", looking up realm NULL
+    rlm_realm: No such realm "NULL"
+  modcall[authorize]: module "suffix" returns noop for request 2
+rlm_ldap: - authorize
+rlm_ldap: performing user authorization for test
+radius_xlat:  '(uid=test)'
+radius_xlat:  'dc=VM-debian,dc=com'
+ldap_get_conn: Got Id: 0
+rlm_ldap: performing search in dc=VM-debian,dc=com, with filter (uid=test)
+rlm_ldap: Added password testing123 in check items
+rlm_ldap: looking for check items in directory...
+rlm_ldap: looking for reply items in directory...
+rlm_ldap: user test authorized to use remote access
+ldap_release_conn: Release Id: 0
+  modcall[authorize]: module "ldap" returns ok for request 2
+radius_xlat:  'test'
+rlm_sql (sql): sql_set_user escaped user --> 'test'
+radius_xlat:  'SELECT id,UserName,Attribute,Value,op FROM radcheck WHERE Username = 'test' ORDER BY id'
+rlm_sql (/usr/local/var/log/radius/sqltrace.sql): Reserving sql socket id: 0
+radius_xlat:  'SELECT id,Framed_IP_Address,Attribute,Value,op FROM IPMAC WHERE Framed_IP_Address = '10.0.0.212' ORDER BY id'
+rlm_sql_mysql: query:  SELECT id,Framed_IP_Address,Attribute,Value,op FROM IPMAC WHERE Framed_IP_Address = '10.0.0.212' ORDER BY id
+rlm_sql (/usr/local/var/log/radius/sqltrace.sql): Released sql socket id: 0
+  modcall[authorize]: module "sql" returns ok for request 2
+rlm_checkval: Item Name: Calling-Station-Id, Value: 00:d0:59:08:3d:9c
+rlm_checkval: Value Name: Calling-Station-Id, Value: 00:d0:59:08:3d:9c
+  modcall[authorize]: module "checkval" returns ok for request 2
+modcall: group authorize returns updated for request 2
+  rad_check_password:  Found Auth-Type EAP
+auth: type "EAP"
+modcall: entering group authenticate for request 2
+  rlm_eap: EAP packet type notification id 5 length 26
+  rlm_eap: EAP Start not found
+  rlm_eap: Request found, released from the list
+  rlm_eap: EAP_TYPE - md5
+  rlm_eap: processing type md5
+  rlm_eap: Freeing handler
+  modcall[authenticate]: module "eap" returns ok for request 2
+modcall: group authenticate returns ok for request 2
+Sending Access-Accept of id 18 to 10.0.0.47:1812
+	EAP-Message = 0x03050004
+	Message-Authenticator = 0x00000000000000000000000000000000
+Finished request 2
+Going to the next request
+Waking up in 6 seconds...
+rad_recv: Accounting-Request packet from host 10.0.0.47:1813, id=19, length=219
+	User-Name = "test"
+	Acct-Status-Type = Start
+	Acct-Delay-Time = 0
+	Acct-Session-Id = "000000025600100d059083d9c000007"
+	Service-Type = Framed-User
+	Framed-Protocol = PPP
+	Attr-538181663 = 0x0a00002f
+	Attr-538181664 = 0x000007ff
+	Attr-538181665 = 0x486172626f75722330303a30353a33623a31303a31633a3532233123
+	Attr-538181646 = 0x486172626f7572
+	Attr-538181648 = 0x303030353362313031633532
+	Attr-538181649 = 0x00000001
+	Framed-IP-Address = 10.0.0.212
+	NAS-Port = 1
+	NAS-Port-Type = Ethernet
+	Calling-Station-Id = "00:d0:59:08:3d:9c"
+	Acct-Authentic = RADIUS
+	NAS-Identifier = "Harbour"
+	NAS-IP-Address = 10.0.0.47
+modcall: entering group preacct for request 3
+rlm_preprocess: bjfu_hacking test with token @
+  modcall[preacct]: module "preprocess" returns noop for request 3
+    rlm_realm: No '@' in User-Name = "test", looking up realm NULL
+    rlm_realm: No such realm "NULL"
+  modcall[preacct]: module "suffix" returns noop for request 3
+  modcall[preacct]: module "files" returns noop for request 3
+modcall: group preacct returns noop for request 3
+modcall: entering group accounting for request 3
+rlm_acct_unique: WARNING: Attribute NAS-Port-Id was not found in request, unique ID MAY be inconsistent
+rlm_acct_unique: Hashing ',Client-IP-Address = 10.0.0.47,NAS-IP-Address = 10.0.0.47,Acct-Session-Id = "000000025600100d059083d9c000007",User-Name = "test"'
+rlm_acct_unique: Acct-Unique-Session-ID = "7794c65f6f0ae070".
+  modcall[accounting]: module "acct_unique" returns ok for request 3
+radius_xlat:  '/usr/local/var/log/radius/radacct/10.0.0.47/detail-20041005'
+rlm_detail: /usr/local/var/log/radius/radacct/%{Client-IP-Address}/detail-%Y%m%d expands to /usr/local/var/log/radius/radacct/10.0.0.47/detail-20041005
+  modcall[accounting]: module "detail" returns ok for request 3
+  modcall[accounting]: module "unix" returns ok for request 3
+radius_xlat:  '/usr/local/var/log/radius/radutmp'
+radius_xlat:  'test'
+  modcall[accounting]: module "radutmp" returns ok for request 3
+modcall: group accounting returns ok for request 3
+Sending Accounting-Response of id 19 to 10.0.0.47:1813
+Finished request 3
+Going to the next request
+Waking up in 6 seconds...
+--- Walking the entire request list ---
+Cleaning up request 1 ID 17 with timestamp 4161d2fb
+Cleaning up request 2 ID 18 with timestamp 4161d2fb
+Cleaning up request 3 ID 19 with timestamp 4161d2fb
+Nothing to do.  Sleeping until we see a request.
+rad_recv: Accounting-Request packet from host 10.0.0.47:1813, id=20, length=231
+	User-Name = "test"
+	Acct-Status-Type = Stop
+	Acct-Delay-Time = 0
+	Acct-Session-Id = "000000025600100d059083d9c000007"
+	NAS-Port = 1
+	NAS-Port-Type = Ethernet
+	Service-Type = Framed-User
+	Framed-Protocol = PPP
+	Attr-538181663 = 0x0a00002f
+	Attr-538181664 = 0x000007ff
+	Attr-538181665 = 0x486172626f75722330303a30353a33623a31303a31633a3532233123
+	Attr-538181646 = 0x486172626f7572
+	Attr-538181648 = 0x303030353362313031633532
+	Attr-538181649 = 0x00000001
+	Framed-IP-Address = 10.0.0.212
+	Acct-Session-Time = 10
+	Calling-Station-Id = "00:d0:59:08:3d:9c"
+	Acct-Authentic = RADIUS
+	Acct-Terminate-Cause = User-Request
+	NAS-Identifier = "Harbour"
+	NAS-IP-Address = 10.0.0.47
+modcall: entering group preacct for request 4
+rlm_preprocess: bjfu_hacking test with token @
+  modcall[preacct]: module "preprocess" returns noop for request 4
+    rlm_realm: No '@' in User-Name = "test", looking up realm NULL
+    rlm_realm: No such realm "NULL"
+  modcall[preacct]: module "suffix" returns noop for request 4
+  modcall[preacct]: module "files" returns noop for request 4
+modcall: group preacct returns noop for request 4
+modcall: entering group accounting for request 4
+rlm_acct_unique: WARNING: Attribute NAS-Port-Id was not found in request, unique ID MAY be inconsistent
+rlm_acct_unique: Hashing ',Client-IP-Address = 10.0.0.47,NAS-IP-Address = 10.0.0.47,Acct-Session-Id = "000000025600100d059083d9c000007",User-Name = "test"'
+rlm_acct_unique: Acct-Unique-Session-ID = "7794c65f6f0ae070".
+  modcall[accounting]: module "acct_unique" returns ok for request 4
+radius_xlat:  '/usr/local/var/log/radius/radacct/10.0.0.47/detail-20041005'
+rlm_detail: /usr/local/var/log/radius/radacct/%{Client-IP-Address}/detail-%Y%m%d expands to /usr/local/var/log/radius/radacct/10.0.0.47/detail-20041005
+  modcall[accounting]: module "detail" returns ok for request 4
+  modcall[accounting]: module "unix" returns ok for request 4
+radius_xlat:  '/usr/local/var/log/radius/radutmp'
+radius_xlat:  'test'
+  modcall[accounting]: module "radutmp" returns ok for request 4
+modcall: group accounting returns ok for request 4
+Sending Accounting-Response of id 20 to 10.0.0.47:1813
+Finished request 4
+Going to the next request
+--- Walking the entire request list ---
+Waking up in 6 seconds...
+rad_recv: Access-Request packet from host 10.0.0.47:1812, id=21, length=196
+	User-Name = "test"
+	NAS-Port = 1
+	Service-Type = Framed-User
+	NAS-Port-Type = Ethernet
+	Framed-Protocol = PPP
+	EAP-Message = 0x020200090174657374
+	Framed-IP-Address = 10.0.0.212
+	Calling-Station-Id = "00:d0:59:08:3d:9c"
+	Attr-538181663 = 0x0a00002f
+	Attr-538181664 = 0x000007ff
+	Attr-538181665 = 0x486172626f75722330303a30353a33623a31303a31633a3532233123
+	Attr-538181646 = 0x486172626f7572
+	Attr-538181648 = 0x303030353362313031633532
+	Attr-538181649 = 0x00000001
+	NAS-Identifier = "Harbour"
+	NAS-IP-Address = 10.0.0.47
+	Message-Authenticator = 0x2a9466b0104402f0e8fa3f60daa32449
+modcall: entering group authorize for request 5
+rlm_preprocess: bjfu_hacking test with token @
+  modcall[authorize]: module "preprocess" returns ok for request 5
+  rlm_eap: EAP packet type notification id 2 length 9
+  rlm_eap: EAP Start not found
+  modcall[authorize]: module "eap" returns updated for request 5
+    rlm_realm: No '@' in User-Name = "test", looking up realm NULL
+    rlm_realm: No such realm "NULL"
+  modcall[authorize]: module "suffix" returns noop for request 5
+rlm_ldap: - authorize
+rlm_ldap: performing user authorization for test
+radius_xlat:  '(uid=test)'
+radius_xlat:  'dc=VM-debian,dc=com'
+ldap_get_conn: Got Id: 0
+rlm_ldap: performing search in dc=VM-debian,dc=com, with filter (uid=test)
+rlm_ldap: Added password testing123 in check items
+rlm_ldap: looking for check items in directory...
+rlm_ldap: looking for reply items in directory...
+rlm_ldap: user test authorized to use remote access
+ldap_release_conn: Release Id: 0
+  modcall[authorize]: module "ldap" returns ok for request 5
+radius_xlat:  'test'
+rlm_sql (sql): sql_set_user escaped user --> 'test'
+radius_xlat:  'SELECT id,UserName,Attribute,Value,op FROM radcheck WHERE Username = 'test' ORDER BY id'
+rlm_sql (/usr/local/var/log/radius/sqltrace.sql): Reserving sql socket id: 0
+radius_xlat:  'SELECT id,Framed_IP_Address,Attribute,Value,op FROM IPMAC WHERE Framed_IP_Address = '10.0.0.212' ORDER BY id'
+rlm_sql_mysql: query:  SELECT id,Framed_IP_Address,Attribute,Value,op FROM IPMAC WHERE Framed_IP_Address = '10.0.0.212' ORDER BY id
+rlm_sql (/usr/local/var/log/radius/sqltrace.sql): Released sql socket id: 0
+  modcall[authorize]: module "sql" returns ok for request 5
+rlm_checkval: Item Name: Calling-Station-Id, Value: 00:d0:59:08:3d:9c
+rlm_checkval: Value Name: Calling-Station-Id, Value: 00:d0:59:08:3d:9c
+  modcall[authorize]: module "checkval" returns ok for request 5
+modcall: group authorize returns updated for request 5
+  rad_check_password:  Found Auth-Type EAP
+auth: type "EAP"
+modcall: entering group authenticate for request 5
+  rlm_eap: EAP packet type notification id 2 length 9
+  rlm_eap: EAP Start not found
+  rlm_eap: EAP Identity
+  rlm_eap: processing type md5
+rlm_eap_md5: Issuing Challenge
+  modcall[authenticate]: module "eap" returns ok for request 5
+modcall: group authenticate returns ok for request 5
+Sending Access-Challenge of id 21 to 10.0.0.47:1812
+	EAP-Message = 0x01030016041020fbfc91a5dea659e834399513bf2ab8
+	Message-Authenticator = 0x00000000000000000000000000000000
+	State = 0x8ef8b679bdcb4b1f39a799979d1f988506d361417cd4819fa819e877c29a38c7bffc84c8
+Finished request 5
+Going to the next request
+--- Walking the entire request list ---
+Waking up in 4 seconds...
+rad_recv: Access-Request packet from host 10.0.0.47:1812, id=22, length=285
+	State = 0x8ef8b679bdcb4b1f39a799979d1f988506d361417cd4819fa819e877c29a38c7bffc84c8
+	User-Name = "test"
+	Acct-Session-Id = "000000025600100d059083d9c000008"
+	NAS-Port = 1
+	Service-Type = Framed-User
+	NAS-Port-Type = Ethernet
+	EAP-Message = 0x0203001a04108124fcf2ea212d114dc88ddcd8dda42874657374
+	Framed-Protocol = PPP
+	Framed-IP-Address = 10.0.0.212
+	Calling-Station-Id = "00:d0:59:08:3d:9c"
+	Attr-538181663 = 0x0a00002f
+	Attr-538181664 = 0x000007ff
+	Attr-538181665 = 0x486172626f75722330303a30353a33623a31303a31633a3532233123
+	Attr-538181646 = 0x486172626f7572
+	Attr-538181648 = 0x303030353362313031633532
+	Attr-538181649 = 0x00000001
+	NAS-Identifier = "Harbour"
+	NAS-IP-Address = 10.0.0.47
+	Message-Authenticator = 0x2ef6d9e0a8ea2607eac497e20d7ef782
+modcall: entering group authorize for request 6
+rlm_preprocess: bjfu_hacking test with token @
+  modcall[authorize]: module "preprocess" returns ok for request 6
+  rlm_eap: EAP packet type notification id 3 length 26
+  rlm_eap: EAP Start not found
+  modcall[authorize]: module "eap" returns updated for request 6
+    rlm_realm: No '@' in User-Name = "test", looking up realm NULL
+    rlm_realm: No such realm "NULL"
+  modcall[authorize]: module "suffix" returns noop for request 6
+rlm_ldap: - authorize
+rlm_ldap: performing user authorization for test
+radius_xlat:  '(uid=test)'
+radius_xlat:  'dc=VM-debian,dc=com'
+ldap_get_conn: Got Id: 0
+rlm_ldap: performing search in dc=VM-debian,dc=com, with filter (uid=test)
+rlm_ldap: Added password testing123 in check items
+rlm_ldap: looking for check items in directory...
+rlm_ldap: looking for reply items in directory...
+rlm_ldap: user test authorized to use remote access
+ldap_release_conn: Release Id: 0
+  modcall[authorize]: module "ldap" returns ok for request 6
+radius_xlat:  'test'
+rlm_sql (sql): sql_set_user escaped user --> 'test'
+radius_xlat:  'SELECT id,UserName,Attribute,Value,op FROM radcheck WHERE Username = 'test' ORDER BY id'
+rlm_sql (/usr/local/var/log/radius/sqltrace.sql): Reserving sql socket id: 0
+radius_xlat:  'SELECT id,Framed_IP_Address,Attribute,Value,op FROM IPMAC WHERE Framed_IP_Address = '10.0.0.212' ORDER BY id'
+rlm_sql_mysql: query:  SELECT id,Framed_IP_Address,Attribute,Value,op FROM IPMAC WHERE Framed_IP_Address = '10.0.0.212' ORDER BY id
+rlm_sql (/usr/local/var/log/radius/sqltrace.sql): Released sql socket id: 0
+  modcall[authorize]: module "sql" returns ok for request 6
+rlm_checkval: Item Name: Calling-Station-Id, Value: 00:d0:59:08:3d:9c
+rlm_checkval: Value Name: Calling-Station-Id, Value: 00:d0:59:08:3d:9c
+  modcall[authorize]: module "checkval" returns ok for request 6
+modcall: group authorize returns updated for request 6
+  rad_check_password:  Found Auth-Type EAP
+auth: type "EAP"
+modcall: entering group authenticate for request 6
+  rlm_eap: EAP packet type notification id 3 length 26
+  rlm_eap: EAP Start not found
+  rlm_eap: Request found, released from the list
+  rlm_eap: EAP_TYPE - md5
+  rlm_eap: processing type md5
+  rlm_eap: Freeing handler
+  modcall[authenticate]: module "eap" returns ok for request 6
+modcall: group authenticate returns ok for request 6
+Sending Access-Accept of id 22 to 10.0.0.47:1812
+	EAP-Message = 0x03030004
+	Message-Authenticator = 0x00000000000000000000000000000000
+Finished request 6
+Going to the next request
+--- Walking the entire request list ---
+Waking up in 3 seconds...
+rad_recv: Accounting-Request packet from host 10.0.0.47:1813, id=23, length=219
+	User-Name = "test"
+	Acct-Status-Type = Start
+	Acct-Delay-Time = 0
+	Acct-Session-Id = "000000025600100d059083d9c000008"
+	Service-Type = Framed-User
+	Framed-Protocol = PPP
+	Attr-538181663 = 0x0a00002f
+	Attr-538181664 = 0x000007ff
+	Attr-538181665 = 0x486172626f75722330303a30353a33623a31303a31633a3532233123
+	Attr-538181646 = 0x486172626f7572
+	Attr-538181648 = 0x303030353362313031633532
+	Attr-538181649 = 0x00000001
+	Framed-IP-Address = 10.0.0.212
+	NAS-Port = 1
+	NAS-Port-Type = Ethernet
+	Calling-Station-Id = "00:d0:59:08:3d:9c"
+	Acct-Authentic = RADIUS
+	NAS-Identifier = "Harbour"
+	NAS-IP-Address = 10.0.0.47
+modcall: entering group preacct for request 7
+rlm_preprocess: bjfu_hacking test with token @
+  modcall[preacct]: module "preprocess" returns noop for request 7
+    rlm_realm: No '@' in User-Name = "test", looking up realm NULL
+    rlm_realm: No such realm "NULL"
+  modcall[preacct]: module "suffix" returns noop for request 7
+  modcall[preacct]: module "files" returns noop for request 7
+modcall: group preacct returns noop for request 7
+modcall: entering group accounting for request 7
+rlm_acct_unique: WARNING: Attribute NAS-Port-Id was not found in request, unique ID MAY be inconsistent
+rlm_acct_unique: Hashing ',Client-IP-Address = 10.0.0.47,NAS-IP-Address = 10.0.0.47,Acct-Session-Id = "000000025600100d059083d9c000008",User-Name = "test"'
+rlm_acct_unique: Acct-Unique-Session-ID = "d11786149cf523ff".
+  modcall[accounting]: module "acct_unique" returns ok for request 7
+radius_xlat:  '/usr/local/var/log/radius/radacct/10.0.0.47/detail-20041005'
+rlm_detail: /usr/local/var/log/radius/radacct/%{Client-IP-Address}/detail-%Y%m%d expands to /usr/local/var/log/radius/radacct/10.0.0.47/detail-20041005
+  modcall[accounting]: module "detail" returns ok for request 7
+  modcall[accounting]: module "unix" returns ok for request 7
+radius_xlat:  '/usr/local/var/log/radius/radutmp'
+radius_xlat:  'test'
+  modcall[accounting]: module "radutmp" returns ok for request 7
+modcall: group accounting returns ok for request 7
+Sending Accounting-Response of id 23 to 10.0.0.47:1813
+Finished request 7
+Going to the next request
+Waking up in 3 seconds...
+--- Walking the entire request list ---
+Cleaning up request 4 ID 20 with timestamp 4161d304
+Waking up in 2 seconds...
+rad_recv: Accounting-Request packet from host 10.0.0.47:1813, id=24, length=231
+	User-Name = "test"
+	Acct-Status-Type = Stop
+	Acct-Delay-Time = 0
+	Acct-Session-Id = "000000025600100d059083d9c000008"
+	NAS-Port = 1
+	NAS-Port-Type = Ethernet
+	Service-Type = Framed-User
+	Framed-Protocol = PPP
+	Attr-538181663 = 0x0a00002f
+	Attr-538181664 = 0x000007ff
+	Attr-538181665 = 0x486172626f75722330303a30353a33623a31303a31633a3532233123
+	Attr-538181646 = 0x486172626f7572
+	Attr-538181648 = 0x303030353362313031633532
+	Attr-538181649 = 0x00000001
+	Framed-IP-Address = 10.0.0.212
+	Acct-Session-Time = 14
+	Calling-Station-Id = "00:d0:59:08:3d:9c"
+	Acct-Authentic = RADIUS
+	Acct-Terminate-Cause = User-Request
+	NAS-Identifier = "Harbour"
+	NAS-IP-Address = 10.0.0.47
+modcall: entering group preacct for request 8
+rlm_preprocess: bjfu_hacking test with token @
+  modcall[preacct]: module "preprocess" returns noop for request 8
+    rlm_realm: No '@' in User-Name = "test", looking up realm NULL
+    rlm_realm: No such realm "NULL"
+  modcall[preacct]: module "suffix" returns noop for request 8
+  modcall[preacct]: module "files" returns noop for request 8
+modcall: group preacct returns noop for request 8
+modcall: entering group accounting for request 8
+rlm_acct_unique: WARNING: Attribute NAS-Port-Id was not found in request, unique ID MAY be inconsistent
+rlm_acct_unique: Hashing ',Client-IP-Address = 10.0.0.47,NAS-IP-Address = 10.0.0.47,Acct-Session-Id = "000000025600100d059083d9c000008",User-Name = "test"'
+rlm_acct_unique: Acct-Unique-Session-ID = "d11786149cf523ff".
+  modcall[accounting]: module "acct_unique" returns ok for request 8
+radius_xlat:  '/usr/local/var/log/radius/radacct/10.0.0.47/detail-20041005'
+rlm_detail: /usr/local/var/log/radius/radacct/%{Client-IP-Address}/detail-%Y%m%d expands to /usr/local/var/log/radius/radacct/10.0.0.47/detail-20041005
+  modcall[accounting]: module "detail" returns ok for request 8
+  modcall[accounting]: module "unix" returns ok for request 8
+radius_xlat:  '/usr/local/var/log/radius/radutmp'
+radius_xlat:  'test'
+  modcall[accounting]: module "radutmp" returns ok for request 8
+modcall: group accounting returns ok for request 8
+Sending Accounting-Response of id 24 to 10.0.0.47:1813
+Finished request 8
+Going to the next request
+--- Walking the entire request list ---
+Waking up in 1 seconds...
+--- Walking the entire request list ---
+Cleaning up request 5 ID 21 with timestamp 4161d306
+Waking up in 1 seconds...
+rad_recv: Access-Request packet from host 10.0.0.47:1812, id=25, length=196
+	User-Name = "test"
+	NAS-Port = 1
+	Service-Type = Framed-User
+	NAS-Port-Type = Ethernet
+	Framed-Protocol = PPP
+	EAP-Message = 0x020200090174657374
+	Framed-IP-Address = 10.0.0.212
+	Calling-Station-Id = "00:d0:59:08:3d:9c"
+	Attr-538181663 = 0x0a00002f
+	Attr-538181664 = 0x000007ff
+	Attr-538181665 = 0x486172626f75722330303a30353a33623a31303a31633a3532233123
+	Attr-538181646 = 0x486172626f7572
+	Attr-538181648 = 0x303030353362313031633532
+	Attr-538181649 = 0x00000001
+	NAS-Identifier = "Harbour"
+	NAS-IP-Address = 10.0.0.47
+	Message-Authenticator = 0x160ca18bba73d3aee5962dd28b3e8424
+modcall: entering group authorize for request 9
+rlm_preprocess: bjfu_hacking test with token @
+  modcall[authorize]: module "preprocess" returns ok for request 9
+  rlm_eap: EAP packet type notification id 2 length 9
+  rlm_eap: EAP Start not found
+  modcall[authorize]: module "eap" returns updated for request 9
+    rlm_realm: No '@' in User-Name = "test", looking up realm NULL
+    rlm_realm: No such realm "NULL"
+  modcall[authorize]: module "suffix" returns noop for request 9
+rlm_ldap: - authorize
+rlm_ldap: performing user authorization for test
+radius_xlat:  '(uid=test)'
+radius_xlat:  'dc=VM-debian,dc=com'
+ldap_get_conn: Got Id: 0
+rlm_ldap: performing search in dc=VM-debian,dc=com, with filter (uid=test)
+rlm_ldap: Added password testing123 in check items
+rlm_ldap: looking for check items in directory...
+rlm_ldap: looking for reply items in directory...
+rlm_ldap: user test authorized to use remote access
+ldap_release_conn: Release Id: 0
+  modcall[authorize]: module "ldap" returns ok for request 9
+radius_xlat:  'test'
+rlm_sql (sql): sql_set_user escaped user --> 'test'
+radius_xlat:  'SELECT id,UserName,Attribute,Value,op FROM radcheck WHERE Username = 'test' ORDER BY id'
+rlm_sql (/usr/local/var/log/radius/sqltrace.sql): Reserving sql socket id: 0
+radius_xlat:  'SELECT id,Framed_IP_Address,Attribute,Value,op FROM IPMAC WHERE Framed_IP_Address = '10.0.0.212' ORDER BY id'
+rlm_sql_mysql: query:  SELECT id,Framed_IP_Address,Attribute,Value,op FROM IPMAC WHERE Framed_IP_Address = '10.0.0.212' ORDER BY id
+rlm_sql (/usr/local/var/log/radius/sqltrace.sql): Released sql socket id: 0
+  modcall[authorize]: module "sql" returns ok for request 9
+rlm_checkval: Item Name: Calling-Station-Id, Value: 00:d0:59:08:3d:9c
+rlm_checkval: Value Name: Calling-Station-Id, Value: 00:d0:59:08:3d:9c
+  modcall[authorize]: module "checkval" returns ok for request 9
+modcall: group authorize returns updated for request 9
+  rad_check_password:  Found Auth-Type EAP
+auth: type "EAP"
+modcall: entering group authenticate for request 9
+  rlm_eap: EAP packet type notification id 2 length 9
+  rlm_eap: EAP Start not found
+  rlm_eap: EAP Identity
+  rlm_eap: processing type md5
+rlm_eap_md5: Issuing Challenge
+  modcall[authenticate]: module "eap" returns ok for request 9
+modcall: group authenticate returns ok for request 9
+Sending Access-Challenge of id 25 to 10.0.0.47:1812
+	EAP-Message = 0x010300160410ca7dd9c4cc968541991e8e2acee27d71
+	Message-Authenticator = 0x00000000000000000000000000000000
+	State = 0x92294f38c47e083c127c7fe5573a71920dd361416dd891e911327ed23bbdb4f91ad8668c
+Finished request 9
+Going to the next request
+--- Walking the entire request list ---
+Cleaning up request 6 ID 22 with timestamp 4161d307
+Cleaning up request 7 ID 23 with timestamp 4161d307
+Waking up in 4 seconds...
+rad_recv: Access-Request packet from host 10.0.0.47:1812, id=26, length=285
+	State = 0x92294f38c47e083c127c7fe5573a71920dd361416dd891e911327ed23bbdb4f91ad8668c
+	User-Name = "test"
+	Acct-Session-Id = "000000025600100d059083d9c000009"
+	NAS-Port = 1
+	Service-Type = Framed-User
+	NAS-Port-Type = Ethernet
+	EAP-Message = 0x0203001a0410d59b0ddba285a7a4011f322c7fbaf2c674657374
+	Framed-Protocol = PPP
+	Framed-IP-Address = 10.0.0.212
+	Calling-Station-Id = "00:d0:59:08:3d:9c"
+	Attr-538181663 = 0x0a00002f
+	Attr-538181664 = 0x000007ff
+	Attr-538181665 = 0x486172626f75722330303a30353a33623a31303a31633a3532233123
+	Attr-538181646 = 0x486172626f7572
+	Attr-538181648 = 0x303030353362313031633532
+	Attr-538181649 = 0x00000001
+	NAS-Identifier = "Harbour"
+	NAS-IP-Address = 10.0.0.47
+	Message-Authenticator = 0x9770b9056aad02457f4fc8488e55d0ab
+modcall: entering group authorize for request 10
+rlm_preprocess: bjfu_hacking test with token @
+  modcall[authorize]: module "preprocess" returns ok for request 10
+  rlm_eap: EAP packet type notification id 3 length 26
+  rlm_eap: EAP Start not found
+  modcall[authorize]: module "eap" returns updated for request 10
+    rlm_realm: No '@' in User-Name = "test", looking up realm NULL
+    rlm_realm: No such realm "NULL"
+  modcall[authorize]: module "suffix" returns noop for request 10
+rlm_ldap: - authorize
+rlm_ldap: performing user authorization for test
+radius_xlat:  '(uid=test)'
+radius_xlat:  'dc=VM-debian,dc=com'
+ldap_get_conn: Got Id: 0
+rlm_ldap: performing search in dc=VM-debian,dc=com, with filter (uid=test)
+rlm_ldap: Added password testing123 in check items
+rlm_ldap: looking for check items in directory...
+rlm_ldap: looking for reply items in directory...
+rlm_ldap: user test authorized to use remote access
+ldap_release_conn: Release Id: 0
+  modcall[authorize]: module "ldap" returns ok for request 10
+radius_xlat:  'test'
+rlm_sql (sql): sql_set_user escaped user --> 'test'
+radius_xlat:  'SELECT id,UserName,Attribute,Value,op FROM radcheck WHERE Username = 'test' ORDER BY id'
+rlm_sql (/usr/local/var/log/radius/sqltrace.sql): Reserving sql socket id: 0
+radius_xlat:  'SELECT id,Framed_IP_Address,Attribute,Value,op FROM IPMAC WHERE Framed_IP_Address = '10.0.0.212' ORDER BY id'
+rlm_sql_mysql: query:  SELECT id,Framed_IP_Address,Attribute,Value,op FROM IPMAC WHERE Framed_IP_Address = '10.0.0.212' ORDER BY id
+rlm_sql (/usr/local/var/log/radius/sqltrace.sql): Released sql socket id: 0
+  modcall[authorize]: module "sql" returns ok for request 10
+rlm_checkval: Item Name: Calling-Station-Id, Value: 00:d0:59:08:3d:9c
+rlm_checkval: Value Name: Calling-Station-Id, Value: 00:d0:59:08:3d:9c
+  modcall[authorize]: module "checkval" returns ok for request 10
+modcall: group authorize returns updated for request 10
+  rad_check_password:  Found Auth-Type EAP
+auth: type "EAP"
+modcall: entering group authenticate for request 10
+  rlm_eap: EAP packet type notification id 3 length 26
+  rlm_eap: EAP Start not found
+  rlm_eap: Request found, released from the list
+  rlm_eap: EAP_TYPE - md5
+  rlm_eap: processing type md5
+  rlm_eap: Freeing handler
+  modcall[authenticate]: module "eap" returns ok for request 10
+modcall: group authenticate returns ok for request 10
+Sending Access-Accept of id 26 to 10.0.0.47:1812
+	EAP-Message = 0x03030004
+	Message-Authenticator = 0x00000000000000000000000000000000
+Finished request 10
+Going to the next request
+Waking up in 4 seconds...
+rad_recv: Accounting-Request packet from host 10.0.0.47:1813, id=27, length=219
+	User-Name = "test"
+	Acct-Status-Type = Start
+	Acct-Delay-Time = 0
+	Acct-Session-Id = "000000025600100d059083d9c000009"
+	Service-Type = Framed-User
+	Framed-Protocol = PPP
+	Attr-538181663 = 0x0a00002f
+	Attr-538181664 = 0x000007ff
+	Attr-538181665 = 0x486172626f75722330303a30353a33623a31303a31633a3532233123
+	Attr-538181646 = 0x486172626f7572
+	Attr-538181648 = 0x303030353362313031633532
+	Attr-538181649 = 0x00000001
+	Framed-IP-Address = 10.0.0.212
+	NAS-Port = 1
+	NAS-Port-Type = Ethernet
+	Calling-Station-Id = "00:d0:59:08:3d:9c"
+	Acct-Authentic = RADIUS
+	NAS-Identifier = "Harbour"
+	NAS-IP-Address = 10.0.0.47
+modcall: entering group preacct for request 11
+rlm_preprocess: bjfu_hacking test with token @
+  modcall[preacct]: module "preprocess" returns noop for request 11
+    rlm_realm: No '@' in User-Name = "test", looking up realm NULL
+    rlm_realm: No such realm "NULL"
+  modcall[preacct]: module "suffix" returns noop for request 11
+  modcall[preacct]: module "files" returns noop for request 11
+modcall: group preacct returns noop for request 11
+modcall: entering group accounting for request 11
+rlm_acct_unique: WARNING: Attribute NAS-Port-Id was not found in request, unique ID MAY be inconsistent
+rlm_acct_unique: Hashing ',Client-IP-Address = 10.0.0.47,NAS-IP-Address = 10.0.0.47,Acct-Session-Id = "000000025600100d059083d9c000009",User-Name = "test"'
+rlm_acct_unique: Acct-Unique-Session-ID = "e97efeb9bc5a584a".
+  modcall[accounting]: module "acct_unique" returns ok for request 11
+radius_xlat:  '/usr/local/var/log/radius/radacct/10.0.0.47/detail-20041005'
+rlm_detail: /usr/local/var/log/radius/radacct/%{Client-IP-Address}/detail-%Y%m%d expands to /usr/local/var/log/radius/radacct/10.0.0.47/detail-20041005
+  modcall[accounting]: module "detail" returns ok for request 11
+  modcall[accounting]: module "unix" returns ok for request 11
+radius_xlat:  '/usr/local/var/log/radius/radutmp'
+radius_xlat:  'test'
+  modcall[accounting]: module "radutmp" returns ok for request 11
+modcall: group accounting returns ok for request 11
+Sending Accounting-Response of id 27 to 10.0.0.47:1813
+Finished request 11
+Going to the next request
+Waking up in 4 seconds...
+--- Walking the entire request list ---
+Cleaning up request 8 ID 24 with timestamp 4161d30b
+Waking up in 2 seconds...
+rad_recv: Accounting-Request packet from host 10.0.0.47:1813, id=28, length=231
+	User-Name = "test"
+	Acct-Status-Type = Stop
+	Acct-Delay-Time = 0
+	Acct-Session-Id = "000000025600100d059083d9c000009"
+	NAS-Port = 1
+	NAS-Port-Type = Ethernet
+	Service-Type = Framed-User
+	Framed-Protocol = PPP
+	Attr-538181663 = 0x0a00002f
+	Attr-538181664 = 0x000007ff
+	Attr-538181665 = 0x486172626f75722330303a30353a33623a31303a31633a3532233123
+	Attr-538181646 = 0x486172626f7572
+	Attr-538181648 = 0x303030353362313031633532
+	Attr-538181649 = 0x00000001
+	Framed-IP-Address = 10.0.0.212
+	Acct-Session-Time = 18
+	Calling-Station-Id = "00:d0:59:08:3d:9c"
+	Acct-Authentic = RADIUS
+	Acct-Terminate-Cause = User-Request
+	NAS-Identifier = "Harbour"
+	NAS-IP-Address = 10.0.0.47
+modcall: entering group preacct for request 12
+rlm_preprocess: bjfu_hacking test with token @
+  modcall[preacct]: module "preprocess" returns noop for request 12
+    rlm_realm: No '@' in User-Name = "test", looking up realm NULL
+    rlm_realm: No such realm "NULL"
+  modcall[preacct]: module "suffix" returns noop for request 12
+  modcall[preacct]: module "files" returns noop for request 12
+modcall: group preacct returns noop for request 12
+modcall: entering group accounting for request 12
+rlm_acct_unique: WARNING: Attribute NAS-Port-Id was not found in request, unique ID MAY be inconsistent
+rlm_acct_unique: Hashing ',Client-IP-Address = 10.0.0.47,NAS-IP-Address = 10.0.0.47,Acct-Session-Id = "000000025600100d059083d9c000009",User-Name = "test"'
+rlm_acct_unique: Acct-Unique-Session-ID = "e97efeb9bc5a584a".
+  modcall[accounting]: module "acct_unique" returns ok for request 12
+radius_xlat:  '/usr/local/var/log/radius/radacct/10.0.0.47/detail-20041005'
+rlm_detail: /usr/local/var/log/radius/radacct/%{Client-IP-Address}/detail-%Y%m%d expands to /usr/local/var/log/radius/radacct/10.0.0.47/detail-20041005
+  modcall[accounting]: module "detail" returns ok for request 12
+  modcall[accounting]: module "unix" returns ok for request 12
+radius_xlat:  '/usr/local/var/log/radius/radutmp'
+radius_xlat:  'test'
+  modcall[accounting]: module "radutmp" returns ok for request 12
+modcall: group accounting returns ok for request 12
+Sending Accounting-Response of id 28 to 10.0.0.47:1813
+Finished request 12
+Going to the next request
+--- Walking the entire request list ---
+Waking up in 1 seconds...
+--- Walking the entire request list ---
+Cleaning up request 9 ID 25 with timestamp 4161d30d
+Cleaning up request 10 ID 26 with timestamp 4161d30d
+Cleaning up request 11 ID 27 with timestamp 4161d30d
+Waking up in 5 seconds...
+--- Walking the entire request list ---
+Cleaning up request 12 ID 28 with timestamp 4161d312
+Nothing to do.  Sleeping until we see a request.
+rad_recv: Access-Request packet from host 10.0.0.47:1812, id=29, length=196
+	User-Name = "test"
+	NAS-Port = 1
+	Service-Type = Framed-User
+	NAS-Port-Type = Ethernet
+	Framed-Protocol = PPP
+	EAP-Message = 0x020200090174657374
+	Framed-IP-Address = 10.0.0.212
+	Calling-Station-Id = "00:d0:59:08:3d:9c"
+	Attr-538181663 = 0x0a00002f
+	Attr-538181664 = 0x000007ff
+	Attr-538181665 = 0x486172626f75722330303a30353a33623a31303a31633a3532233123
+	Attr-538181646 = 0x486172626f7572
+	Attr-538181648 = 0x303030353362313031633532
+	Attr-538181649 = 0x00000001
+	NAS-Identifier = "Harbour"
+	NAS-IP-Address = 10.0.0.47
+	Message-Authenticator = 0x0f7d26597bcbb93e14a7c41bb75fe91f
+modcall: entering group authorize for request 13
+rlm_preprocess: bjfu_hacking test with token @
+  modcall[authorize]: module "preprocess" returns ok for request 13
+  rlm_eap: EAP packet type notification id 2 length 9
+  rlm_eap: EAP Start not found
+  modcall[authorize]: module "eap" returns updated for request 13
+    rlm_realm: No '@' in User-Name = "test", looking up realm NULL
+    rlm_realm: No such realm "NULL"
+  modcall[authorize]: module "suffix" returns noop for request 13
+rlm_ldap: - authorize
+rlm_ldap: performing user authorization for test
+radius_xlat:  '(uid=test)'
+radius_xlat:  'dc=VM-debian,dc=com'
+ldap_get_conn: Got Id: 0
+rlm_ldap: performing search in dc=VM-debian,dc=com, with filter (uid=test)
+rlm_ldap: Added password testing123 in check items
+rlm_ldap: looking for check items in directory...
+rlm_ldap: looking for reply items in directory...
+rlm_ldap: user test authorized to use remote access
+ldap_release_conn: Release Id: 0
+  modcall[authorize]: module "ldap" returns ok for request 13
+radius_xlat:  'test'
+rlm_sql (sql): sql_set_user escaped user --> 'test'
+radius_xlat:  'SELECT id,UserName,Attribute,Value,op FROM radcheck WHERE Username = 'test' ORDER BY id'
+rlm_sql (/usr/local/var/log/radius/sqltrace.sql): Reserving sql socket id: 0
+radius_xlat:  'SELECT id,Framed_IP_Address,Attribute,Value,op FROM IPMAC WHERE Framed_IP_Address = '10.0.0.212' ORDER BY id'
+rlm_sql_mysql: query:  SELECT id,Framed_IP_Address,Attribute,Value,op FROM IPMAC WHERE Framed_IP_Address = '10.0.0.212' ORDER BY id
+rlm_sql (/usr/local/var/log/radius/sqltrace.sql): Released sql socket id: 0
+  modcall[authorize]: module "sql" returns ok for request 13
+rlm_checkval: Item Name: Calling-Station-Id, Value: 00:d0:59:08:3d:9c
+rlm_checkval: Value Name: Calling-Station-Id, Value: 00:d0:59:08:3d:9c
+  modcall[authorize]: module "checkval" returns ok for request 13
+modcall: group authorize returns updated for request 13
+  rad_check_password:  Found Auth-Type EAP
+auth: type "EAP"
+modcall: entering group authenticate for request 13
+  rlm_eap: EAP packet type notification id 2 length 9
+  rlm_eap: EAP Start not found
+  rlm_eap: EAP Identity
+  rlm_eap: processing type md5
+rlm_eap_md5: Issuing Challenge
+  modcall[authenticate]: module "eap" returns ok for request 13
+modcall: group authenticate returns ok for request 13
+Sending Access-Challenge of id 29 to 10.0.0.47:1812
+	EAP-Message = 0x01030016041071b206201bfa2f921df000047075212e
+	Message-Authenticator = 0x00000000000000000000000000000000
+	State = 0xa034924f92138b185f13eca1f6d72bc223d361412ad728c7d9c00af7c33e9ebe341a9dc2
+Finished request 13
+Going to the next request
+--- Walking the entire request list ---
+Waking up in 6 seconds...
+rad_recv: Access-Request packet from host 10.0.0.47:1812, id=30, length=285
+	State = 0xa034924f92138b185f13eca1f6d72bc223d361412ad728c7d9c00af7c33e9ebe341a9dc2
+	User-Name = "test"
+	Acct-Session-Id = "000000025600100d059083d9c00000a"
+	NAS-Port = 1
+	Service-Type = Framed-User
+	NAS-Port-Type = Ethernet
+	EAP-Message = 0x0203001a041082573d40e6d37a73f7c7c7c90cc20e4274657374
+	Framed-Protocol = PPP
+	Framed-IP-Address = 10.0.0.212
+	Calling-Station-Id = "00:d0:59:08:3d:9c"
+	Attr-538181663 = 0x0a00002f
+	Attr-538181664 = 0x000007ff
+	Attr-538181665 = 0x486172626f75722330303a30353a33623a31303a31633a3532233123
+	Attr-538181646 = 0x486172626f7572
+	Attr-538181648 = 0x303030353362313031633532
+	Attr-538181649 = 0x00000001
+	NAS-Identifier = "Harbour"
+	NAS-IP-Address = 10.0.0.47
+	Message-Authenticator = 0x234a9db827de3a42614b5455f5a937ba
+modcall: entering group authorize for request 14
+rlm_preprocess: bjfu_hacking test with token @
+  modcall[authorize]: module "preprocess" returns ok for request 14
+  rlm_eap: EAP packet type notification id 3 length 26
+  rlm_eap: EAP Start not found
+  modcall[authorize]: module "eap" returns updated for request 14
+    rlm_realm: No '@' in User-Name = "test", looking up realm NULL
+    rlm_realm: No such realm "NULL"
+  modcall[authorize]: module "suffix" returns noop for request 14
+rlm_ldap: - authorize
+rlm_ldap: performing user authorization for test
+radius_xlat:  '(uid=test)'
+radius_xlat:  'dc=VM-debian,dc=com'
+ldap_get_conn: Got Id: 0
+rlm_ldap: performing search in dc=VM-debian,dc=com, with filter (uid=test)
+rlm_ldap: Added password testing123 in check items
+rlm_ldap: looking for check items in directory...
+rlm_ldap: looking for reply items in directory...
+rlm_ldap: user test authorized to use remote access
+ldap_release_conn: Release Id: 0
+  modcall[authorize]: module "ldap" returns ok for request 14
+radius_xlat:  'test'
+rlm_sql (sql): sql_set_user escaped user --> 'test'
+radius_xlat:  'SELECT id,UserName,Attribute,Value,op FROM radcheck WHERE Username = 'test' ORDER BY id'
+rlm_sql (/usr/local/var/log/radius/sqltrace.sql): Reserving sql socket id: 0
+radius_xlat:  'SELECT id,Framed_IP_Address,Attribute,Value,op FROM IPMAC WHERE Framed_IP_Address = '10.0.0.212' ORDER BY id'
+rlm_sql_mysql: query:  SELECT id,Framed_IP_Address,Attribute,Value,op FROM IPMAC WHERE Framed_IP_Address = '10.0.0.212' ORDER BY id
+rlm_sql (/usr/local/var/log/radius/sqltrace.sql): Released sql socket id: 0
+  modcall[authorize]: module "sql" returns ok for request 14
+rlm_checkval: Item Name: Calling-Station-Id, Value: 00:d0:59:08:3d:9c
+rlm_checkval: Value Name: Calling-Station-Id, Value: 00:d0:59:08:3d:9c
+  modcall[authorize]: module "checkval" returns ok for request 14
+modcall: group authorize returns updated for request 14
+  rad_check_password:  Found Auth-Type EAP
+auth: type "EAP"
+modcall: entering group authenticate for request 14
+  rlm_eap: EAP packet type notification id 3 length 26
+  rlm_eap: EAP Start not found
+  rlm_eap: Request found, released from the list
+  rlm_eap: EAP_TYPE - md5
+  rlm_eap: processing type md5
+  rlm_eap: Freeing handler
+  modcall[authenticate]: module "eap" returns ok for request 14
+modcall: group authenticate returns ok for request 14
+Sending Access-Accept of id 30 to 10.0.0.47:1812
+	EAP-Message = 0x03030004
+	Message-Authenticator = 0x00000000000000000000000000000000
+Finished request 14
+Going to the next request
+Waking up in 6 seconds...
+rad_recv: Accounting-Request packet from host 10.0.0.47:1813, id=31, length=219
+	User-Name = "test"
+	Acct-Status-Type = Start
+	Acct-Delay-Time = 0
+	Acct-Session-Id = "000000025600100d059083d9c00000a"
+	Service-Type = Framed-User
+	Framed-Protocol = PPP
+	Attr-538181663 = 0x0a00002f
+	Attr-538181664 = 0x000007ff
+	Attr-538181665 = 0x486172626f75722330303a30353a33623a31303a31633a3532233123
+	Attr-538181646 = 0x486172626f7572
+	Attr-538181648 = 0x303030353362313031633532
+	Attr-538181649 = 0x00000001
+	Framed-IP-Address = 10.0.0.212
+	NAS-Port = 1
+	NAS-Port-Type = Ethernet
+	Calling-Station-Id = "00:d0:59:08:3d:9c"
+	Acct-Authentic = RADIUS
+	NAS-Identifier = "Harbour"
+	NAS-IP-Address = 10.0.0.47
+modcall: entering group preacct for request 15
+rlm_preprocess: bjfu_hacking test with token @
+  modcall[preacct]: module "preprocess" returns noop for request 15
+    rlm_realm: No '@' in User-Name = "test", looking up realm NULL
+    rlm_realm: No such realm "NULL"
+  modcall[preacct]: module "suffix" returns noop for request 15
+  modcall[preacct]: module "files" returns noop for request 15
+modcall: group preacct returns noop for request 15
+modcall: entering group accounting for request 15
+rlm_acct_unique: WARNING: Attribute NAS-Port-Id was not found in request, unique ID MAY be inconsistent
+rlm_acct_unique: Hashing ',Client-IP-Address = 10.0.0.47,NAS-IP-Address = 10.0.0.47,Acct-Session-Id = "000000025600100d059083d9c00000a",User-Name = "test"'
+rlm_acct_unique: Acct-Unique-Session-ID = "75455b5f50553984".
+  modcall[accounting]: module "acct_unique" returns ok for request 15
+radius_xlat:  '/usr/local/var/log/radius/radacct/10.0.0.47/detail-20041005'
+rlm_detail: /usr/local/var/log/radius/radacct/%{Client-IP-Address}/detail-%Y%m%d expands to /usr/local/var/log/radius/radacct/10.0.0.47/detail-20041005
+  modcall[accounting]: module "detail" returns ok for request 15
+  modcall[accounting]: module "unix" returns ok for request 15
+radius_xlat:  '/usr/local/var/log/radius/radutmp'
+radius_xlat:  'test'
+  modcall[accounting]: module "radutmp" returns ok for request 15
+modcall: group accounting returns ok for request 15
+Sending Accounting-Response of id 31 to 10.0.0.47:1813
+Finished request 15
+Going to the next request
+Waking up in 6 seconds...
+rad_recv: Accounting-Request packet from host 10.0.0.47:1813, id=32, length=231
+	User-Name = "test"
+	Acct-Status-Type = Stop
+	Acct-Delay-Time = 0
+	Acct-Session-Id = "000000025600100d059083d9c00000a"
+	NAS-Port = 1
+	NAS-Port-Type = Ethernet
+	Service-Type = Framed-User
+	Framed-Protocol = PPP
+	Attr-538181663 = 0x0a00002f
+	Attr-538181664 = 0x000007ff
+	Attr-538181665 = 0x486172626f75722330303a30353a33623a31303a31633a3532233123
+	Attr-538181646 = 0x486172626f7572
+	Attr-538181648 = 0x303030353362313031633532
+	Attr-538181649 = 0x00000001
+	Framed-IP-Address = 10.0.0.212
+	Acct-Session-Time = 24
+	Calling-Station-Id = "00:d0:59:08:3d:9c"
+	Acct-Authentic = RADIUS
+	Acct-Terminate-Cause = User-Request
+	NAS-Identifier = "Harbour"
+	NAS-IP-Address = 10.0.0.47
+modcall: entering group preacct for request 16
+rlm_preprocess: bjfu_hacking test with token @
+  modcall[preacct]: module "preprocess" returns noop for request 16
+    rlm_realm: No '@' in User-Name = "test", looking up realm NULL
+    rlm_realm: No such realm "NULL"
+  modcall[preacct]: module "suffix" returns noop for request 16
+  modcall[preacct]: module "files" returns noop for request 16
+modcall: group preacct returns noop for request 16
+modcall: entering group accounting for request 16
+rlm_acct_unique: WARNING: Attribute NAS-Port-Id was not found in request, unique ID MAY be inconsistent
+rlm_acct_unique: Hashing ',Client-IP-Address = 10.0.0.47,NAS-IP-Address = 10.0.0.47,Acct-Session-Id = "000000025600100d059083d9c00000a",User-Name = "test"'
+rlm_acct_unique: Acct-Unique-Session-ID = "75455b5f50553984".
+  modcall[accounting]: module "acct_unique" returns ok for request 16
+radius_xlat:  '/usr/local/var/log/radius/radacct/10.0.0.47/detail-20041005'
+rlm_detail: /usr/local/var/log/radius/radacct/%{Client-IP-Address}/detail-%Y%m%d expands to /usr/local/var/log/radius/radacct/10.0.0.47/detail-20041005
+  modcall[accounting]: module "detail" returns ok for request 16
+  modcall[accounting]: module "unix" returns ok for request 16
+radius_xlat:  '/usr/local/var/log/radius/radutmp'
+radius_xlat:  'test'
+  modcall[accounting]: module "radutmp" returns ok for request 16
+modcall: group accounting returns ok for request 16
+Sending Accounting-Response of id 32 to 10.0.0.47:1813
+Finished request 16
+Going to the next request
+--- Walking the entire request list ---
+Cleaning up request 13 ID 29 with timestamp 4161d323
+Cleaning up request 14 ID 30 with timestamp 4161d323
+Cleaning up request 15 ID 31 with timestamp 4161d323
+Waking up in 6 seconds...

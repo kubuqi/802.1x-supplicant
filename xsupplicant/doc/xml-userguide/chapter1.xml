@@ -1,0 +1,31 @@
+<chapter id="ch1">
+<title>About Open1x And This Guide</title>
+
+<section>
+<title>Do I Need Open1x?</title>
+<para>The short answer is that if you need to authenticate to an 802.1x-enabled
+network using Linux, then Open1x is probably for you.  The Open1x project 
+provides 802.1x functionality for the Linux operating system.  802.1x is an 
+IEEE standard (ratified in 2001) that provides port-based authentication 
+at layer 2 of the OSI model.  802.1x prevents unauthorized network access
+until appropriate credentials are supplied to access the network.  
+The Open1x project provides the necessary software to connect to an 
+802.1x-enabled network.</para>
+</section>
+
+<section>
+<title>Xsupplicant versus Authenticator</title>
+<para>The Open1x project contains source code for both the "Supplicant" 
+and "Authenticator" pieces of the 802.1x standard.  This document will 
+only focus on the Open1x Supplicant (xsupplicant), as the Authenticator 
+isn't being actively worked on at this point in time.</para>
+</section>
+
+<section>
+<title>Purpose Of This Guide</title>
+<para>This guide is aimed towards both the general user, and the 
+system administrator with the intent of explaining how to install 
+and configure xsupplicant.</para>
+</section>
+
+</chapter>

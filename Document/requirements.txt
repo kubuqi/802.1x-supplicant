@@ -1,0 +1,71 @@
+  请不要在即时消息对话中透露您的密码或信用卡号码。
+  
+zhouyu 说:
+在？
+kubuqi(天下) 说:
+恩那
+zhouyu 说:
+说话方便？
+kubuqi(天下) 说:
+嗯。说吧
+kubuqi(天下) 说:
+？
+zhouyu 说:
+RADIUS/客户端要完善的几个地方。。。
+zhouyu 说:
+1, USERNAME改变
+
+zhouyu 说:
+主要是客户端需要改一下，另外，我觉得应该选另外一个TOKENCHAR
+zhouyu 说:
+不可打印的，呵呵
+zhouyu 说:
+2，SIMULTANEOUS-USE，还要拜托你试一下
+zhouyu 说:
+3，能不能不用RADUTMP文件，而是用SQL
+zhouyu 说:
+4，LOG文件应该进SQL，而不是LOG文件
+zhouyu 说:
+主要就这些吧
+kubuqi(天下) 说:
+1.token char在radius是可以配置的。只要在客户端改代码就可以了。
+zhouyu 说:
+没错
+zhouyu 说:
+你现在的TOKENCHAR是64，呵呵
+zhouyu 说:
+要改一下客户端
+kubuqi(天下) 说:
+2。Simultaneous-use我再看一下，这个意思就是同时只能有1个用户上线对把？
+kubuqi(天下) 说:
+那么radius要记录用户上线的状态，需要交换机在用户下线时发送消息给radius。
+zhouyu 说:
+可以限制有几个人同时上
+kubuqi(天下) 说:
+3。没看懂。是说把什么东西放在sql中了？radius tmp是什么？
+zhouyu 说:
+在DOC目录下有一个简单的文档
+zhouyu 说:
+RADUTMP是一个文件，ACCOUTING START信息过来后，把在线用户加到这个文件里，STOP信息过来后，删用户信息
+kubuqi(天下) 说:
+哦。和2是一个问题
+zhouyu 说:
+我想把它改在数据库里，这样就可以有多个RADIUS SERVER了
+zhouyu 说:
+是的
+zhouyu 说:
+也是，也不是 
+zhouyu 说:
+3实际是可以在线查谁在线
+zhouyu 说:
+但SIM-USE用到了3，如果发现在3里有这个用户，他会发SNMP去NAS哪里查
+kubuqi(天下) 说:
+4的log是指的radius的运行log吧？
+zhouyu 说:
+不是，是ACCT的LOG
+zhouyu 说:
+这个我没看懂，可不可以进SQL
+kubuqi(天下) 说:
+明白了，2,3,4都是radius中acct的东西。我先看看，再和你联系吧。
+zhouyu 说:
+OK

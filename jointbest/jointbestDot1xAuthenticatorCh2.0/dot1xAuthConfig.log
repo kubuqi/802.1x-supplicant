@@ -1,0 +1,26 @@
+802.1x:REPORT:RATSM state machine on port 0 changed from NULL state to Stop state
+802.1x:REPORT:ASM state machine on port 0 changed from NULL state to Initialize state
+802.1x:REPORT:RATSM state machine on port 0 changed from NULL state to Stop state
+802.1x:REPORT:BASM state machine on port 0 changed from NULL state to Initialize state
+802.1x:REPORT:CDSM state machine on port 0 changed from NULL state to IN_OR_BOTH state
+802.1x:REPORT:CDSM state machine on port 0 changed from IN_OR_BOTH state to FORCE_BOTH state
+802.1x:REPORT:AKSM state machine on port 0 changed from NULL state to NoKeyTransmit state
+802.1x:REPORT:KRSM state machine on port 0 changed from NULL state to NoKeyRecevie state
+802.1x:REPORT:BASM state machine on port 0 changed from Initialize state to Idle state
+802.1x:REPORT:RATSM state machine on port 7 changed from NULL state to Stop state
+802.1x:REPORT:ASM state machine on port 7 changed from NULL state to Initialize state
+802.1x:REPORT:RATSM state machine on port 7 changed from NULL state to Stop state
+802.1x:REPORT:BASM state machine on port 7 changed from NULL state to Initialize state
+802.1x:REPORT:CDSM state machine on port 7 changed from NULL state to IN_OR_BOTH state
+802.1x:REPORT:CDSM state machine on port 7 changed from IN_OR_BOTH state to FORCE_BOTH state
+802.1x:REPORT:AKSM state machine on port 7 changed from NULL state to NoKeyTransmit state
+802.1x:REPORT:KRSM state machine on port 7 changed from NULL state to NoKeyRecevie state
+802.1x:REPORT:BASM state machine on port 7 changed from Initialize state to Idle state
+802.1x:REPORT:BASM state machine on port 0 changed from Idle state to Initialize state
+802.1x:REPORT:BASM state machine on port 0 changed from Initialize state to Idle state
+802.1x:REPORT:ASM state machine on port 0 changed from Initialize state to Disconnected state
+802.1x:REPORT:RATSM state machine on port 0 changed from Stop state to Stop state
+802.1x: REPORT:  a new EAPOL packet is send out. 
+802.1x:REPORT: EAPOL: Packet type is EAPOL-EAP 
+802.1x:REPORT: EAP:  Failure packet.
+Packet identifier is  0, length is  4

@@ -1,0 +1,416 @@
+2002-10-16  Rainer Weikusat  <weikusat@students.uni-mainz.de>
+
+	* include/ll_802_3.hh, src/ll_802_3.cc, src/ll_ether.cc, src/main.cc:
+	removed workaround for fictious bug
+
+2002-10-02  Rainer Weikusat  <weikusat@students.uni-mainz.de>
+
+	* src/tls.cc: set TLS output 0 in case of no output
+
+	* include/ll_eapol.hh, include/ll_ether.hh, src/eap.cc, src/etherlink.cc, src/ll_eapol.cc, src/ll_ether.cc:
+	ll_interface sanity changes
+
+2002-09-29  Rainer Weikusat  <weikusat@students.uni-mainz.de>
+
+	* include/ll_802_3.hh, src/ll_802_3.cc:
+	handle protocol specific addressing
+	at the 'correct' abstraction level
+
+2002-09-26  Rainer Weikusat  <weikusat@students.uni-mainz.de>
+
+	* include/ll_802_3.hh, include/ll_eapol.hh, include/ll_ether.hh, src/ll_802_3.cc, src/ll_eapol.cc, src/ll_ether.cc, src/main.cc:
+	removed pcap and net dependancies (FreeBSD only)
+
+2002-09-16  Rainer Weikusat  <weikusat@students.uni-mainz.de>
+
+	* include/ll_eapol.hh, include/ll_ether.hh: fixed hook definitions
+
+	* src/ll_802_3.cc, src/ll_eapol.cc, src/ll_ether.cc:
+	eliminated redundant src address
+	copies
+
+2002-09-15  Rainer Weikusat  <weikusat@students.uni-mainz.de>
+
+	* src/type_identity.cc, src/type_md5.cc, src/type_notification.cc, src/type_tls.cc, include/accessor.hh, include/eap.hh, include/eap_tls_packet.hh, include/eapol.hh, include/ll_eapol.hh, include/ll_ether.hh, include/type_identity.hh, include/type_md5.hh, include/type_notification.hh, include/type_tls.hh, src/eap.cc, src/ll_802_3.cc, src/ll_eapol.cc, src/ll_ether.cc, src/main.cc:
+	avoid copying packets in input/output
+
+2002-09-14  Rainer Weikusat  <weikusat@students.uni-mainz.de>
+
+	* include/ll_eapol.hh, include/ll_ether.hh, src/ll_eapol.cc, src/ll_ether.cc:
+	moved pcap/libnet to ll_eapol
+
+2002-09-13  Rainer Weikusat  <weikusat@students.uni-mainz.de>
+
+	* include/accessor.hh, include/error.hh, include/ll_ether.hh, src/error.cc, src/ll_802_3.cc, src/ll_ether.cc, src/main.cc:
+	ported to FreeBSD, various small fixes
+
+2002-09-12  Rainer Weikusat  <weikusat@students.uni-mainz.de>
+
+	* src/main.cc: removed spaghetti in -user codepath
+
+2002-09-08  Rainer Weikusat  <weikusat@students.uni-mainz.de>
+
+	* src/eap.cc, src/main.cc, src/tls.cc, src/type_identity.cc, src/type_md5.cc, src/type_notification.cc, src/type_tls.cc:
+	sanitized debugging messages
+
+	* src/main.cc: missing chdir("/") in daemonize/ -user
+
+2002-09-06  Rainer Weikusat  <weikusat@students.uni-mainz.de>
+
+	* src/main.cc: stop molestor at beginning of DO_AUTH
+
+2002-09-05  Rainer Weikusat  <weikusat@students.uni-mainz.de>
+
+	* src/ll_eapol.cc, include/accessor.hh, include/eap.hh, include/eapol.hh, include/ll_eapol.hh, src/main.cc:
+	small sanity fixes
+
+	* src/ll_ether.cc: removed spurious dst change
+
+	* src/eap.cc, src/ll_802_3.cc, src/ll_eapol.cc, src/ll_ether.cc, include/ll_802_3.hh, include/ll_eapol.hh, include/ll_ether.hh:
+	pushed type/ code checks to the respective
+	(EAPOL, EAP) protocol layers and restructured
+	data receiving
+
+2002-09-04  Rainer Weikusat  <weikusat@students.uni-mainz.de>
+
+	* src/ll_eapol.cc, src/ll_ether.cc, include/ll_eapol.hh, include/ll_ether.hh:
+	changed validation code. Will likely
+	change again.
+
+	* src/eap.cc, src/ll_eapol.cc, src/ll_ether.cc, src/ll_frame.cc, src/type_identity.cc, src/type_md5.cc, src/type_notification.cc, include/ll_eapol.hh, include/ll_ether.hh, include/ll_frame.hh:
+	removed ll_frame. Needs cleanup, though.
+
+2002-09-04  Rainer Weikusat  <weikusat@students.uni-mainz.de>
+
+	* src/main.cc: integrated TLS
+
+	* src/buffer.cc: removed redundant size check in _need
+
+2002-09-03  Rainer Weikusat  <weikusat@students.uni-mainz.de>
+
+	* src/type_identity.cc, src/type_notification.cc, src/type_tls.cc, include/type_tls.hh:
+	eaptest version
+
+2002-09-02  Rainer Weikusat  <weikusat@students.uni-mainz.de>
+
+	* src/type_tls.cc, include/type_tls.hh: packet classification
+
+2002-09-01  Rainer Weikusat  <weikusat@students.uni-mainz.de>
+
+	* src/buffer.cc, src/eap.cc, src/eap_tls_packet.cc, src/main.cc, src/type_identity.cc, src/type_md5.cc, src/type_notification.cc, src/type_tls.cc, include/accessor.hh, include/buffer.hh, include/eap.hh, include/eap_tls_packet.hh, include/type_tls.hh, Makefile:
+	various minor tweaks
+
+	* src/eap.cc, src/eap_tls_packet.cc, src/ll_eapol.cc, src/ll_ether.cc, src/ll_frame.cc, src/main.cc, src/tls.cc, src/type_md5.cc, src/type_notification.cc, src/type_tls.cc, include/eap.hh, include/eap_tls_packet.hh, include/eapol.hh, include/ll_eapol.hh, include/ll_frame.hh, include/type_tls.hh:
+	saner PDU access
+
+2002-08-30  Rainer Weikusat  <weikusat@students.uni-mainz.de>
+
+	* src/eap.cc, src/type_identity.cc: EAP aborts
+
+	* src/type_tls.cc, include/type_tls.hh: failed_once
+
+2002-08-29  Rainer Weikusat  <weikusat@students.uni-mainz.de>
+
+	* src/main.cc: switch back to 200 octet fragments,
+	because 1024 was causing trouble
+
+	* src/eap.cc: another abort-fix
+
+	* include/accessor.hh: fixed ui8 +=
+
+	* src/eap.cc: small fix in abort codepaths
+
+	* src/type_md5.cc, src/type_notification.cc, src/type_tls.cc, src/eap.cc:
+	minor cleanups
+
+	* src/tls.cc, include/tls.hh: saner error handling, minor cleanups
+
+	* include/eap.hh: removed obsolete ll_frame reference
+
+	* src/comm.cc, include/comm.hh: uninlined search functions
+
+	* src/eap.cc, src/type_tls.cc, include/accessor.hh:
+	added some operators
+
+	* src/eap.cc, include/eap.hh: NINVALID_MAX
+
+	* src/main.cc, src/tls.cc, include/tls.hh: removed TLS-server support
+
+	* src/main.cc: consistent abort handling
+
+2002-08-28  Rainer Weikusat  <weikusat@students.uni-mainz.de>
+
+	* src/type_tls.cc, include/type_tls.hh:
+	works w/o flaws. Should use session cacheing,
+	though.
+
+	* src/tls.cc: print TLS output sizes again
+
+	* src/main.cc: added abort in EAP failure code path
+
+	* src/eap_tls_message.cc, include/eap_tls_message.hh, include/tls.hh, include/type_tls.hh:
+	remove eap_tls_message
+
+	* src/eap.cc, src/tls.cc, src/type_tls.cc, include/tls.hh, include/type_tls.hh:
+	rewritten type_tls
+
+2002-08-27  Rainer Weikusat  <weikusat@students.uni-mainz.de>
+
+	* src/eap_tls_message.cc, src/tls.cc, src/type_tls.cc, include/eap_tls_message.hh, include/eap_tls_packet.hh, include/tls.hh, include/type_tls.hh:
+	believed to be working (0.7 codebase)
+
+	* src/type_tls.cc, include/type_tls.hh:
+	splitted 'process' into three functions
+
+	* include/eap_tls_packet.hh: moved 'make_ack' to type_tls
+
+	* include/eap_tls_message.hh: added initial default size of
+	1024
+
+	* src/type_tls.cc, include/type_tls.hh:
+	implementend tracking if ACK-ids
+
+	* src/tls.cc: fixed debugginf msgs
+
+	* src/eap_tls_message.cc, src/tls.cc, src/type_tls.cc, include/eap_tls_message.hh, include/tls.hh:
+	re-use a single, appropriately expanded TLS-message
+	instead of reallocting new ones
+
+	* src/main.cc: test-code commented out fo r0-7
+
+	* src/type_tls.cc: various small fixes
+
+	* src/tls.cc: fixed an error message
+
+	* src/eap.cc: various small fixes
+
+	* src/main.cc: EAP_TLS test code
+
+	* src/eap_tls_message.cc: always increment cur in next_fragment
+
+	* src/eap_tls_packet.cc, include/eap_tls_packet.hh:
+	make tls_pdu_len account for length_included
+
+2002-08-26  Rainer Weikusat  <weikusat@students.uni-mainz.de>
+
+	* src/eap.cc: moved setting of last_request to send
+
+	* src/eap.cc, src/eap_tls_message.cc, src/ll_ether.cc, src/main.cc, src/type_tls.cc, include/eap.hh, include/eap_tls_message.hh, include/eap_tls_packet.hh, include/ll_ether.hh, include/ll_frame.hh, include/type_tls.hh:
+	pushed retransmissons to the eap layer
+	and cleaned up the type_tls code
+
+	* include/accessor.hh: removed obsolete bit accessors
+
+2002-08-25  Rainer Weikusat  <weikusat@students.uni-mainz.de>
+
+	* src/buffer.cc, src/comm.cc, src/eap.cc, src/error.cc, src/globals.cc, src/ll_802_3.cc, src/ll_ether.cc, src/main.cc, src/tls.cc, src/type_tls.cc, include/buffer.hh, include/eap.hh, include/error.hh, include/globals.hh, include/ll_802_3.hh, include/ll_ether.hh, include/ll_frame.hh, include/tls.hh, include/type_tls.hh:
+	more sensible error handling, safer asynchronous
+	termination, propagate top-level abort to
+	authentication handlers (that may carry state)
+
+2002-08-24  Rainer Weikusat  <weikusat@students.uni-mainz.de>
+
+	* src/eap.cc, src/type_identity.cc, src/type_md5.cc, src/type_notification.cc, src/type_tls.cc:
+	added support for handler-directed
+	aborts (needed for TLS)
+
+	* src/tls.cc, include/tls.hh, tls_test.cc:
+	tls can do handshakes w/ itself
+
+2002-08-23  Rainer Weikusat  <weikusat@students.uni-mainz.de>
+
+	* include/type_tls.hh, include/tls.hh:
+	implentend 'sort of'  TLS session handling
+	code
+
+	* include/eap_tls_message.hh: len()
+
+	* src/tls.cc: added debugging messages
+
+	* src/type_tls.cc: adapted to tls interface
+
+	* src/tls.cc, include/tls.hh: TLS libary & context init/ destroy
+
+	* src/error.cc, include/error.hh: modified raise to optionally copy
+	an error message
+
+2002-08-21  Rainer Weikusat  <weikusat@students.uni-mainz.de>
+
+	* src/eap_tls_message.cc, src/eap_tls_packet.cc, src/type_tls.cc, include/eap_tls_message.hh, include/eap_tls_packet.hh, include/type_tls.hh:
+	first stab at EAP_TLS support
+
+	* src/eap.cc: back 'ret_inv' again, to allow for damaged
+	TLS packets & retransmission
+
+	* include/eap.hh: cosmetical change
+
+	* src/eap_tls_packet.cc, src/main.cc, src/type_identity.cc, src/type_md5.cc, src/type_notification.cc, src/type_tls.cc, include/eap_tls_packet.hh:
+	first half of name change
+
+	* src/eap.cc: changed to 'abort' in case of
+	failed handlers
+
+2002-08-20  Rainer Weikusat  <weikusat@students.uni-mainz.de>
+
+	* src/type_tls.cc: nascent TLS support
+
+	* src/type_identity.cc: cast id to char * for printing
+
+	* include/eap_tls_packet.hh: spurious blank line
+
+	* include/handle.hh: obsolete
+
+2002-08-19  Rainer Weikusat  <weikusat@students.uni-mainz.de>
+
+	* include/type_tls.hh: initial
+
+	* src/eap.cc, src/type_identity.cc, src/type_md5.cc, src/type_notification.cc, include/eap.hh, include/type_identity.hh, include/type_md5.hh, include/type_notification.hh:
+	switched from ll_frame * to eap::packet *
+
+	* src/eap_tls_packet.cc, include/accessor.hh, include/eap.hh, include/eap_tls_packet.hh, include/ll_ether.hh:
+	eap::tls class
+
+	* src/ll_frame.cc: obsolete
+
+	* src/eap.cc, src/ll_ether.cc, src/ll_frame.cc, src/main.cc, src/type_identity.cc, src/type_md5.cc, src/type_notification.cc, include/eap.hh, include/ll_frame.hh, include/type_identity.hh, include/type_md5.hh, include/type_notification.hh:
+	saner logging. class eap::packet for tls-support.
+
+2002-08-18  Rainer Weikusat  <weikusat@students.uni-mainz.de>
+
+	* src/main.cc: daemonize before opening network connections
+
+	* src/buffer.cc, src/password.cc:
+	added initializers to suppress spurious
+	warnings
+
+	* src/password.cc: yet another 'hotfix'
+
+	* src/password.cc: now really
+
+	* src/main.cc: minor tweaks
+
+	* src/password.cc: fix: handle zero-length passwords
+
+	* src/main.cc: added setuid support and re-organized
+	EAP processing
+
+	* src/password.cc: typo
+
+	* src/ll_ether.cc, src/main.cc, src/password.cc, include/password.hh:
+	read MD5 secret from terminal
+
+	* src/buffer.cc: omission
+
+	* include/buffer.hh: previously omitted
+
+	* src/main.cc: commented test code out
+
+2002-08-17  Rainer Weikusat  <weikusat@students.uni-mainz.de>
+
+	* src/main.cc: EAPOL logoff
+
+	* src/ll_ether.cc, src/type_md5.cc, include/globals.hh, include/ll_frame.hh, include/type_md5.hh, src/comm.cc, include/comm.hh:
+	unified buffer handling
+
+	* src/ll_ether.cc: removed unused label
+
+	* src/comm.cc, src/error.cc, src/ll_802_3.cc, src/ll_ether.cc, src/main.cc, include/ll_802_3.hh, include/ll_ether.hh, include/comm.hh, include/error.hh, include/globals.hh:
+	switch error handling to static instances
+
+	* src/eap.cc: fixed naks
+
+	* src/comm.cc: fixed a memory leak
+
+	* src/type_md5.cc, include/type_md5.hh: added nak function
+
+2002-08-15  Rainer Weikusat  <weikusat@students.uni-mainz.de>
+
+	* src/main.cc: minor changes to get MD5 testable
+
+2002-08-14  Rainer Weikusat  <weikusat@students.uni-mainz.de>
+
+	* src/main.cc: need asynchronous waitpid
+
+	* src/main.cc: basic reauthentication support & other goodies
+
+	* src/ll_eapol.cc, src/ll_ether.cc, src/main.cc, include/ll_802_3.hh, include/ll_ether.hh:
+	fixed EAPOL. Merged changes from eaptest
+	back in.
+
+2002-08-13  Rainer Weikusat  <weikusat@students.uni-mainz.de>
+
+	* src/eap.cc, src/main.cc, include/eap.hh:
+	compiles and should in theory be able to
+	do MD5 authentication
+
+	* include/comm.hh, include/error.hh, include/handle.hh, include/ll_802_3.hh, include/ll_ether.hh, src/comm.cc, src/ll_802_3.cc, src/ll_ether.cc, src/main.cc:
+	more sensible error handling
+
+2002-08-10  Rainer Weikusat  <weikusat@students.uni-mainz.de>
+
+	* src/main.cc: rudimentary main
+
+	* src/comm.cc, src/eap.cc, src/ll_eapol.cc, src/ll_frame.cc, src/type_notification.cc, include/comm.hh:
+	reasonable output infrastructure
+
+	* src/ll_ether.cc: initialize ether_dst to 0
+
+2002-08-09  Rainer Weikusat  <weikusat@students.uni-mainz.de>
+
+	* src/ll_802_3.cc, src/type_identity.cc, src/type_md5.cc, src/type_notification.cc:
+	formatting & other minor changes
+
+	* src/comm.cc: performance tweak: don't compare \000 twice
+	in find_m
+
+	* src/type_notification.cc, include/type_notification.hh:
+	complete EAP support compilable
+
+	* src/eap.cc: typo in $Id: ChangeLog,v 1.9 2002/10/17 10:54:02 rw Exp $
+
+	* src/comm.cc, src/eap.cc, src/ll_eapol.cc, src/ll_ether.cc, src/ll_frame.cc, include/comm.hh:
+	added multi-level debugging output
+
+	* include/accessor.hh: added operter [] to access_range
+
+	* src/eap.cc, src/type_identity.cc, src/type_md5.cc, include/eap.hh, include/type_identity.hh, include/type_md5.hh:
+	basic eap handling
+
+	* src/ll_ether.cc, include/eap.hh, include/eapol.hh, include/ll_eapol.hh, include/ll_frame.hh:
+	now really & compiles again
+
+	* src/ll_eapol.cc, src/ll_ether.cc, src/ll_frame.cc, include/eap.hh, include/eapol.hh, include/ll_eapol.hh, include/ll_frame.hh:
+	moved eap/eapol-protocol constants to separate files
+
+	* src/ll_802_3.cc, src/ll_ether.cc, src/ll_frame.cc, include/ll_802_3.hh, include/ll_ether.hh, include/ll_frame.hh:
+	removed the timeout
+
+2002-08-08  Rainer Weikusat  <weikusat@students.uni-mainz.de>
+
+	* src/ll_eapol.cc, src/ll_ether.cc, include/ll_eapol.hh, include/ll_ether.hh:
+	minor tweaks
+
+	* include/ll_frame.hh: signal.h
+
+	* include/accessor.hh: added 'copy_out'
+
+	* src/ll_802_3.cc, include/ll_802_3.hh: 802.3 ll class
+
+	* src/ll_eapol.cc, src/ll_ether.cc, src/ll_frame.cc, include/accessor.hh, include/ll_ether.hh, include/ll_frame.hh:
+	compilable
+
+	* src/eap.cc, src/eap_std.cc, src/io_802_3.cc, src/io_ethernet.cc, src/ll_eapol.cc, src/ll_ether.cc, src/ll_frame.cc, src/type_identity.cc, src/type_md5.cc, src/type_notification.cc, include/accessor.hh, include/eap.hh, include/eap_std.hh, include/eapol.hh, include/exception.hh, include/globals.hh, include/io_802_3.hh, include/io_base.hh, include/io_ethernet.hh, include/ll_eapol.hh, include/ll_ether.hh, include/ll_frame.hh, include/type_identity.hh, include/type_md5.hh, include/type_notification.hh:
+	ll backend
+
+2002-08-06  Rainer Weikusat  <weikusat@students.uni-mainz.de>
+
+	* src/io_802_3.cc, src/io_ethernet.cc, include/eapol.hh, include/io_802_3.hh, include/io_base.hh, include/io_ethernet.hh:
+	added EAPOL type handling
+
+	* src/eap.cc, src/eap_std.cc, src/io_802_3.cc, src/io_ethernet.cc, src/type_identity.cc, src/type_md5.cc, src/type_notification.cc, include/accessor.hh, include/eap.hh, include/eap_std.hh, include/eapol.hh, include/exception.hh, include/globals.hh, include/io_802_3.hh, include/io_base.hh, include/io_ethernet.hh, include/type_identity.hh, include/type_md5.hh, include/type_notification.hh:
+	basic eapol support for 802.3
+
+2002-08-05  Rainer Weikusat  <weikusat@students.uni-mainz.de>
+
+	* src/eap.cc, src/type_identity.cc, src/type_md5.cc, src/type_notification.cc, include/accessor.hh, include/eap.hh, include/globals.hh, include/type_identity.hh, include/type_md5.hh, include/type_notification.hh
+	basic eap compiles
